@@ -10,10 +10,6 @@ ext {
     version = '1.0-SNAPSHOT'
 }
 
-
-group = 'com.github.blanexie.vxpt'
-version = "${version}"
-
 //全部模块通用配置
 allprojects {
     sourceCompatibility = '11'
