@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-COPY ../libs/ /usr/src/app
+COPY build/libs/ /usr/src/app
 WORKDIR /usr/src/app
 EXPOSE 9090
 
