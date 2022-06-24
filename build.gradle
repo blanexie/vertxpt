@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.springframework.boot' version '2.6.7' //springboot依赖
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE' //spring的依赖管理插件
+
+}
+ext {
+    springCloudVersion = "2021.0.2"  //springcloud版本号
+    version = '1.0-SNAPSHOT'
+}
+
+
+group = 'com.github.blanexie.vxpt'
+version = "${version}"
+
+//全部模块通用配置
+allprojects {
+    sourceCompatibility = '11'
+    repositories {
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter/' }
+        mavenCentral()
+    }
+}
+
+//子模块配置
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management' //引入差价
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+
+    version "${version}"
+    //子模块通用依赖
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib"
+        compileOnly group: 'org.projectlombok', name: 'lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
+    }
+    //子模块依赖管理
+    dependencyManagement {
+        dependencies {
+            dependency "org.springframework.boot:spring-boot-starter:2.6.7"
+        }
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
