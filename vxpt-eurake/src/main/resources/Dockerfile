@@ -2,5 +2,6 @@ FROM openjdk:11
 
 COPY ../libs/ /usr/src/app
 WORKDIR /usr/src/app
-RUN javac Main.java
-CMD ["java", "Main"]
+EXPOSE 9090
+
+ENTRYPOINT ["java", "-jar", "vxpt-eurake-unspecified.jar"]
