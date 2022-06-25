@@ -11,4 +11,4 @@ docker rmi vxpt-eurake:1.0
 docker build -t vxpt-eurake:1.0 .
 
 ## 启动镜像
-docker run --rm --name eurake -p 9090:9090 vxpt-eurake:1.0
+docker run --rm -d  --name eurake -p 9090:9090 vxpt-eurake:1.0
