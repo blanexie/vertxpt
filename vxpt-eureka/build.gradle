@@ -1,6 +1,6 @@
 
 
-group 'com.github.blanexie.vxpt.eurake'
+group 'com.github.blanexie.vxpt.eureka'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'

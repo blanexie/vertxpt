@@ -1,4 +1,4 @@
 rootProject.name = 'vxpt'
 
 
-include("vxpt-eurake")
+include("vxpt-eureka", "vxpt-user", "vxpt-user-api")
