@@ -10,7 +10,11 @@ docker rmi vxpt-eurake:1.0
 ## 重新打包镜像
 docker build -t vxpt-eurake:1.0 .
 
-## 闪出去容器
+## 停止容器
+docker stop  eurake
+
+## 删除容器
 docker rm eurake
+
 ## 启动容器
 docker run --rm -d  --name eurake -p 9090:9090 vxpt-eurake:1.0
