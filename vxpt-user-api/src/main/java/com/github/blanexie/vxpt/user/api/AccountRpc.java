@@ -2,16 +2,14 @@ package com.github.blanexie.vxpt.user.api;
 
 import com.github.blanexie.vxpt.user.api.dto.AccountDTO;
 import com.github.blanexie.vxpt.user.api.dto.PublishData;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface AccountRpc {
 
-    void publish(PublishData publishData);
 
-    /**
-     * 获取数据
-     * @param userId
-     * @return
-     */
-    AccountDTO getByUserId(Integer userId);
+    @PostMapping("/rpc/account/publish")
+    void publish(@RequestBody PublishData publishData);
 
 }

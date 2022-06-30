@@ -1,0 +1,11 @@
+group 'com.github.blanexie.vxpt.gateway'
+
+dependencies {
+
+    compile project(":vxpt-user-api")
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}

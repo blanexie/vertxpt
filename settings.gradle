@@ -1,4 +1,4 @@
 rootProject.name = 'vxpt'
 
+include("vxpt-eureka", "vxpt-gateway", "vxpt-user", "vxpt-user-api", "vxpt-bbs", "vxpt-bbs-api")
 
-include("vxpt-eureka", "vxpt-user", "vxpt-user-api")

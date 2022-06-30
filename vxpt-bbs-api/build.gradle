@@ -1,0 +1,4 @@
+group 'com.github.blanexie.vxpt.bbs.api'
+
+dependencies {
+}

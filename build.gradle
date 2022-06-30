@@ -30,7 +30,12 @@ subprojects {
     version "${version}"
     //子模块通用依赖
     dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation "org.jetbrains.kotlin:kotlin-stdlib"
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
+        implementation 'cn.hutool:hutool-all:5.8.4'
         compileOnly group: 'org.projectlombok', name: 'lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
     }

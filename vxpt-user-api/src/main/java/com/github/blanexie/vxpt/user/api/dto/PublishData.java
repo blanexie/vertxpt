@@ -26,17 +26,17 @@ public class PublishData {
     /**
      * 增加的积分
      */
-    private Integer points;
+    private Integer addPoints;
 
     /**
      * 增加的真实下载量
      */
-    private Long download;
+    private Long addDownload;
 
     /**
      * 增加的真实上传量
      */
-    private Long upload;
+    private Long addUpload;
 
 
     public Integer getUserId() {
@@ -63,27 +63,27 @@ public class PublishData {
         this.activeTorrentNum = activeTorrentNum;
     }
 
-    public Integer getPoints() {
-        return points;
+    public Integer getAddPoints() {
+        return addPoints;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void setAddPoints(Integer addPoints) {
+        this.addPoints = addPoints;
     }
 
-    public Long getDownload() {
-        return download;
+    public Long getAddDownload() {
+        return addDownload;
     }
 
-    public void setDownload(Long download) {
-        this.download = download;
+    public void setAddDownload(Long addDownload) {
+        this.addDownload = addDownload;
     }
 
-    public Long getUpload() {
-        return upload;
+    public Long getAddUpload() {
+        return addUpload;
     }
 
-    public void setUpload(Long upload) {
-        this.upload = upload;
+    public void setAddUpload(Long addUpload) {
+        this.addUpload = addUpload;
     }
 }
