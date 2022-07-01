@@ -34,7 +34,5 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
-
-
+/vxpt-web/.vscode/
 /vxpt-web/node_modules/
