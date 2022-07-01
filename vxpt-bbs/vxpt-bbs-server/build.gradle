@@ -1,10 +1,8 @@
 
-
-group 'com.github.blanexie.vxpt.user'
+group 'com.github.blanexie.vxpt.bbs.server'
 
 dependencies {
-
-    compile project(":vxpt-user-api")
+    compile project(":vxpt-bbs:vxpt-bbs-api")
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation "org.springframework.boot:spring-boot-starter-web"
@@ -12,5 +10,4 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     developmentOnly("org.postgresql:postgresql")
     implementation("com.vladmihalcea:hibernate-types-52:2.16.0")
-
 }

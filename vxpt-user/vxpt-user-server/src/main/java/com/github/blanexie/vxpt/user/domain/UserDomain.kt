@@ -3,12 +3,9 @@ package com.github.blanexie.vxpt.user.domain
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.date.DateUnit
 import cn.hutool.core.date.DateUtil
-import cn.hutool.core.lang.UUID
-import cn.hutool.core.util.IdUtil
 import cn.hutool.crypto.digest.DigestUtil
 import com.github.blanexie.vxpt.user.api.dto.UserDTO
 import com.github.blanexie.vxpt.user.domain.entity.UserDO
-import java.time.LocalDateTime
 import java.util.*
 
 class UserDomain(val userDO: UserDO) {
@@ -30,7 +27,7 @@ class UserDomain(val userDO: UserDO) {
 
 
 
-    fun toDTO():UserDTO{
+    fun toDTO(): UserDTO {
        return  BeanUtil.copyProperties(userDO, UserDTO::class.java)
     }
 

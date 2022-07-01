@@ -2,7 +2,6 @@ package com.github.blanexie.vxpt.user.domain
 
 import com.github.blanexie.vxpt.user.api.dto.PublishData
 import com.github.blanexie.vxpt.user.domain.entity.AccountDO
-import com.github.blanexie.vxpt.user.domain.entity.UserDO
 import com.github.blanexie.vxpt.user.domain.repository.AccountRepository
 
 
