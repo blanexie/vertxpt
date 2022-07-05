@@ -2,9 +2,13 @@ package com.github.blanexie.vxpt.user.domain
 
 import com.github.blanexie.vxpt.user.api.dto.PublishData
 import com.github.blanexie.vxpt.user.domain.entity.AccountDO
-import com.github.blanexie.vxpt.user.domain.repository.AccountRepository
+import com.github.blanexie.vxpt.user.domain.adapter.repository.AccountRepository
 
-
+/**
+ * 领域不应该直接依赖任何的外部内容，
+ * 这里依赖了 DO数据库对象
+ *
+ */
 class AccountDomain(val accountDO: AccountDO) {
 
     val accountId: Int = accountDO.id!!

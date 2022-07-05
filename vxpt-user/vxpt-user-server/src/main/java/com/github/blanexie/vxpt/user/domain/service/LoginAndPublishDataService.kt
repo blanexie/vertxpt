@@ -1,23 +1,16 @@
-package com.github.blanexie.vxpt.user.domain.application
+package com.github.blanexie.vxpt.user.domain.service
 
 import com.github.blanexie.vxpt.user.api.dto.PublishData
 import com.github.blanexie.vxpt.user.api.dto.UserDTO
 import com.github.blanexie.vxpt.user.domain.AccountDomain
 import com.github.blanexie.vxpt.user.domain.UserDomain
-import com.github.blanexie.vxpt.user.domain.repository.AccountRepository
-import com.github.blanexie.vxpt.user.domain.repository.UserRepository
-import org.springframework.stereotype.Service
-import javax.annotation.Resource
+import com.github.blanexie.vxpt.user.domain.adapter.repository.AccountRepository
+import com.github.blanexie.vxpt.user.domain.adapter.repository.UserRepository
 
-
-@Service
-class UserAndAccountService {
-
-    @Resource
-    lateinit var userRepository: UserRepository;
-
-    @Resource
-    lateinit var accountRepository: AccountRepository
+/**
+ * 登录和数据上报的领域服务
+ */
+class LoginAndPublishDataService(private val userRepository: UserRepository, private val accountRepository: AccountRepository) {
 
     /**
      * 校验登录, 登录成功了才会返回UserDTO
@@ -29,7 +22,6 @@ class UserAndAccountService {
         return if (userDomain.checkPwd(pwdSecret, timeStamp)) userDomain.toDTO() else null
     }
 
-
     /**
      * 上报统计数据
      */
@@ -38,6 +30,5 @@ class UserAndAccountService {
         val accountDomain = AccountDomain(accountDO)
         accountDomain.publish(publishData, accountRepository)
     }
-
 
 }

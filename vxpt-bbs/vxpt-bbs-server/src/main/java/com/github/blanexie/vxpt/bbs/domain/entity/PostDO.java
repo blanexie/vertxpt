@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 帖子对象
@@ -22,7 +23,7 @@ public class PostDO {
     private String cover;// String, //封面
     private String category;//String, //分类
 
-    private labels:MutableSet<Label>,
+    private List<String> labels;//:,
 
     @Column(columnDefinition = "TEXT")
     private String content;// : String,  //markdown 文本描述
