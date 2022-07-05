@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.server.domain.entity;
+package com.github.blanexie.vxpt.user.support.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -38,15 +38,6 @@ public class UserDO {
      */
     @Column(nullable = false)
     private Integer referencesUserId;
-
-    @Column(unique = true)
-    private String token;
-
-    /**
-     * token的过期时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime tokenExpireTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;

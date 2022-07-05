@@ -1,6 +1,6 @@
-package com.github.blanexie.vxpt.user.domain.adapter.repository
+package com.github.blanexie.vxpt.user.support.jpa.repository
 
-import com.github.blanexie.vxpt.user.domain.entity.UserDO
+import com.github.blanexie.vxpt.user.support.jpa.entity.UserDO
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

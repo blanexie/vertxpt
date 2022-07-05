@@ -2,10 +2,10 @@ package com.github.blanexie.vxpt.user.domain.service
 
 import com.github.blanexie.vxpt.user.api.dto.PublishData
 import com.github.blanexie.vxpt.user.api.dto.UserDTO
-import com.github.blanexie.vxpt.user.domain.AccountDomain
-import com.github.blanexie.vxpt.user.domain.UserDomain
-import com.github.blanexie.vxpt.user.domain.adapter.repository.AccountRepository
-import com.github.blanexie.vxpt.user.domain.adapter.repository.UserRepository
+import com.github.blanexie.vxpt.user.domain.entity.AccountDomain
+import com.github.blanexie.vxpt.user.domain.entity.UserDomain
+import com.github.blanexie.vxpt.user.support.jpa.repository.AccountRepository
+import com.github.blanexie.vxpt.user.support.jpa.repository.UserRepository
 
 /**
  * 登录和数据上报的领域服务

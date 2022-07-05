@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.server.domain.entity;
+package com.github.blanexie.vxpt.user.support.jpa.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

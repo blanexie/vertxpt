@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.server.rpc
+package com.github.blanexie.vxpt.user.rpc
 
 import com.github.blanexie.vxpt.user.api.UserRpc
 import com.github.blanexie.vxpt.user.api.dto.UserDTO

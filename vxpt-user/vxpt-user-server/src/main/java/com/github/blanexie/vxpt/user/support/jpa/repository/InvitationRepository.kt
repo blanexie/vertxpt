@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.domain.adapter.repository
+package com.github.blanexie.vxpt.user.support.jpa.repository
 
 import com.github.blanexie.vxpt.user.domain.entity.InvitationDO
 import org.springframework.data.repository.CrudRepository
