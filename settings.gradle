@@ -2,8 +2,9 @@ rootProject.name = 'vxpt'
 
 include ":vxpt-eureka",
         ":vxpt-gateway",
-        ":vxpt-user:vxpt-user-server",
         ":vxpt-user:vxpt-user-api",
+        ":vxpt-user:vxpt-user-server",
+        ":vxpt-bbs:vxpt-bbs-api",
         ":vxpt-bbs:vxpt-bbs-server",
-        ":vxpt-bbs:vxpt-bbs-api"
-
+        ":vxpt-auth:vxpt-auth-api",
+        ":vxpt-auth:vxpt-auth-server"
