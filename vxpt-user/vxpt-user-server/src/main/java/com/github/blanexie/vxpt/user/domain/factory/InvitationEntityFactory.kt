@@ -14,4 +14,8 @@ interface InvitationEntityFactory {
      */
     fun nextSeqId(): Int
 
+
+    fun createInvitation(userId:Int, email:String):InvitationEntity
+
+
 }

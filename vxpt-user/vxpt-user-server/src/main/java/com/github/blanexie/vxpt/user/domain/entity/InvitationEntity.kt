@@ -18,7 +18,7 @@ class InvitationEntity(
 ) {
 
 
-    fun use(userId: Int) {
+    fun use(receiveId: Int) {
         //检查有无过期
         if (LocalDateTime.now().isAfter(expireTime)) {
             throw Error("邀请函已经过期， ID：${id}")
@@ -28,7 +28,7 @@ class InvitationEntity(
             throw Error("邀请函已经被使用， ID：${id}")
         }
 
-        this.receiveId = userId
+        this.receiveId = receiveId
     }
 
 

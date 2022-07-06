@@ -25,16 +25,21 @@ class AccountEntity(
     fun addDownload(count: Long) {
         this.download += count
     }
+
     fun addUpload(count: Long) {
         this.upload += count
     }
 
     fun addActiveCount(count: Int) {
+        assert(this.activeCount + count >= 0)
         this.activeCount += count
     }
+
     fun addInvitationCount(count: Int) {
+        assert(this.invitationCount + count >= 0)
         this.invitationCount += count
     }
+
     fun addPoints(count: Int) {
         this.points += count
     }
@@ -42,7 +47,9 @@ class AccountEntity(
     fun addLevel(count: Int) {
         this.level += count
     }
+
     fun addCompleteCount(count: Int) {
+        assert(this.activeCount + count >= 0)
         this.completeCount += count
     }
 
