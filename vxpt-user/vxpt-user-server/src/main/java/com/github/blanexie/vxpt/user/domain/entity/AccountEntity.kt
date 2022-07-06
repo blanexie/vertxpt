@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 /**
  * 领域不应该直接依赖任何的外部内容，
- * 这里依赖了 DO数据库对象
+
  *
  */
 class AccountEntity(
@@ -19,13 +19,32 @@ class AccountEntity(
     var activeCount: Int = 0, //活动种子数
     var download: Long = 0, //真实下载量, 单位byte
     var upload: Long = 0, //真实上传量, 单位byte
-    var updateTime: LocalDateTime = LocalDateTime.now(), //
     val createTime: LocalDateTime = LocalDateTime.now(), //
-
 ) {
 
+    fun addDownload(count: Long) {
+        this.download += count
+    }
+    fun addUpload(count: Long) {
+        this.upload += count
+    }
 
+    fun addActiveCount(count: Int) {
+        this.activeCount += count
+    }
+    fun addInvitationCount(count: Int) {
+        this.invitationCount += count
+    }
+    fun addPoints(count: Int) {
+        this.points += count
+    }
 
+    fun addLevel(count: Int) {
+        this.level += count
+    }
+    fun addCompleteCount(count: Int) {
+        this.completeCount += count
+    }
 
 
 }

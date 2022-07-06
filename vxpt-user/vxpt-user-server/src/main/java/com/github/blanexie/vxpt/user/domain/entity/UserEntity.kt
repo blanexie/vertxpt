@@ -1,31 +1,40 @@
 package com.github.blanexie.vxpt.user.domain.entity
 
-import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.date.DateUnit
 import cn.hutool.core.date.DateUtil
 import cn.hutool.crypto.digest.DigestUtil
-import com.fasterxml.jackson.annotation.JsonFormat
-import com.github.blanexie.vxpt.user.server.api.dto.UserDTO
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
 
 class UserEntity(
-    var id: Int,
+    val id: Int,
     val nickName: String,
     val email: String,
-    val pwd: String,
+    var pwd: String,
     val sex: Int, //1: 男  2: 女  0:未知
-    var role: String,  //角色
     val referencesUserId: Int,  //邀请者， 1：admin
+    var role: String="normalUser",  //角色. 默认普通用户
     val createTime: LocalDateTime = LocalDateTime.now(),
-    val updateTime: LocalDateTime = LocalDateTime.now()
 ) {
 
 
+    /**
+     * 授予角色
+     */
+    fun updateRole(roleCode: String) {
+        this.role = roleCode
+    }
+
+    /**
+     * 修改密码
+     */
+    fun updatePwd(pwd: String) {
+        this.pwd = pwd
+    }
+
+    /**
+     * 检查密码
+     */
     fun checkPwd(pwdSha256Hex: String, timeStamp: Long): Boolean {
         //检查是否超时
         val betweenMinutes = DateUtil.between(Date(), Date(timeStamp), DateUnit.MINUTE)
