@@ -1,8 +1,8 @@
 package com.github.blanexie.vxpt.auth.server.domain
 
 import com.github.blanexie.vxpt.auth.api.dto.PathDTO
-import com.github.blanexie.vxpt.auth.server.domain.entity.AuthorityDO
-import com.github.blanexie.vxpt.auth.server.domain.entity.PathDO
+import com.github.blanexie.vxpt.auth.server.support.jpa.entity.AuthorityDO
+import com.github.blanexie.vxpt.auth.server.support.jpa.entity.PathDO
 
 
 /**
