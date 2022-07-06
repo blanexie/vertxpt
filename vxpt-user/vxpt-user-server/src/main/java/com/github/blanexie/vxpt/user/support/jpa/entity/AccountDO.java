@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-user")
+@Table(schema = "vxpt-user", name = "account")
 public class AccountDO {
 
     @Id
@@ -29,24 +29,23 @@ public class AccountDO {
     /**
      * 当前用户拥有的邀请函数量,
      */
-    private Integer invitationNum;
+    private Integer invitationCount;
 
     /**
      * 等级
      */
     @Column(unique = true)
-    private String level;
-
+    private Integer level;
 
     /**
      * 做种数
      */
-    private Integer uploadTorrentNum;
+    private Integer completeCount;
 
     /**
      * 活动种子数
      */
-    private Integer activeTorrentNum;
+    private Integer activeCount;
 
     /**
      * 积分
@@ -68,8 +67,5 @@ public class AccountDO {
     private LocalDateTime createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
-    @Column(nullable = false)
-    private Integer status;
-
 
 }

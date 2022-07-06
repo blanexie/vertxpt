@@ -10,7 +10,7 @@ import java.time.LocalDateTime
  *
  */
 class AccountEntity(
-    val accountId: Int,
+    val id: Int,
     val userId: Int,
     var level: Int = 1, //等级
     var points: Int = 0,//积分

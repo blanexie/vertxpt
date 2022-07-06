@@ -3,6 +3,7 @@ package com.github.blanexie.vxpt.user.domain.service
 import com.github.blanexie.vxpt.user.domain.entity.AccountEntity
 import com.github.blanexie.vxpt.user.domain.entity.UserEntity
 import com.github.blanexie.vxpt.user.domain.factory.AccountEntityFactory
+import com.github.blanexie.vxpt.user.domain.factory.InvitationEntityFactory
 import com.github.blanexie.vxpt.user.domain.factory.UserEntityFactory
 
 /**
@@ -10,7 +11,8 @@ import com.github.blanexie.vxpt.user.domain.factory.UserEntityFactory
  */
 class LoginAndPublishDataService(
     private val userEntityFactory: UserEntityFactory,
-    private val accountEntityFactory: AccountEntityFactory
+    private val accountEntityFactory: AccountEntityFactory,
+    private val invitationEntityFactory: InvitationEntityFactory
 ) {
 
     /**
@@ -24,14 +26,25 @@ class LoginAndPublishDataService(
     /**
      * 注册, 返回的是userId
      */
-    fun register(email: String, pwd: String, nickName: String, sex: Int, referencesUserId: Int): Int {
+    fun register(
+        code: String,
+        email: String,
+        pwd: String,
+        nickName: String,
+        sex: Int,
+        referencesUserId: Int
+    ): Int {
         val userId = userEntityFactory.nextSeqId()
+        //检查邀请函
+        val invitationDO = invitationEntityFactory.findByCode(code)
+        invitationDO.use(userId)
         // 创建用户
         val userEntity = UserEntity(userId, nickName, email, pwd, sex, referencesUserId)
-        userEntityFactory.save(userEntity)
         // 创建账户
         val accountId = accountEntityFactory.nextSeqId()
         val accountEntity = AccountEntity(accountId, userId)
+        userEntityFactory.save(userEntity)
+        invitationEntityFactory.save(invitationDO)
         accountEntityFactory.save(accountEntity)
         return userId
     }
@@ -46,7 +59,12 @@ class LoginAndPublishDataService(
         activeCount: Int = 0,
         completeCount: Int = 0
     ) {
-
+        val accountEntity = accountEntityFactory.findByUserId(userId)
+        accountEntity.addActiveCount(activeCount)
+        accountEntity.addCompleteCount(completeCount)
+        accountEntity.addDownload(addDownload)
+        accountEntity.addUpload(upload)
+        accountEntityFactory.save(accountEntity)
     }
 
 

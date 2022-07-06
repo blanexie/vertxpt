@@ -17,7 +17,6 @@ class UserEntity(
     val createTime: LocalDateTime = LocalDateTime.now(),
 ) {
 
-
     /**
      * 授予角色
      */

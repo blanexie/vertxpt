@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(schema = "vxpt-user")
+@Table(schema = "vxpt-user",name = "user")
 public class UserDO {
 
     @Id
@@ -43,7 +43,5 @@ public class UserDO {
     private LocalDateTime createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
-    @Column(nullable = false)
-    private Integer status;
 
 }

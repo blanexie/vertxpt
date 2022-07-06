@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-user")
+@Table(schema = "vxpt-user", name = "invitation")
 public class InvitationDO {
 
     @Id
@@ -35,6 +35,10 @@ public class InvitationDO {
      * 发出邀请函的用户id
      */
     private Integer userId;
+
+    @Column(unique = true)
+    private Integer receiveId;
+
     /**
      * 邀请函过期时间
      */
