@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.server.api.dto;
+package com.github.blanexie.vxpt.user.api.dto;
 
 import java.time.LocalDateTime;
 

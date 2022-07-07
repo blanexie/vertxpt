@@ -1,6 +1,6 @@
-package com.github.blanexie.vxpt.user.server.api.feign;
+package com.github.blanexie.vxpt.user.api.feign;
 
-import com.github.blanexie.vxpt.user.server.api.AccountRpc;
+import com.github.blanexie.vxpt.user.api.AccountRpc;
 import org.springframework.cloud.openfeign.FeignClient;
 
 

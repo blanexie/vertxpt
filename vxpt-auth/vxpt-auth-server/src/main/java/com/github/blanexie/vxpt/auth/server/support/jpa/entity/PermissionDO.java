@@ -9,8 +9,8 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-auth")
-public class AuthorityDO {
+@Table(schema = "vxpt-auth",name = "permission")
+public class PermissionDO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,12 @@ public class AuthorityDO {
     /**
      * 权限的说明
      */
-    private String description;
+    private String name;
 
+    /**
+     * 权限的说明
+     */
+    private String description;
 
 
 

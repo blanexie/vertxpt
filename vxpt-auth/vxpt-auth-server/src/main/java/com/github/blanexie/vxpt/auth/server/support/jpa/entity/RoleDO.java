@@ -1,6 +1,9 @@
 package com.github.blanexie.vxpt.auth.server.support.jpa.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +13,8 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-auth")
+@Table(schema = "vxpt-auth", name = "role")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class RoleDO {
 
     @Id
@@ -24,20 +28,22 @@ public class RoleDO {
     private String code;
 
 
-    /**
-     * 角色的说明
-     */
-    private String description;
-
+    private String name;
 
     /**
      * 角色拥有的权限
      */
-    private List<String>  authorities;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private List<String> permissions;
 
     /**
      * 角色拥有的子角色， 表示当前角色拥有子角色的所有权限
      */
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
     private List<String> roles;
 
 
