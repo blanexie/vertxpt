@@ -12,7 +12,6 @@ class UserEntity(
     val email: String,
     var pwd: String,
     val sex: Int, //1: 男  2: 女  0:未知
-    val referencesUserId: Int,  //邀请者， 1：admin
     var role: String="normalUser",  //角色. 默认普通用户
     val createTime: LocalDateTime = LocalDateTime.now(),
 ) {

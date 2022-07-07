@@ -58,7 +58,6 @@ class UserEntityFactoryImpl : UserEntityFactory {
         userDO.email = userEntity.email
         userDO.pwd = userEntity.pwd
         userDO.sex = userEntity.sex
-        userDO.referencesUserId = userEntity.referencesUserId
         userDO.role = userEntity.role
         userDO.createTime = userEntity.createTime
         userDO.updateTime = LocalDateTime.now()

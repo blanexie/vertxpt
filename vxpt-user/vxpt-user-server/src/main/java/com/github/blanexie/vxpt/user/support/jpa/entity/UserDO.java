@@ -33,12 +33,6 @@ public class UserDO {
     @Column(unique = true)
     private String role;
 
-    /**
-     * 邀请者
-     */
-    @Column(nullable = false)
-    private Integer referencesUserId;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

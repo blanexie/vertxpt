@@ -31,15 +31,14 @@ class LoginAndPublishDataService(
         email: String,
         pwd: String,
         nickName: String,
-        sex: Int,
-        referencesUserId: Int
+        sex: Int
     ): Int {
         val userId = userEntityFactory.nextSeqId()
         //检查邀请函
         val invitationDO = invitationEntityFactory.findByCode(code)
         invitationDO.use(userId)
         // 创建用户
-        val userEntity = UserEntity(userId, nickName, email, pwd, sex, referencesUserId)
+        val userEntity = UserEntity(userId, nickName, email, pwd, sex)
         // 创建账户
         val accountId = accountEntityFactory.nextSeqId()
         val accountEntity = AccountEntity(accountId, userId)
