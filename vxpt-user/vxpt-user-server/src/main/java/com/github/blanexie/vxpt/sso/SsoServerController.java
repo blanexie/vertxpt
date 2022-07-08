@@ -6,11 +6,8 @@ import cn.dev33.satoken.sso.SaSsoHandle;
 import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.ejlchina.okhttps.OkHttps;
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO;
 import com.github.blanexie.vxpt.auth.domain.RoleService;
-import com.github.blanexie.vxpt.auth.domain.entity.RoleEntity;
-import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory;
 import com.github.blanexie.vxpt.user.api.dto.AccountDTO;
 import com.github.blanexie.vxpt.user.api.dto.UserDTO;
 import com.github.blanexie.vxpt.user.domain.entity.AccountEntity;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 
 /**
  * Sa-Token-SSO Server端 Controller
@@ -125,7 +121,8 @@ public class SsoServerController {
             try {
                 // 发起 http 请求 
                 System.out.println("发起请求：" + url);
-                return OkHttps.sync(url).get().getBody().toString();
+                //return OkHttps.sync(url).get().getBody().toString();
+                return "";
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
