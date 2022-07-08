@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.auth.server.support.jpa.entity;
+package com.github.blanexie.vxpt.auth.support.jpa.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;

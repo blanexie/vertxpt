@@ -1,24 +1,21 @@
-package com.github.blanexie.vxpt.auth.server;
+package com.github.blanexie.vxpt;
 
-
-import com.github.blanexie.vxpt.auth.server.domain.RoleService;
-import com.github.blanexie.vxpt.auth.server.domain.factory.RoleFactory;
+import com.github.blanexie.vxpt.auth.domain.RoleService;
+import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
 
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AuthApplication {
-
+public class UserApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthApplication.class);
+        SpringApplication.run(UserApplication.class);
     }
 
     /**
@@ -31,5 +28,4 @@ public class AuthApplication {
     public RoleService roleService(RoleFactory roleFactory) {
         return new RoleService(roleFactory);
     }
-
 }

@@ -1,6 +1,6 @@
-package com.github.blanexie.vxpt.auth.server.support.jpa.repository
+package com.github.blanexie.vxpt.auth.support.jpa.repository
 
-import com.github.blanexie.vxpt.auth.server.support.jpa.entity.PermissionDO
+import com.github.blanexie.vxpt.auth.support.jpa.entity.PermissionDO
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

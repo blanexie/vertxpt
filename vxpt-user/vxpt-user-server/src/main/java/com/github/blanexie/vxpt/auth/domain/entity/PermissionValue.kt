@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.auth.server.domain.entity
+package com.github.blanexie.vxpt.auth.domain.entity
 
 data class PermissionValue(
     val code: String,

@@ -1,5 +1,0 @@
-group 'com.github.blanexie.vxpt.auth.api'
-
-dependencies {
-    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
-}

@@ -13,7 +13,7 @@ class UserRpcImpl : UserRpc {
     @Resource
     lateinit var userAndAccountService: LoginAndPublishDataService
 
-    override fun login(email: String, pwdSecret: String, timeStamp: Long): UserDTO? {
+    override fun login(token: String): UserDTO? {
         return userAndAccountService.login(email, pwdSecret, timeStamp)
     }
 

@@ -1,9 +1,9 @@
-package com.github.blanexie.vxpt.auth.server.domain
+package com.github.blanexie.vxpt.auth.domain
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.blanexie.vxpt.auth.api.dto.PermissionDTO
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO
-import com.github.blanexie.vxpt.auth.server.domain.factory.RoleFactory
+import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory
 
 
 /**

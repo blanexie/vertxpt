@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.auth.server.domain.entity
+package com.github.blanexie.vxpt.auth.domain.entity
 
 class RoleEntity(
     val code: String,

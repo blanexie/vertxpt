@@ -1,8 +1,8 @@
-package com.github.blanexie.vxpt.auth.server.rpc
+package com.github.blanexie.vxpt.auth.rpc
 
 import com.github.blanexie.vxpt.auth.api.RoleRpc
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO
-import com.github.blanexie.vxpt.auth.server.domain.RoleService
+import com.github.blanexie.vxpt.auth.domain.RoleService
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.Resource
 

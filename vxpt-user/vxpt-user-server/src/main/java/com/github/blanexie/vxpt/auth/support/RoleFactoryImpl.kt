@@ -1,10 +1,10 @@
-package com.github.blanexie.vxpt.auth.server.support
+package com.github.blanexie.vxpt.auth.support
 
-import com.github.blanexie.vxpt.auth.server.domain.entity.PermissionValue
-import com.github.blanexie.vxpt.auth.server.domain.entity.RoleEntity
-import com.github.blanexie.vxpt.auth.server.domain.factory.RoleFactory
-import com.github.blanexie.vxpt.auth.server.support.jpa.repository.PermissionRepository
-import com.github.blanexie.vxpt.auth.server.support.jpa.repository.RoleRepository
+import com.github.blanexie.vxpt.auth.domain.entity.PermissionValue
+import com.github.blanexie.vxpt.auth.domain.entity.RoleEntity
+import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory
+import com.github.blanexie.vxpt.auth.support.jpa.repository.PermissionRepository
+import com.github.blanexie.vxpt.auth.support.jpa.repository.RoleRepository
 import org.springframework.stereotype.Component
 import javax.annotation.Resource
 

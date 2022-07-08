@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public interface UserRpc {
 
     /**
-     * 登录
+     * 根据token获取当前登录的用户信息
      *
      * @return
      */
-    @PostMapping("/rpc/user/login")
+    @PostMapping("/rpc/user/token")
     @ResponseBody
-    UserDTO login(@RequestParam String email, @RequestParam String pwdSecret, @RequestParam Long timeStamp);
+    UserDTO login(@RequestParam String token);
 
 }
