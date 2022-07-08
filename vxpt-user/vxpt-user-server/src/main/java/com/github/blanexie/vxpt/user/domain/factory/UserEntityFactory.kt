@@ -13,6 +13,7 @@ interface UserEntityFactory {
 
     fun findByEmail(email: String): UserEntity
 
+    fun findByNickName(nickName: String): UserEntity
     /**
      * 获取序列值作为主键
      */

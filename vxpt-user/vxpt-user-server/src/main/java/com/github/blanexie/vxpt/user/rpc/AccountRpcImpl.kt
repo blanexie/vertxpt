@@ -2,7 +2,8 @@ package com.github.blanexie.vxpt.user.rpc
 
 import com.github.blanexie.vxpt.user.api.AccountRpc
 import com.github.blanexie.vxpt.user.api.dto.PublishData
-import com.github.blanexie.vxpt.user.domain.service.LoginAndPublishDataService
+import com.github.blanexie.vxpt.user.domain.service.AccountService
+import com.github.blanexie.vxpt.user.domain.service.UserService
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.Resource
 
@@ -11,10 +12,16 @@ import javax.annotation.Resource
 class AccountRpcImpl : AccountRpc {
 
     @Resource
-    lateinit var userAndAccountService: LoginAndPublishDataService
+    lateinit var accountService: AccountService
 
     override fun publish(publishData: PublishData) {
-        userAndAccountService.publishData(publishData)
+        accountService.addAccountData(
+            publishData.userId,
+            publishData.addDownload,
+            publishData.addUpload,
+            publishData.addActiveCount,
+            publishData.addCompleteCount
+        )
     }
 
 }

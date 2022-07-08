@@ -23,5 +23,4 @@ public class RoleDTO {
      */
     private Set<PermissionDTO> permissions;
 
-
 }

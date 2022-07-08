@@ -2,6 +2,12 @@ package com.github.blanexie.vxpt;
 
 import com.github.blanexie.vxpt.auth.domain.RoleService;
 import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory;
+import com.github.blanexie.vxpt.user.domain.factory.AccountEntityFactory;
+import com.github.blanexie.vxpt.user.domain.factory.InvitationEntityFactory;
+import com.github.blanexie.vxpt.user.domain.factory.UserEntityFactory;
+import com.github.blanexie.vxpt.user.domain.service.AccountService;
+import com.github.blanexie.vxpt.user.domain.service.InvitationService;
+import com.github.blanexie.vxpt.user.domain.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -27,5 +33,30 @@ public class UserApplication {
     @Bean
     public RoleService roleService(RoleFactory roleFactory) {
         return new RoleService(roleFactory);
+    }
+
+
+    @Bean
+    public UserService userService(
+            UserEntityFactory userEntityFactory,
+            AccountEntityFactory accountEntityFactory,
+            InvitationEntityFactory invitationEntityFactory
+    ) {
+        return new UserService(userEntityFactory, accountEntityFactory, invitationEntityFactory);
+    }
+
+    @Bean
+    public InvitationService invitationService(
+            AccountEntityFactory accountEntityFactory,
+            InvitationEntityFactory invitationEntityFactory
+    ) {
+        return new InvitationService(invitationEntityFactory, accountEntityFactory);
+    }
+
+    @Bean
+    public AccountService accountService(
+            AccountEntityFactory accountEntityFactory
+    ) {
+        return new AccountService(accountEntityFactory);
     }
 }

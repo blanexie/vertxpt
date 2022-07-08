@@ -33,13 +33,8 @@ class UserEntity(
     /**
      * 检查密码
      */
-    fun checkPwd(pwdSha256Hex: String, timeStamp: Long): Boolean {
-        //检查是否超时
-        val betweenMinutes = DateUtil.between(Date(), Date(timeStamp), DateUnit.MINUTE)
-        if (betweenMinutes > 30) {
-            return false
-        }
-        val secret = "${email}${pwd}$timeStamp"
+    fun checkPwd(pwdSha256Hex: String): Boolean {
+        val secret = "${email}${pwd}"
         val sha256Hex = DigestUtil.sha256Hex(secret)
         return pwdSha256Hex == sha256Hex
     }

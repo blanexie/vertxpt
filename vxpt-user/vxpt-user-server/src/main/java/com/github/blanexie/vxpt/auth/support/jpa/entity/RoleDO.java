@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-auth", name = "role")
+@Table(schema = "vxpt_auth", name = "role")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class RoleDO {
 

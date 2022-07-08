@@ -1,5 +1,7 @@
 package com.github.blanexie.vxpt.user.support
 
+import cn.hutool.core.util.IdUtil
+import cn.hutool.core.util.RandomUtil
 import com.github.blanexie.vxpt.user.domain.entity.InvitationEntity
 import com.github.blanexie.vxpt.user.domain.factory.AccountEntityFactory
 import com.github.blanexie.vxpt.user.domain.factory.InvitationEntityFactory
@@ -44,5 +46,27 @@ class InvitationEntityFactoryImpl : InvitationEntityFactory {
 
     override fun nextSeqId(): Int {
         return invitationRepository.nextSeqId()
+    }
+
+    override fun createInvitation(userId: Int, email: String): InvitationEntity {
+        val invitationDO = InvitationDO()
+        invitationDO.code = RandomUtil.randomString(10)
+        invitationDO.email = email
+        invitationDO.userId = userId
+        //invitationDO.receiveId = invitationEntity.receiveId
+        invitationDO.expireTime = LocalDateTime.now().plusDays(7)
+        invitationDO.createTime = LocalDateTime.now()
+        invitationDO.updateTime = LocalDateTime.now()
+        invitationRepository.save(invitationDO)
+
+       return InvitationEntity(
+            invitationDO.id,
+            invitationDO.code,
+            invitationDO.email,
+            invitationDO.userId,
+            invitationDO.receiveId,
+            invitationDO.expireTime,
+            invitationDO.createTime
+        )
     }
 }

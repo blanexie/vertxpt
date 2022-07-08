@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.server;
+package com.github.blanexie.vxpt.bbs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

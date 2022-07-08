@@ -1,4 +1,3 @@
-
 server:
   port: 9091
 spring:
@@ -16,8 +15,6 @@ spring:
           auto: update
     show-sql: true
 
-
-
 eureka:
   client:
     service-url:
@@ -25,4 +22,24 @@ eureka:
   instance:
     prefer-ip-address: true # 服务实例显示ip而不是显示主机名
     # 实例名称
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+    instance-id: ${spring.application.name}:${server.port}
+
+
+
+# Sa-Token 配置
+sa-token:
+  # ------- SSO-模式二相关配置
+  sso:
+    # Ticket有效期 (单位: 秒)，默认五分钟
+    ticket-timeout: 300
+    # 所有允许的授权回调地址
+    allow-url: "*"
+    # 是否打开单点注销功能
+    is-slo: true
+
+    # ------- SSO-模式三相关配置 （下面的配置在SSO模式三并且 is-slo=true 时打开） -------
+    # 是否打开模式三
+    isHttp: true
+    # 接口调用秘钥（用于SSO模式三的单点注销功能）
+    secretkey: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
+    # ---- 除了以上配置项，你还需要为 Sa-Token 配置http请求处理器（文档有步骤说明）

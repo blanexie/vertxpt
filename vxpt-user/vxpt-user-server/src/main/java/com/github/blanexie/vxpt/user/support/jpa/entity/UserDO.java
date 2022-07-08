@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(schema = "vxpt-user",name = "user")
+@Table(schema = "vxpt_user",name = "user")
 public class UserDO {
 
     @Id

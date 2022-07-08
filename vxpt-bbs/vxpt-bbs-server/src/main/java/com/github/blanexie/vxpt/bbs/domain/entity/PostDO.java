@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.server.domain.entity;
+package com.github.blanexie.vxpt.bbs.domain.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

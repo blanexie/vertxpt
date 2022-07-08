@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.server.domain.dto;
+package com.github.blanexie.vxpt.bbs.domain.dto;
 
 import lombok.Data;
 

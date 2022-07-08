@@ -1,9 +1,9 @@
-package com.github.blanexie.vxpt.bbs.server.domain
+package com.github.blanexie.vxpt.bbs.domain
 
 import cn.hutool.core.bean.BeanUtil
-import com.github.blanexie.vxpt.bbs.server.domain.dto.PostDTO
-import com.github.blanexie.vxpt.bbs.server.domain.entity.TorrentDO
-import com.github.blanexie.vxpt.bbs.server.domain.repository.TorrentRepository
+import com.github.blanexie.vxpt.bbs.domain.dto.PostDTO
+import com.github.blanexie.vxpt.bbs.domain.entity.TorrentDO
+import com.github.blanexie.vxpt.bbs.domain.repository.TorrentRepository
 
 
 /**

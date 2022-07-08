@@ -7,5 +7,4 @@ interface RoleFactory {
     fun findByCode(code: String): RoleEntity?
 
 
-
 }

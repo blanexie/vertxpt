@@ -21,9 +21,11 @@ class RoleService(
                 RoleDTO::class.java,
                 "permissions"
             )
-            roleDTO.permissions = roleEntity.permissions.map {
+            val permissions = roleEntity.permissions.map {
                 BeanUtil.copyProperties(it, PermissionDTO::class.java)
             }.toMutableSet()
+            roleDTO.permissions = permissions
+
             for (role in it.roles) {
                 val subRoleDTO = this.findByRoleCode(code)
                 subRoleDTO?.let {
@@ -32,8 +34,6 @@ class RoleService(
             }
             roleDTO
         }
-
-
 
         return let
     }

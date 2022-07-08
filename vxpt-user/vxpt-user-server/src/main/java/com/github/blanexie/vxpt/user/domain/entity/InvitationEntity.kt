@@ -27,7 +27,6 @@ class InvitationEntity(
         if (receiveId != null) {
             throw Error("邀请函已经被使用， ID：${id}")
         }
-
         this.receiveId = receiveId
     }
 

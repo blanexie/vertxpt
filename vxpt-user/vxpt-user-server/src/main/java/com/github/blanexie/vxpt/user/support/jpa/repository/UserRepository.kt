@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : CrudRepository<UserDO, Int> {
 
+    fun findFirstByNickName(nickName: String): UserDO?
+
     fun findFirstByEmail(email: String): UserDO?
 
 

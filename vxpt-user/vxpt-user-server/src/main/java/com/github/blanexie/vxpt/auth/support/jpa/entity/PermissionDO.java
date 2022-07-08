@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-auth",name = "permission")
+@Table(schema = "vxpt_auth",name = "permission")
 public class PermissionDO {
 
     @Id

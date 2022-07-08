@@ -14,20 +14,10 @@ class UserEntityFactoryImpl : UserEntityFactory {
     @Resource
     lateinit var userRepository: UserRepository
 
-
     override fun findByUserId(userId: Int): UserEntity {
         val userDO = userRepository.findById(userId)
         val userEntity = userDO.map {
-            UserEntity(
-                it.id,
-                it.nickName,
-                it.email,
-                it.pwd,
-                it.sex,
-                it.referencesUserId,
-                it.role,
-                it.createTime
-            )
+            UserEntity(it.id, it.nickName, it.email, it.pwd, it.sex, it.role, it.createTime)
         }.orElseThrow()
         return userEntity
     }
@@ -36,14 +26,15 @@ class UserEntityFactoryImpl : UserEntityFactory {
         val userDO = userRepository.findFirstByEmail(email)
         userDO ?: throw Error("userId: ${email}  未找到对应的账户  ")
         return UserEntity(
-            userDO.id,
-            userDO.nickName,
-            userDO.email,
-            userDO.pwd,
-            userDO.sex,
-            userDO.referencesUserId,
-            userDO.role,
-            userDO.createTime
+            userDO.id, userDO.nickName, userDO.email, userDO.pwd, userDO.sex, userDO.role, userDO.createTime
+        )
+    }
+
+    override fun findByNickName(nickName: String): UserEntity {
+        val userDO = userRepository.findFirstByNickName(nickName)
+        userDO ?: throw Error("userId: ${nickName}  未找到对应的账户  ")
+        return UserEntity(
+            userDO.id, userDO.nickName, userDO.email, userDO.pwd, userDO.sex, userDO.role, userDO.createTime
         )
     }
 

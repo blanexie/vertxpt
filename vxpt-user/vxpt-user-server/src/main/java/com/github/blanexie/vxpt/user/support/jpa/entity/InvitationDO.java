@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(schema = "vxpt-user", name = "invitation")
+@Table(schema = "vxpt_user", name = "invitation")
 public class InvitationDO {
 
     @Id
