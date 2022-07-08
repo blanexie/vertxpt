@@ -1,9 +1,9 @@
-package com.github.blanexie.vxpt.bbs.domain
+package com.github.blanexie.vxpt.bbs.domain.entity
 
 import cn.hutool.core.bean.BeanUtil
-import com.github.blanexie.vxpt.bbs.domain.dto.PostDTO
-import com.github.blanexie.vxpt.bbs.domain.entity.PostDO
-import com.github.blanexie.vxpt.bbs.domain.repository.PostRepository
+import com.github.blanexie.vxpt.bbs.api.dto.PostDTO
+import com.github.blanexie.vxpt.bbs.support.jpa.entity.PostDO
+import com.github.blanexie.vxpt.bbs.support.jpa.repository.PostRepository
 
 
 /**

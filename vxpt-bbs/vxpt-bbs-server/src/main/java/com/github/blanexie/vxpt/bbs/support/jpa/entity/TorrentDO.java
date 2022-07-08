@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.domain.entity;
+package com.github.blanexie.vxpt.bbs.support.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;

@@ -1,6 +1,6 @@
-package com.github.blanexie.vxpt.bbs.domain.repository
+package com.github.blanexie.vxpt.bbs.support.jpa.repository
 
-import com.github.blanexie.vxpt.bbs.domain.entity.PostDO
+import com.github.blanexie.vxpt.bbs.support.jpa.entity.PostDO
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.domain.dto;
+package com.github.blanexie.vxpt.bbs.api.dto;
 
 import lombok.Data;
 
@@ -16,7 +16,6 @@ public class PostDTO {
 
     private String content;// : String,  //markdown 文本描述
     private Integer userId;//: Int, //用户的id
-
 
     private String infoName;
     private Long size;

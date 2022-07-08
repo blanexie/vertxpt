@@ -1,7 +1,6 @@
-package com.github.blanexie.vxpt.bbs.domain.entity;
+package com.github.blanexie.vxpt.bbs.support.jpa.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -27,11 +26,9 @@ public class PostDO {
     private String cover;// String, //封面
     private String category;//String, //分类
 
-    private labels:MutableSet<Label>,
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<String> labels;
-
 
     @Lob
     @Column(columnDefinition = "TEXT")
