@@ -9,7 +9,7 @@ import com.github.blanexie.vxpt.bbs.support.jpa.repository.TorrentRepository
 /**
  * 种子
  */
-class TorrentDomain(val torrentDO: TorrentDO) {
+class TorrentEntity(val torrentDO: TorrentDO) {
 
     val id: Int = torrentDO.id!!
 

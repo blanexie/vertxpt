@@ -9,16 +9,12 @@ import com.github.blanexie.vxpt.bbs.support.jpa.repository.PostRepository
 /**
  * 帖子
  */
-class PostDomain(val postDTO: PostDTO) {
-
+class PostEntity(val postDTO: PostDTO) {
 
     fun save(postDTO: PostDTO, postRepository: PostRepository): PostDO {
         val postDO = BeanUtil.copyProperties(postDTO, PostDO::class.java)
         return postRepository.save(postDO)
     }
-
-
-
 
 }
 
