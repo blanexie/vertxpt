@@ -1,7 +1,10 @@
 package com.github.blanexie.vxpt;
 
-import com.github.blanexie.vxpt.auth.domain.RoleService;
+import com.github.blanexie.vxpt.auth.domain.factory.PathFactory;
+import com.github.blanexie.vxpt.auth.domain.service.PathService;
+import com.github.blanexie.vxpt.auth.domain.service.RoleService;
 import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory;
+import com.github.blanexie.vxpt.auth.support.PathFactoryImpl;
 import com.github.blanexie.vxpt.user.domain.factory.AccountEntityFactory;
 import com.github.blanexie.vxpt.user.domain.factory.InvitationEntityFactory;
 import com.github.blanexie.vxpt.user.domain.factory.UserEntityFactory;
@@ -35,6 +38,10 @@ public class UserApplication {
         return new RoleService(roleFactory);
     }
 
+    @Bean
+    public PathService pathService(PathFactory pathFactory) {
+        return new PathService(pathFactory);
+    }
 
     @Bean
     public UserService userService(

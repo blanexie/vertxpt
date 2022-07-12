@@ -7,7 +7,7 @@ import cn.dev33.satoken.sso.SaSsoUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO;
-import com.github.blanexie.vxpt.auth.domain.RoleService;
+import com.github.blanexie.vxpt.auth.domain.service.RoleService;
 import com.github.blanexie.vxpt.user.api.dto.AccountDTO;
 import com.github.blanexie.vxpt.user.api.dto.UserDTO;
 import com.github.blanexie.vxpt.user.domain.entity.AccountEntity;

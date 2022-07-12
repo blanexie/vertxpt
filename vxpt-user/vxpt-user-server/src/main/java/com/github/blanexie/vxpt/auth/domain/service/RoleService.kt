@@ -1,7 +1,6 @@
-package com.github.blanexie.vxpt.auth.domain
+package com.github.blanexie.vxpt.auth.domain.service
 
 import cn.hutool.core.bean.BeanUtil
-import cn.hutool.core.collection.CollUtil
 import com.github.blanexie.vxpt.auth.api.dto.PermissionDTO
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO
 import com.github.blanexie.vxpt.auth.domain.factory.PathFactory
@@ -12,8 +11,7 @@ import com.github.blanexie.vxpt.auth.domain.factory.RoleFactory
  * 角色权限
  */
 class RoleService(
-    private val roleFactory: RoleFactory,
-    private val pathFactory: PathFactory
+    private val roleFactory: RoleFactory
 ) {
 
     fun findByRoleCode(code: String): RoleDTO? {
@@ -38,17 +36,6 @@ class RoleService(
             roleDTO
         }
         return let
-    }
-
-    /**
-     * 校验权限
-     */
-    fun checkPath(path: String, permissionCode: Set<String>): Boolean {
-        val pathEntity = pathFactory.findByPath(path)
-        return pathEntity?.let {
-            val intersection = CollUtil.intersection(it.permissions, permissionCode)
-            intersection.isEmpty()
-        } ?: false
     }
 
 

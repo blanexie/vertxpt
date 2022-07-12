@@ -1,5 +1,6 @@
 package com.github.blanexie.vxpt.auth.domain.entity
 
+import cn.hutool.core.collection.CollUtil
 import kotlin.streams.toList
 
 /**
@@ -23,5 +24,12 @@ class PathEntity(
         this.roles.add(role)
     }
 
+    /**
+     * 校验权限
+     */
+    fun checkPath(permissionCode: Set<String>): Boolean {
+        val intersection = CollUtil.intersection(this.permissions, permissionCode)
+        return intersection.isEmpty()
+    }
 
 }

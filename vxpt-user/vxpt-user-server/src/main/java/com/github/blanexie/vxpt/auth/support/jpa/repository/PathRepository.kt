@@ -13,5 +13,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PathRepository : CrudRepository<PathDO, Int> {
 
+    fun findByPath(path: String): PathDO?
 
 }
