@@ -1,10 +1,7 @@
 package com.github.blanexie.vxpt.user.domain.entity
 
-import cn.hutool.core.date.DateUnit
-import cn.hutool.core.date.DateUtil
 import cn.hutool.crypto.digest.DigestUtil
 import java.time.LocalDateTime
-import java.util.*
 
 class UserEntity(
     val id: Int,

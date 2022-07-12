@@ -3,34 +3,32 @@ package com.github.blanexie.vxpt.auth.support.jpa.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
- * 权限表
+ * @author ：xiezc
+ * @date ：2022/7/11 7:27 PM
  */
 @Data
 @Entity
-@Table(schema = "vxpt_auth",name = "permission")
-public class PermissionDO {
+@Table(schema = "vxpt_auth", name = "path")
+public class PathDO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true)
+    private String path;
+
     /**
      * 权限的code
      */
-    @Column(unique = true)
-    private String code;
-
+    private Set<String> permissions;
 
     /**
-     * 权限的说明
+     * 角色
      */
-    private String name;
-
-    /**
-     * 权限的说明
-     */
-    private String description;
+    private Set<String> roles;
 
 }
