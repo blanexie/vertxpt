@@ -44,26 +44,18 @@ public class UserApplication {
     }
 
     @Bean
-    public UserService userService(
-            UserEntityFactory userEntityFactory,
-            AccountEntityFactory accountEntityFactory,
-            InvitationEntityFactory invitationEntityFactory
-    ) {
+    public UserService userService(UserEntityFactory userEntityFactory, AccountEntityFactory accountEntityFactory,
+                                   InvitationEntityFactory invitationEntityFactory) {
         return new UserService(userEntityFactory, accountEntityFactory, invitationEntityFactory);
     }
 
     @Bean
-    public InvitationService invitationService(
-            AccountEntityFactory accountEntityFactory,
-            InvitationEntityFactory invitationEntityFactory
-    ) {
+    public InvitationService invitationService(AccountEntityFactory accountEntityFactory, InvitationEntityFactory invitationEntityFactory) {
         return new InvitationService(invitationEntityFactory, accountEntityFactory);
     }
 
     @Bean
-    public AccountService accountService(
-            AccountEntityFactory accountEntityFactory
-    ) {
+    public AccountService accountService(AccountEntityFactory accountEntityFactory) {
         return new AccountService(accountEntityFactory);
     }
 }
