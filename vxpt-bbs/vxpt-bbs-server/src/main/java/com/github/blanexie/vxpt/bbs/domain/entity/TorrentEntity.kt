@@ -1,21 +1,34 @@
 package com.github.blanexie.vxpt.bbs.domain.entity
 
-import cn.hutool.core.bean.BeanUtil
-import com.github.blanexie.vxpt.bbs.api.dto.PostDTO
-import com.github.blanexie.vxpt.bbs.support.jpa.entity.TorrentDO
-import com.github.blanexie.vxpt.bbs.support.jpa.repository.TorrentRepository
+import cn.hutool.crypto.digest.DigestUtil
+import com.dampcake.bencode.Type
+import com.github.blanexie.vxpt.bbs.support.util.bencode
+import java.time.LocalDateTime
 
 
 /**
  * 种子
  */
-class TorrentEntity(val torrentDO: TorrentDO) {
+class TorrentEntity(
+    val infoHash: String,
+    var title: String,
+    val postId: Int,
+    val size: Long,
+    val infoName: String,
+    val pieceLength: Long,
+    val files: List<Map<String, Any>>?,
+    val infoByte: ByteArray,
+    val createTime: LocalDateTime,
+    var status: Int = 0,
+) {
 
-    val id: Int = torrentDO.id!!
-
-    fun save(postDTO: PostDTO, torrentRepository: TorrentRepository): TorrentDO {
-        val torrentDO = BeanUtil.copyProperties(postDTO, TorrentDO::class.java)
-        return torrentRepository.save(torrentDO)
+    fun putTitle(title: String) {
+        this.title = title
     }
+
+    fun putStatus(status: Int) {
+        this.status = status
+    }
+
 
 }
