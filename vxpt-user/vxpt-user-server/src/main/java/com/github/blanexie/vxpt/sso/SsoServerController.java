@@ -8,6 +8,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.github.blanexie.vxpt.auth.api.dto.RoleDTO;
 import com.github.blanexie.vxpt.auth.domain.service.RoleService;
+import com.github.blanexie.vxpt.user.api.UserRpc;
 import com.github.blanexie.vxpt.user.api.dto.AccountDTO;
 import com.github.blanexie.vxpt.user.api.dto.UserDTO;
 import com.github.blanexie.vxpt.user.domain.entity.AccountEntity;
@@ -16,10 +17,7 @@ import com.github.blanexie.vxpt.user.domain.factory.AccountEntityFactory;
 import com.github.blanexie.vxpt.user.domain.factory.UserEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -28,7 +26,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-public class SsoServerController {
+public class SsoServerController implements UserRpc {
     @Resource
     private UserEntityFactory userEntityFactory;
     @Resource
@@ -56,7 +54,8 @@ public class SsoServerController {
 
     // 自定义接口：获取userinfo
     @RequestMapping("/sso/userinfo")
-    public Object userinfo(Integer loginId) {
+    @Override
+    public Object userinfo(@RequestParam Integer loginId) {
         log.info("---------------- 获取userinfo --------");
         // 校验签名，防止敏感信息外泄
         SaSsoUtil.checkSign(SaHolder.getRequest());

@@ -10,4 +10,6 @@ interface TorrentFactory {
 
     fun save(torrentEntity: TorrentEntity)
 
+    fun findByPostId(postId: Int, ): List<TorrentEntity>
+
 }
