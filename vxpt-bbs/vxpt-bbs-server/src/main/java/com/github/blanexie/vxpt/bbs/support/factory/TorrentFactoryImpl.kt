@@ -35,5 +35,17 @@ class TorrentFactoryImpl : TorrentFactory {
         )
     }
 
+    override fun findByInfoHash(infoHash: String): TorrentEntity {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(torrentEntity: TorrentEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun findByPostId(postId: Int): List<TorrentEntity> {
+        TODO("Not yet implemented")
+    }
+
 
 }

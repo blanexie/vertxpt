@@ -12,11 +12,10 @@ import java.time.LocalDateTime
 class TorrentEntity(
     val infoHash: String,
     var title: String,
-    val postId: Int,
     val size: Long,
     val infoName: String,
     val pieceLength: Long,
-    val files: List<Map<String, Any>>?,
+    val files: List<InfoFile>?,
     val infoByte: ByteArray,
     val createTime: LocalDateTime,
     var status: Int = 0,
@@ -32,3 +31,9 @@ class TorrentEntity(
 
 
 }
+
+
+data class InfoFile(
+    val length: Long,
+    val path: String
+)

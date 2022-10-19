@@ -1,5 +1,6 @@
 package com.github.blanexie.vxpt.bbs.domain.service
 
+import com.github.blanexie.vxpt.bbs.domain.entity.Label
 import com.github.blanexie.vxpt.bbs.domain.factory.PostFactory
 import com.github.blanexie.vxpt.bbs.domain.factory.TorrentFactory
 
@@ -12,7 +13,7 @@ class PostService(
         title: String,
         cover: String,
         category: String,
-        labels: Set<String>,
+        labels: Set<Label>,
         content: String,
         userId: Int,
     ) {

@@ -16,7 +16,7 @@ class PostEntity(
     var title: String,
     var cover: String,
     var category: String,
-    var labels: Set<String>,
+    var labels: Set<Label>,
     var content: String,
     var userId: Int,
     val createTime: LocalDateTime,
@@ -35,11 +35,11 @@ class PostEntity(
         this.category = category
     }
 
-    fun putLabels(labels: Set<String>) {
+    fun putLabels(labels: Set<Label>) {
         this.labels = labels
     }
 
-    fun putContent(labels: Set<String>) {
+    fun putContent(labels: Set<Label>) {
         this.labels = labels
     }
 
@@ -51,9 +51,7 @@ class PostEntity(
         this.title = title
     }
 
-
 }
-
 
 
 

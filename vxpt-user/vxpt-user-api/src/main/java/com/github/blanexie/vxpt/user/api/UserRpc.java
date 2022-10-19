@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public interface UserRpc {
 
-
-    @RequestMapping("/sso/userinfo")
-    Object userinfo(@RequestParam Integer loginId);
-
+    @RequestMapping("/userinfo/token")
+    UserDTO userInfo(@RequestParam String token);
 
 }
