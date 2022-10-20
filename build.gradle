@@ -9,7 +9,6 @@ plugins {
     id 'io.freefair.lombok' version '5.3.0'
 }
 
-apply plugin: "kotlin-spring" // instead of "kotlin-allopen"
 ext {
     springCloudVersion = "2021.0.2"
     version = '1.0-SNAPSHOT'
@@ -34,7 +33,6 @@ subprojects {
     apply plugin: 'org.jetbrains.kotlin.plugin.lombok'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'org.jetbrains.kotlin.plugin.spring'
-
 
     version "${version}"
     //子模块通用依赖

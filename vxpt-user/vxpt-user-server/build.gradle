@@ -1,5 +1,10 @@
 group 'com.github.blanexie.vxpt.user'
 
+bootJar {
+    archiveBaseName = "vxpt-user"
+    archiveVersion= "0.0.1"
+}
+
 dependencies {
 
     compile project(":vxpt-user:vxpt-user-api")
@@ -10,8 +15,5 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation("org.postgresql:postgresql")
     implementation("com.vladmihalcea:hibernate-types-52:2.16.0")
-
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.30.0'
-    implementation 'cn.dev33:sa-token-sso:1.30.0'
 
 }
