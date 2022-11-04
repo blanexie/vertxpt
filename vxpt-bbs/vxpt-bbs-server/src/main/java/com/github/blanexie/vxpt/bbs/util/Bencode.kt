@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.support.util
+package com.github.blanexie.vxpt.bbs.util
 
 import com.dampcake.bencode.Bencode
 

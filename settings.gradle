@@ -1,10 +1,10 @@
 rootProject.name = 'vxpt'
 
-include ":vxpt-eureka",
-        'vxpt-common',
-        ":vxpt-gateway",
-        ":vxpt-user:vxpt-user-api",
-        ":vxpt-user:vxpt-user-server",
-        ":vxpt-bbs:vxpt-bbs-api",
-        ":vxpt-bbs:vxpt-bbs-server"
+include ':vxpt-eureka'
+include ':vxpt-common'
+include ':vxpt-gateway'
+include ':vxpt-user:vxpt-user-api'
+include ':vxpt-user:vxpt-user-server'
+include ':vxpt-bbs:vxpt-bbs-api'
+include ':vxpt-bbs:vxpt-bbs-server'
 

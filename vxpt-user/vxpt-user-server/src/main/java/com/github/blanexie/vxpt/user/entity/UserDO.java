@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+@ToString
 @Getter
 @Entity
 @AllArgsConstructor

@@ -1,6 +1,7 @@
 package com.github.blanexie.vxpt.user.service
 
 import cn.hutool.core.util.StrUtil
+import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.user.entity.UserDO
 import com.github.blanexie.vxpt.user.repository.InvitationRepository
 import com.github.blanexie.vxpt.user.repository.UserRepository
@@ -20,9 +21,13 @@ class UserService(
     /**
      * 校验登录,
      */
-    fun login(email: String, pwdSecret: String): Boolean {
+    fun login(email: String, pwdSecret: String): UserDO? {
         val userDO = userRepository.findByEmail(email)
-        return if (userDO == null) false else userDO.checkPwd(pwdSecret)
+        return if (userDO != null && userDO.checkPwd(pwdSecret)) {
+            userDO;
+        } else {
+            null
+        }
     }
 
 
@@ -56,34 +61,31 @@ class UserService(
         }
     }
 
+
+    fun nextUserId(): Int {
+        return userRepository.nextSeqId()
+    }
+
     /**
      * 注册, 返回的是userId
      */
     fun register(
-        code: String,
-        email: String,
-        pwd: String,
-        nickName: String,
-        sex: Int
+        registerUserDTO: RegisterUserDTO
     ): Int {
-        val userId = userRepository.nextSeqId()
-        //检查邀请函
-        val invitationDO = invitationRepository.findByCodeAndStatus(code, 0) ?: throw  Error("请输入正确的邀请码")
-        val msg = invitationDO.use(userId)
-        if (StrUtil.isBlank(msg)) {
-            throw  Error(msg);
-        }
-
         // 创建用户
         val userDO = UserDO(
-            userId, nickName, email, pwd, sex, listOf("normal"),
-            invitationDO.id, LocalDateTime.now(),
+            registerUserDTO.userId,
+            registerUserDTO.nickName,
+            registerUserDTO.email,
+            registerUserDTO.pwd,
+            registerUserDTO.sex,
+            listOf("normal"),
+            registerUserDTO.invitationId,
+            LocalDateTime.now(),
             LocalDateTime.now(), 0
         )
-
         userRepository.save(userDO)
-        invitationRepository.save(invitationDO)
-        return userId
+        return userDO.id
     }
 
 }

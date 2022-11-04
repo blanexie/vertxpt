@@ -4,8 +4,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleDTO {

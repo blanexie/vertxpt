@@ -11,6 +11,11 @@ class InvitationService(
     private val invitationRepository: InvitationRepository
 ) {
 
+
+    fun findByCode(code:String):InvitationDO?{
+         return invitationRepository.findByCodeAndStatus(code, 0)
+    }
+
     /**
      * 创建一个邀请函
      */

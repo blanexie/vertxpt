@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 /**
  * 邀请函实体
  */
+@ToString
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -66,19 +67,19 @@ public class InvitationDO {
      * @param receiveId
      * @return 返回的是错误消息
      */
-    public String use(Integer receiveId) {
+    public Boolean use(Integer receiveId)  {
         if (status > 0) {
-            return "邀请函已经状态不对，无法使用； ID:" + id;
+            return  false;
         }
         //检查有无过期
         if (LocalDateTime.now().isAfter(expireTime)) {
             this.status = 2;
-            return "邀请函已经过期， ID：" + id;
+            return  false;
         }
         //检查有无已经使用
         if (receiveId != null) {
             this.status = 1;
-            return "邀请函已经被使用， ID：" + id;
+            return  false;
         }
         this.receiveId = receiveId;
         this.status = 1;

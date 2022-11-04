@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 角色实体
  */
-
+@ToString
 @Getter
 @Entity
 @AllArgsConstructor
