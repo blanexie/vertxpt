@@ -2,12 +2,11 @@ group 'com.github.blanexie.vxpt.user'
 
 bootJar {
     archiveBaseName = "vxpt-user"
-    archiveVersion= "0.0.1"
+    archiveVersion = "0.0.1"
 }
 
 dependencies {
-
-    compile project(":vxpt-user:vxpt-user-api")
+    api project(":vxpt-user:vxpt-user-api")
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation("org.springframework.boot:spring-boot-starter-web")

@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.jpa.entity;
+package com.github.blanexie.vxpt.bbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;

@@ -1,4 +1,3 @@
-group 'com.github.blanexie.vxpt.bbs.api'
-
 dependencies {
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
 }

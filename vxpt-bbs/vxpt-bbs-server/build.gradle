@@ -6,7 +6,7 @@ bootJar {
 }
 
 dependencies {
-    compile project(":vxpt-bbs:vxpt-bbs-api")
+    api project(":vxpt-bbs:vxpt-bbs-api")
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation "org.springframework.boot:spring-boot-starter-web"

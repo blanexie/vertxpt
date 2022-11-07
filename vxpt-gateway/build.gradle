@@ -2,7 +2,7 @@ group 'com.github.blanexie.vxpt.gateway'
 
 dependencies {
 
-    compile project(":vxpt-user:vxpt-user-api")
+    api project(":vxpt-user:vxpt-user-api")
     implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"

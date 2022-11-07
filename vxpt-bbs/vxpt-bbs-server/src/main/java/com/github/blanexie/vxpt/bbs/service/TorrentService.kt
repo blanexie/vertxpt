@@ -2,11 +2,13 @@ package com.github.blanexie.vxpt.bbs.service
 
 import cn.hutool.crypto.digest.DigestUtil
 import com.dampcake.bencode.Type
-import com.github.blanexie.vxpt.bbs.jpa.entity.TorrentDO
-import com.github.blanexie.vxpt.bbs.jpa.repository.TorrentRepository
+import com.github.blanexie.vxpt.bbs.entity.TorrentDO
+import com.github.blanexie.vxpt.bbs.repository.TorrentRepository
 import com.github.blanexie.vxpt.bbs.util.bencode
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
+@Service
 class TorrentService(
     val torrentRepository: TorrentRepository
 ) {
@@ -16,9 +18,9 @@ class TorrentService(
         val infoHash = DigestUtil.sha1Hex(infoByte)
         val size = dictionary["length"] ?: {
             val files = dictionary["files"] as List<Map<String, *>>
-            files.map {
+            files.sumOf {
                 it["length"] as Long
-            }.sum()
+            }
         }
         val infoName = dictionary["name"] as String
         val files = dictionary["files"] as List<Map<String, Any>>

@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.jpa.entity;
+package com.github.blanexie.vxpt.bbs.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,29 +27,31 @@ public class PostDO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;//: Int? = null,
+    private Integer id;
 
+    // 标题
     @Column(nullable = false, length = 64)
-    private String title;// : String, // 标题
+    private String title;
 
+    //封面
     @Column(nullable = false)
-    private String cover;// String, //封面
+    private String cover;
+
+    //分类
     @Column(nullable = false)
-    private String category;//String, //分类
+    private String category;
 
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb")
-    private List<String> labels;
-
+    //markdown 文本描述
     @Lob
     @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;// : String,  //markdown 文本描述
+    private String content;
+
+    //用户的id
+    @Column(nullable = false)
+    private Integer userId;
 
     @Column(nullable = false)
-    private Integer userId; //: Int, //用户的id
-
-    @Column(nullable = false)
-    private Integer status;//: Int = 0,
+    private Integer status;
 
     @CreatedDate
     private LocalDateTime createTime;
