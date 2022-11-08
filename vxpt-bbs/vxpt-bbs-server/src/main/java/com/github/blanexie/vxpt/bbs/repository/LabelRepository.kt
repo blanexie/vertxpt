@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface LabelRepository : CrudRepository<LabelDO, Int> {
+
+    fun findByLabelAndPostId(label: String, postId: Int): LabelDO?
+
 }

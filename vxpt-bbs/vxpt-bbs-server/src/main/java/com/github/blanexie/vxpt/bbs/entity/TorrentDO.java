@@ -45,7 +45,7 @@ public class TorrentDO {
     @Column(nullable = false)
     private Long pieceLength;
 
-    @Type(type = "json")
+    @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<Map<String, Object>> files;
 

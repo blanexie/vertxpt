@@ -17,7 +17,7 @@ public class PostDTO {
     private String content;// : String,  //markdown 文本描述
     private Integer userId;//: Int, //用户的id
 
-    private List<TorrentDTO> torrentDTOS;
+    private List<TorrentInfoDTO> torrentDTOS;
 
 
 }

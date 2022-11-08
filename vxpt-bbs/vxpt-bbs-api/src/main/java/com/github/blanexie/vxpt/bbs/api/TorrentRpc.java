@@ -36,11 +36,13 @@ public interface TorrentRpc {
      * @return
      */
     @GetMapping("/rpc/publishPost")
-    void publishPost(@RequestParam Integer postId,@RequestParam Integer userId);
-
+    void publishPost(@RequestParam Integer postId, @RequestParam Integer userId);
 
     @GetMapping("/rpc/getPost")
     PostDTO getPost(@RequestParam Integer postId);
+
+    @GetMapping("/rpc/findByInfoHash")
+    TorrentDTO findByInfoHash(@RequestParam String infoHash);
 
     @PostMapping("/rpc/searchPost")
     List<PostDTO> searchPost();

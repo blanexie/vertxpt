@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @AllArgsConstructor
-@Table(schema = "vxpt-bbs")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@Table(schema = "vxpt-bbs", uniqueConstraints = {@UniqueConstraint(columnNames = {"postId", "label"})})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LabelDO {
 

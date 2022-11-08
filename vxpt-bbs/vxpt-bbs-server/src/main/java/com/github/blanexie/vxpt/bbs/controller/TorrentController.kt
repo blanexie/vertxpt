@@ -8,10 +8,7 @@ import com.github.blanexie.vxpt.bbs.service.TorrentService
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class TorrentController(
-    val postService: PostService,
-    val torrentService: TorrentService
-) : TorrentRpc {
+class TorrentController(val postService: PostService, val torrentService: TorrentService) : TorrentRpc {
 
     override fun uploadPost(postDTO: PostDTO): Int {
         return postService.savePost(postDTO);
@@ -27,6 +24,10 @@ class TorrentController(
         }
     }
 
+    override fun findByInfoHash(infoHash: String?): TorrentDTO {
+        TODO("Not yet implemented")
+    }
+
     override fun publishPost(postId: Int, userId: Int) {
         postService.publish(postId, userId)
     }
@@ -34,6 +35,8 @@ class TorrentController(
     override fun getPost(postId: Int): PostDTO? {
         return postService.findById(postId)
     }
+
+
 
     override fun searchPost(): MutableList<PostDTO> {
         TODO("Not yet implemented")
