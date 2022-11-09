@@ -50,8 +50,7 @@ public class TorrentDO {
     private List<Map<String, Object>> files;
 
     @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = " infoByte", columnDefinition = "BLOB", nullable = true)
+    @Column(name = " infoByte", columnDefinition = "BLOB", nullable = false)
     private byte[] infoByte;
 
     @Column(nullable = false)

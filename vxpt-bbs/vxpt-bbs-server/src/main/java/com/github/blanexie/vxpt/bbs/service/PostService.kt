@@ -9,9 +9,10 @@ import com.github.blanexie.vxpt.bbs.repository.LabelRepository
 import com.github.blanexie.vxpt.bbs.repository.PostRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
-@Component
+@Service
 class PostService(val postRepository: PostRepository, val labelRepository: LabelRepository) {
 
     fun findById(id: Int): PostDTO? {

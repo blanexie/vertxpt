@@ -24,8 +24,8 @@ class TorrentController(val postService: PostService, val torrentService: Torren
         }
     }
 
-    override fun findByInfoHash(infoHash: String?): TorrentDTO {
-        TODO("Not yet implemented")
+    override fun findByInfoHash(infoHash: String): TorrentDTO {
+        return torrentService.findByInfoHash(infoHash)
     }
 
     override fun publishPost(postId: Int, userId: Int) {
@@ -35,7 +35,6 @@ class TorrentController(val postService: PostService, val torrentService: Torren
     override fun getPost(postId: Int): PostDTO? {
         return postService.findById(postId)
     }
-
 
 
     override fun searchPost(): MutableList<PostDTO> {

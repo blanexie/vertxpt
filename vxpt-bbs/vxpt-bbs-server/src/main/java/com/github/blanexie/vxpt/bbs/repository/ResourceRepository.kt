@@ -1,10 +1,10 @@
 package com.github.blanexie.vxpt.bbs.repository
 
-import com.github.blanexie.vxpt.bbs.entity.PostDO
+import com.github.blanexie.vxpt.bbs.entity.ResourceDO
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PostRepository : JpaRepository<PostDO, Int> {
+interface ResourceRepository : JpaRepository<ResourceDO, Int> {
+
 }
