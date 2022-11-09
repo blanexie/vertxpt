@@ -8,12 +8,16 @@ import org.springframework.web.bind.annotation.*;
 public interface UserRpc {
 
     @GetMapping("/userinfo/token")
-    UserDTO userInfo(@RequestParam String token);
+    UserDTO userInfo(@RequestParam Integer userId);
 
     @GetMapping("/login")
-    String login(@RequestParam String email, @RequestParam String pwdSecret);
+    Integer login(@RequestParam String email, @RequestParam String pwdSecret);
 
     @PostMapping("/register")
     UserDTO register(@RequestBody RegisterUserDTO registerUserDTO);
+
+
+
+
 
 }

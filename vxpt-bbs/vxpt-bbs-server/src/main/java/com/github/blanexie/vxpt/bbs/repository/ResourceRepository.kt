@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ResourceRepository : JpaRepository<ResDO, Int> {
 
+    fun findByHash(hash: String): ResDO
 }
