@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @date ：2022/11/9 7:30 PM
  */
 @Data
-public class ResourceUserDTO {
+public class ResUserDTO {
 
     private Integer id;
 

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(schema = "vxpt-bbs")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ResourceUserDO {
+public class ResUserDO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

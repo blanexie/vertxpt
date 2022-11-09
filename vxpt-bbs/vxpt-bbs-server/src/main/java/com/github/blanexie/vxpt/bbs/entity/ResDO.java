@@ -1,8 +1,6 @@
 package com.github.blanexie.vxpt.bbs.entity;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
-import org.hibernate.annotations.TypeDef;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -21,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(schema = "vxpt-bbs")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ResourceDO {
+public class ResDO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
