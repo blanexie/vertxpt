@@ -28,7 +28,7 @@ public class ResUserDO {
 
     private Integer userId;
 
-    private String md5;
+    private String hash;
 
     /**
      * 文件的真实名称， 包含后缀
