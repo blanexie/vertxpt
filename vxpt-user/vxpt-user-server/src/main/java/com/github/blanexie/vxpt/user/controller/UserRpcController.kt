@@ -18,23 +18,12 @@ class UserRpcController(
     @Resource
     val roleService: RoleService,
     @Resource
-    val invitationService: InvitationService,
-    @Resource
-    val tokenComponent: TokenComponent
+    val invitationService: InvitationService
 ) : UserRpc {
 
 
-    override fun userInfo(token: String): UserDTO? {
-        val decrypt = tokenComponent.getAES().decrypt(token)
-        val split = String(decrypt).split("|")
-        val useId = split[0].toInt()
-        val createTime = split[1].toLong()
-
-        if (createTime + tokenComponent.getExpireSecond() * 1000 < System.currentTimeMillis()) {
-            return null
-        } else {
-            return getUserDTO(useId)
-        }
+    override fun userInfo(userId: Int): UserDTO? {
+        return getUserDTO(userId)
     }
 
     private fun getUserDTO(useId: Int): UserDTO {
@@ -47,13 +36,12 @@ class UserRpcController(
     }
 
 
-    override fun login(email: String, pwdSecret: String): String? {
-        val userDO = userService.login(email, pwdSecret) ?: return null
-        return tokenComponent.buildToken(userDO.id)
+    override fun login(email: String, pwdSecret: String): Int? {
+        return userService.login(email, pwdSecret)?.id
     }
 
     override fun register(registerUserDTO: RegisterUserDTO): UserDTO {
-        val invitationDO = invitationService.findByCode(registerUserDTO.code)?: throw  Error("请输入正确的邀请码")
+        val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: throw  Error("请输入正确的邀请码")
         val nextUserId = userService.nextUserId()
         //检查邀请函
         invitationDO.use(nextUserId)

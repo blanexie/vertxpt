@@ -14,12 +14,11 @@ import java.time.LocalDateTime;
  * @author ：xiezc
  * @date ：2022/11/9 7:13 PM
  */
-@ToString
-@Getter
+@Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(schema = "vxpt-bbs")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ResUserDO {
 
     @Id
