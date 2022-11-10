@@ -15,8 +15,6 @@ spring:
           auto: update
     show-sql: true
 
-
-
 eureka:
   client:
     service-url:

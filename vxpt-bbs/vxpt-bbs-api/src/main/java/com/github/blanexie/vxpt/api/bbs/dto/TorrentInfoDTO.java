@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.api.dto;
+package com.github.blanexie.vxpt.api.bbs.dto;
 
 import lombok.Data;
 

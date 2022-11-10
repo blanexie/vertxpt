@@ -2,11 +2,8 @@ package com.github.blanexie.vxpt.bbs.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
-import com.github.blanexie.vxpt.bbs.api.TorrentRpc
-import com.github.blanexie.vxpt.bbs.api.dto.PostDTO
-import com.github.blanexie.vxpt.bbs.api.dto.TorrentDTO
+import com.github.blanexie.vxpt.api.bbs.dto.PostDTO
 import com.github.blanexie.vxpt.bbs.service.PostService
-import com.github.blanexie.vxpt.bbs.service.TorrentService
 import org.springframework.web.bind.annotation.*
 
 @RestController

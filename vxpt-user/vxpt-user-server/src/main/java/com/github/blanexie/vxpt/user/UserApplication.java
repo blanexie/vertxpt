@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt;
+package com.github.blanexie.vxpt.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

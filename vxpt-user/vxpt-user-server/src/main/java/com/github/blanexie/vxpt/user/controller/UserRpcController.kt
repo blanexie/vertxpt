@@ -1,13 +1,12 @@
 package com.github.blanexie.vxpt.user.controller
 
-import com.github.blanexie.vxpt.user.api.UserRpc
-import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO
-import com.github.blanexie.vxpt.user.api.dto.RoleDTO
-import com.github.blanexie.vxpt.user.api.dto.UserDTO
+import com.github.blanexie.vxpt.api.user.UserRpc
+import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
+import com.github.blanexie.vxpt.api.user.dto.RoleDTO
+import com.github.blanexie.vxpt.api.user.dto.UserDTO
 import com.github.blanexie.vxpt.user.service.InvitationService
 import com.github.blanexie.vxpt.user.service.RoleService
 import com.github.blanexie.vxpt.user.service.UserService
-import com.github.blanexie.vxpt.user.util.TokenComponent
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.Resource
 
@@ -30,9 +29,20 @@ class UserRpcController(
         val userDO = userService.findById(useId)
         val roles = userDO!!.roles.mapNotNull { roleService.findRole(it) }
             .map {
-                RoleDTO(it.id, it.name, it.code, it.permissionCodes)
+                RoleDTO(
+                    it.id,
+                    it.name,
+                    it.code,
+                    it.permissionCodes
+                )
             }
-        return UserDTO(useId, userDO.nickName, userDO.email, userDO.sex, roles)
+        return UserDTO(
+            useId,
+            userDO.nickName,
+            userDO.email,
+            userDO.sex,
+            roles
+        )
     }
 
 

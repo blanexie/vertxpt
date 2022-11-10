@@ -2,13 +2,12 @@ package com.github.blanexie.vxpt.bbs.service
 
 
 import cn.hutool.core.bean.BeanUtil
-import com.github.blanexie.vxpt.bbs.api.dto.PostDTO
+import com.github.blanexie.vxpt.api.bbs.dto.PostDTO
 import com.github.blanexie.vxpt.bbs.entity.LabelDO
 import com.github.blanexie.vxpt.bbs.entity.PostDO
 import com.github.blanexie.vxpt.bbs.repository.LabelRepository
 import com.github.blanexie.vxpt.bbs.repository.PostRepository
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

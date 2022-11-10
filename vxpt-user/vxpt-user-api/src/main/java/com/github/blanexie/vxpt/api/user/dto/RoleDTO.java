@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.user.api.dto;
+package com.github.blanexie.vxpt.api.user.dto;
 
 import lombok.*;
 

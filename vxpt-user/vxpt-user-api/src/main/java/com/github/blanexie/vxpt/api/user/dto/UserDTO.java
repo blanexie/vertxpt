@@ -1,7 +1,6 @@
-package com.github.blanexie.vxpt.user.api.dto;
+package com.github.blanexie.vxpt.api.user.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

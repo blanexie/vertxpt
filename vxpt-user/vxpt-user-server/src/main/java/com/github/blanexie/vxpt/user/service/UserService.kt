@@ -1,7 +1,6 @@
 package com.github.blanexie.vxpt.user.service
 
-import cn.hutool.core.util.StrUtil
-import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO
+import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.user.entity.UserDO
 import com.github.blanexie.vxpt.user.repository.InvitationRepository
 import com.github.blanexie.vxpt.user.repository.UserRepository

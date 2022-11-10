@@ -1,7 +1,7 @@
-package com.github.blanexie.vxpt.bbs.api;
+package com.github.blanexie.vxpt.api.bbs;
 
-import com.github.blanexie.vxpt.bbs.api.dto.PostDTO;
-import com.github.blanexie.vxpt.bbs.api.dto.TorrentDTO;
+import com.github.blanexie.vxpt.api.bbs.dto.TorrentDTO;
+import com.github.blanexie.vxpt.api.bbs.dto.PostDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

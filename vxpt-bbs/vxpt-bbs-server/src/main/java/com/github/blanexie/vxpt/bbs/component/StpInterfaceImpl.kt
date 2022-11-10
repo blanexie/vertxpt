@@ -1,7 +1,7 @@
 package com.github.blanexie.vxpt.bbs.component
 
 import cn.dev33.satoken.stp.StpInterface
-import com.github.blanexie.vxpt.user.api.UserRpc
+import com.github.blanexie.vxpt.api.user.UserRpc
 import org.springframework.stereotype.Component
 import javax.annotation.Resource
 

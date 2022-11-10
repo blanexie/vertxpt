@@ -1,8 +1,8 @@
-package com.github.blanexie.vxpt.user.api;
+package com.github.blanexie.vxpt.api.user;
 
 
-import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO;
-import com.github.blanexie.vxpt.user.api.dto.UserDTO;
+import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO;
+import com.github.blanexie.vxpt.api.user.dto.UserDTO;
 import org.springframework.web.bind.annotation.*;
 
 public interface UserRpc {

@@ -2,8 +2,8 @@ package com.github.blanexie.vxpt.bbs.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
-import com.github.blanexie.vxpt.user.api.UserRpc
-import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO
+import com.github.blanexie.vxpt.api.user.UserRpc
+import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
@@ -28,7 +28,8 @@ class UserController(@Resource val userRpc: UserRpc) {
 
     @GetMapping("/logout")
     fun logout(): SaResult {
-        return SaResult.data(StpUtil.logout())
+        StpUtil.logout()
+        return SaResult.ok()
     }
 
     @PostMapping("/register")

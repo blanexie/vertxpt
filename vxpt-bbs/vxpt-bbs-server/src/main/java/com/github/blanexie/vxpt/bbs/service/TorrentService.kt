@@ -3,7 +3,7 @@ package com.github.blanexie.vxpt.bbs.service
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.crypto.digest.DigestUtil
 import com.dampcake.bencode.Type
-import com.github.blanexie.vxpt.bbs.api.dto.TorrentDTO
+import com.github.blanexie.vxpt.api.bbs.dto.TorrentDTO
 import com.github.blanexie.vxpt.bbs.entity.TorrentDO
 import com.github.blanexie.vxpt.bbs.repository.TorrentRepository
 import com.github.blanexie.vxpt.bbs.util.bencode

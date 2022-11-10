@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan("com.github.blanexie.vxpt.user.api.feign")
+@ComponentScan("com.github.blanexie.vxpt.api.*.feign")
 public class BbsApplication {
 
     public static void main(String[] args) {
