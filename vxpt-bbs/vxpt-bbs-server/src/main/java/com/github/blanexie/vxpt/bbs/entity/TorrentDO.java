@@ -17,7 +17,7 @@ import java.util.Map;
 @Getter
 @Entity
 @AllArgsConstructor
-@Table(schema = "vxpt-bbs")
+@Table(schema = "vxpt_bbs")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TorrentDO {
@@ -48,10 +48,6 @@ public class TorrentDO {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<Map<String, Object>> files;
-
-    @Lob
-    @Column(name = " infoByte", columnDefinition = "BLOB", nullable = false)
-    private byte[] infoByte;
 
     @Column(nullable = false)
     private Integer status;

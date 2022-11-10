@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @AllArgsConstructor
-@Table(schema = "vxpt-bbs")
+@Table(schema = "vxpt_bbs")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ResDO {
 
@@ -26,7 +26,7 @@ public class ResDO {
     private Integer id;
 
     /**
-     * 资源的md5，可以有效避免重复上传问题
+     * 资源的sha1Hex，可以有效避免重复上传问题
      */
     @Column(nullable = false, unique = true)
     private String hash;
@@ -41,7 +41,7 @@ public class ResDO {
      * 资源类型后缀， 一般使用后缀， 大小限制为3M以内
      */
     @Lob
-    @Column(nullable = false, columnDefinition = "BLOB")
+    @Column(nullable = false, columnDefinition = "BYTEA")
     private byte[] content;
 
     @Column(nullable = false)

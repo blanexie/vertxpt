@@ -1,43 +1,36 @@
 package com.github.blanexie.vxpt.bbs.controller
 
+import cn.dev33.satoken.util.SaResult
 import com.github.blanexie.vxpt.bbs.api.TorrentRpc
 import com.github.blanexie.vxpt.bbs.api.dto.PostDTO
 import com.github.blanexie.vxpt.bbs.api.dto.TorrentDTO
 import com.github.blanexie.vxpt.bbs.service.PostService
 import com.github.blanexie.vxpt.bbs.service.TorrentService
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
-class TorrentController(val postService: PostService, val torrentService: TorrentService) : TorrentRpc {
+@RequestMapping("/api/torrent")
+class TorrentController(val postService: PostService, val torrentService: TorrentService) {
 
-    override fun uploadPost(postDTO: PostDTO): Int {
-        return postService.savePost(postDTO);
-    }
-
-    override fun uploadTorrent(torrentDTO: TorrentDTO): Int {
-        val postDTO = postService.findById(torrentDTO.postId)
+    @PostMapping("/upload")
+    fun uploadTorrent(
+        @RequestParam postId: Int,
+        @RequestParam title: String,
+        @RequestParam infoByte: ByteArray
+    ): SaResult {
+        val postDTO = postService.findById(postId)
         if (postDTO != null) {
-            val buildTorrent = torrentService.buildTorrent(torrentDTO.postId, torrentDTO.title, torrentDTO.infoByte)
-            return buildTorrent.id
+            val buildTorrent = torrentService.buildTorrent(postId, title, infoByte)
+            return SaResult.data(buildTorrent.id)
         } else {
-            throw Error("请传入正确的帖子id")
+            return SaResult.error("请传入正确的帖子id")
         }
     }
 
-    override fun findByInfoHash(infoHash: String): TorrentDTO {
-        return torrentService.findByInfoHash(infoHash)
+    @GetMapping("/find")
+    fun findByInfoHash(@RequestParam infoHash: String): SaResult {
+        var torrentDTO = torrentService.findByInfoHash(infoHash)
+        return SaResult.data(torrentDTO)
     }
 
-    override fun publishPost(postId: Int, userId: Int) {
-        postService.publish(postId, userId)
-    }
-
-    override fun getPost(postId: Int): PostDTO? {
-        return postService.findById(postId)
-    }
-
-
-    override fun searchPost(): MutableList<PostDTO> {
-        TODO("Not yet implemented")
-    }
 }

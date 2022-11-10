@@ -1,39 +1,40 @@
 package com.github.blanexie.vxpt.bbs.controller
 
-import cn.dev33.satoken.stp.StpInterface
 import cn.dev33.satoken.stp.StpUtil
-import com.github.blanexie.vxpt.bbs.util.Response
+import cn.dev33.satoken.util.SaResult
 import com.github.blanexie.vxpt.user.api.UserRpc
 import com.github.blanexie.vxpt.user.api.dto.RegisterUserDTO
-import com.github.blanexie.vxpt.user.api.dto.UserDTO
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 class UserController(@Resource val userRpc: UserRpc) {
 
     @PostMapping("/login")
-    fun doLogin(userDTO: RegisterUserDTO): Response {
+    fun doLogin(userDTO: RegisterUserDTO): SaResult {
         val userId = userRpc.login(userDTO.email, userDTO.pwd)
         if (userId != null) {
             StpUtil.login(userId)
-            return Response.ok()
+            return SaResult.ok()
         }
-        return return Response.fail(503)
+        return SaResult.get(503, "账号或者密码错误", null)
     }
 
     @GetMapping("/isLogin")
-    fun isLogin(): Response {
-        return Response.ok(StpUtil.isLogin())
+    fun isLogin(): SaResult {
+        return SaResult.data(StpUtil.isLogin())
     }
 
     @GetMapping("/logout")
-    fun logout(): Response {
-        return Response.ok(StpUtil.logout())
+    fun logout(): SaResult {
+        return SaResult.data(StpUtil.logout())
     }
 
+    @PostMapping("/register")
+    fun register(@RequestBody  registerUserDTO: RegisterUserDTO): SaResult {
+        val userDTO = userRpc.register(registerUserDTO)
+        StpUtil.login(userDTO.id)
+        return SaResult.ok()
+    }
 }

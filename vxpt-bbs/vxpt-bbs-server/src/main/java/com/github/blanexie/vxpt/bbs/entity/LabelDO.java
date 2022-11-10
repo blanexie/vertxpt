@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @AllArgsConstructor
-@Table(schema = "vxpt-bbs", uniqueConstraints = {@UniqueConstraint(columnNames = {"postId", "label"})})
+@Table(schema = "vxpt_bbs", uniqueConstraints = {@UniqueConstraint(columnNames = {"postId", "label"})})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LabelDO {
 

@@ -29,7 +29,7 @@ class TorrentService(
         val pieceLength = dictionary["piece length"] as Long
         val torrentDO = TorrentDO(
             null, postId, title, size as Long, infoHash, infoName, pieceLength,
-            files, infoByte, 0, LocalDateTime.now(), LocalDateTime.now()
+            files, 0, LocalDateTime.now(), LocalDateTime.now()
         )
         return torrentRepository.save(torrentDO)
     }

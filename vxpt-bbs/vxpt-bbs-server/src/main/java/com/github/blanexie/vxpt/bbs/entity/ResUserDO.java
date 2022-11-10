@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "vxpt-bbs")
+@Table(schema = "vxpt_bbs")
 public class ResUserDO {
 
     @Id

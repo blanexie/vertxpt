@@ -18,23 +18,23 @@ import java.time.LocalDateTime
 class ResourceService(val resourceRepository: ResourceRepository, val resourceUserRepository: ResourceUserRepository) {
 
     fun upload(userId: Int, content: ByteArray, fileName: String) {
-        var md5Hex = DigestUtil.md5Hex(content)
+        var sha1Hex = DigestUtil.sha1Hex(content)
         var suffix = fileName.substringAfterLast(".")
-        val resDO = ResDO(null, md5Hex, suffix, content, 0, LocalDateTime.now(), LocalDateTime.now())
+        val resDO = ResDO(null, sha1Hex, suffix, content, 0, LocalDateTime.now(), LocalDateTime.now())
         resourceRepository.save(resDO)
-        var resUserDO = ResUserDO(null, userId, md5Hex, fileName, 0, LocalDateTime.now(), LocalDateTime.now())
+        var resUserDO = ResUserDO(null, userId, sha1Hex, fileName, 0, LocalDateTime.now(), LocalDateTime.now())
         resourceUserRepository.save(resUserDO)
     }
 
-    fun download(userId: Int, md5: String): ResDO {
+    fun find(userId: Int, sha1Hex: String): ResDO {
         val resUserDO = ResUserDO()
-        resUserDO.hash = md5
+        resUserDO.hash = sha1Hex
         resUserDO.userId = userId
         val findOne = resourceUserRepository.findOne(Example.of(resUserDO))
         if (findOne == null) {
             throw Error("资源不存在")
         } else {
-            return resourceRepository.findByHash(md5)
+            return resourceRepository.findByHash(sha1Hex)
         }
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 @Entity
 @AllArgsConstructor
-@Table(schema = "vxpt-bbs")
+@Table(schema = "vxpt_bbs")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostDO {
