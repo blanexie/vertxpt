@@ -2,7 +2,7 @@ package com.github.blanexie.vxpt.bbs.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
-import com.github.blanexie.vxpt.api.user.UserRpc
+import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource

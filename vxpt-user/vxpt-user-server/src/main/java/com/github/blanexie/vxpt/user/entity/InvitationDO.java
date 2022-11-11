@@ -31,19 +31,19 @@ public class InvitationDO {
     private String code;
 
     /**
-     * 受邀者邮箱
-     */
-    @Column(unique = true)
-    private String email;
-
-    /**
      * 发出邀请函的用户id
      */
-    private Integer userId;
+    private Integer senderUserId;
+
+    /**
+     * 接受到邀请码的邮箱
+     */
+    @Column(unique = true)
+    private String receiveEmail;
 
 
     @Column(unique = true)
-    private Integer receiveId;
+    private Integer receiveUserId;
 
     /**
      * 邀请函过期时间
@@ -67,21 +67,21 @@ public class InvitationDO {
      * @param receiveId
      * @return 返回的是错误消息
      */
-    public Boolean use(Integer receiveId)  {
+    public Boolean use(Integer receiveId) {
         if (status > 0) {
-            return  false;
+            return false;
         }
         //检查有无过期
         if (LocalDateTime.now().isAfter(expireTime)) {
             this.status = 2;
-            return  false;
+            return false;
         }
         //检查有无已经使用
         if (receiveId != null) {
             this.status = 1;
-            return  false;
+            return false;
         }
-        this.receiveId = receiveId;
+        this.receiveUserId = receiveId;
         this.status = 1;
         return null;
     }

@@ -1,6 +1,6 @@
 package com.github.blanexie.vxpt.user.controller
 
-import com.github.blanexie.vxpt.api.user.UserRpc
+import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.api.user.dto.RoleDTO
 import com.github.blanexie.vxpt.api.user.dto.UserDTO
@@ -22,44 +22,30 @@ class UserRpcController(
 
 
     override fun userInfo(userId: Int): UserDTO? {
-        return getUserDTO(userId)
-    }
-
-    private fun getUserDTO(useId: Int): UserDTO {
-        val userDO = userService.findById(useId)
+        val userDO = userService.findById(userId)
         val roles = userDO!!.roles.mapNotNull { roleService.findRole(it) }
             .map {
                 RoleDTO(
-                    it.id,
-                    it.name,
-                    it.code,
-                    it.permissionCodes
+                    it.id, it.name, it.code, it.permissionCodes
                 )
             }
         return UserDTO(
-            useId,
-            userDO.nickName,
-            userDO.email,
-            userDO.sex,
-            roles
+            userId, userDO.nickName, userDO.email, userDO.sex, roles
         )
     }
-
 
     override fun login(email: String, pwdSecret: String): Int? {
         return userService.login(email, pwdSecret)?.id
     }
 
-    override fun register(registerUserDTO: RegisterUserDTO): UserDTO {
-        val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: throw  Error("请输入正确的邀请码")
+    override fun register(registerUserDTO: RegisterUserDTO): Int {
         val nextUserId = userService.nextUserId()
-        //检查邀请函
-        invitationDO.use(nextUserId)
-
-        val userId = userService.register(
+        val invitationId = invitationService.use(registerUserDTO.code, nextUserId)
+        registerUserDTO.userId = nextUserId
+        registerUserDTO.invitationId = invitationId
+        return userService.register(
             registerUserDTO
         )
-        return getUserDTO(userId)
     }
 
 }

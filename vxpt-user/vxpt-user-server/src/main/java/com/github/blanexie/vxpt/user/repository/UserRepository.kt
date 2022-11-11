@@ -8,12 +8,9 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : CrudRepository<UserDO, Int> {
 
-    fun findFirstByNickName(nickName: String): UserDO?
-
     fun findByEmail(email: String): UserDO?
 
-
-    @Query("select nextval('user_id_seq')", nativeQuery = true)
-    fun nextSeqId():Int
+    @Query("select nextval('vxpt_user.user_id_seq')", nativeQuery = true)
+    fun nextSeqId(): Int
 
 }

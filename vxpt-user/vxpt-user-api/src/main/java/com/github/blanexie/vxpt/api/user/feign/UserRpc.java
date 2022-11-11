@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.api.user;
+package com.github.blanexie.vxpt.api.user.feign;
 
 
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO;
@@ -7,17 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 public interface UserRpc {
 
-    @GetMapping("/userinfo/token")
+    @GetMapping("/userinfo")
     UserDTO userInfo(@RequestParam Integer userId);
 
     @GetMapping("/login")
     Integer login(@RequestParam String email, @RequestParam String pwdSecret);
 
     @PostMapping("/register")
-    UserDTO register(@RequestBody RegisterUserDTO registerUserDTO);
-
-
-
-
+    Integer register(@RequestBody RegisterUserDTO registerUserDTO);
 
 }

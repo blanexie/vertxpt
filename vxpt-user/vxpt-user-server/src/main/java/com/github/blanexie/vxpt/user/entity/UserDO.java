@@ -44,7 +44,7 @@ public class UserDO {
      * 邀请函id
      */
     @Column(nullable = false)
-    private Integer inviter;
+    private Integer invitationId;
 
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

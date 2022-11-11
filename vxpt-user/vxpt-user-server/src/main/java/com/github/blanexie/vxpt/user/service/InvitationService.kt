@@ -12,15 +12,22 @@ class InvitationService(
 ) {
 
 
-    fun findByCode(code:String):InvitationDO?{
-         return invitationRepository.findByCodeAndStatus(code, 0)
+    fun findByCode(code: String): InvitationDO? {
+        return invitationRepository.findByCodeAndStatus(code, 0)
+    }
+
+    fun use(code: String, receiveUserId: Int): Int {
+        var invitationDO = invitationRepository.findByCodeAndStatus(code, 0)
+        invitationDO!!.use(receiveUserId)
+        invitationRepository.save(invitationDO)
+        return invitationDO.id
     }
 
     /**
      * 创建一个邀请函
      */
-    fun createInvitation(userId: Int, email: String): InvitationDO {
-        val invitationDOs = invitationRepository.findByUserIdAndStatus(userId, 0)
+    fun createInvitation(senderUserId: Int, receiverEmail: String): InvitationDO {
+        val invitationDOs = invitationRepository.findBySenderUserIdAndStatus(senderUserId, 0)
         if (invitationDOs.isNotEmpty()) {
             throw Error("用户存在待接受的邀请函，无法再次邀请")
         }
@@ -29,7 +36,7 @@ class InvitationService(
             val invitationDO = invitationRepository.findByCodeAndStatus(code, 0);
             if (invitationDO == null) {
                 val invitationDO = InvitationDO(
-                    null, code, email, userId,
+                    null, code, senderUserId, receiverEmail,
                     null, LocalDateTime.now().plusDays(7), 0,
                     LocalDateTime.now(), LocalDateTime.now()
                 )
