@@ -31,7 +31,7 @@ class ResourceService(val resourceRepository: ResourceRepository, val resourceUs
         resUserDO.hash = sha1Hex
         resUserDO.userId = userId
         val findOne = resourceUserRepository.findOne(Example.of(resUserDO))
-        if (findOne == null) {
+        if (findOne.isPresent) {
             throw Error("资源不存在")
         } else {
             return resourceRepository.findByHash(sha1Hex)

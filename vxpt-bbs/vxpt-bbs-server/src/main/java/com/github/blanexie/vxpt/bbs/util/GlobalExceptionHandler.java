@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    // 全局异常拦截 
+    // 全局异常拦截
     @ExceptionHandler
     public SaResult handlerException(Exception e) {
         log.error("错误信息", e);
