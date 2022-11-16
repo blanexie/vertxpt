@@ -22,12 +22,12 @@ class PostService(val postRepository: PostRepository, val labelRepository: Label
     }
 
     fun publish(id: Int, userId: Int) {
-        val postDO = postRepository.findByIdOrNull(id)
-        if (postDO != null && postDO.userId == userId) {
-            postDO.publish()
-            postRepository.save(postDO)
+        val option = postRepository.findById(id)
+        val postDO = option.orElseThrow {
+            Error("请传入正确的帖子id")
         }
-        throw Error("请传入正确的帖子id")
+        postDO.publish()
+        postRepository.save(postDO)
     }
 
     fun savePost(postDTO: PostDTO): Int {

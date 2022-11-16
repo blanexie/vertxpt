@@ -25,9 +25,7 @@ class UserRpcController(
         val userDO = userService.findById(userId)
         val roles = userDO!!.roles.mapNotNull { roleService.findRole(it) }
             .map {
-                RoleDTO(
-                    it.id, it.name, it.code, it.permissionCodes
-                )
+                RoleDTO(it.id, it.name, it.code, it.permissionCodes)
             }
         return UserDTO(
             userId, userDO.nickName, userDO.email, userDO.sex, roles
@@ -43,9 +41,7 @@ class UserRpcController(
         val invitationId = invitationService.use(registerUserDTO.code, nextUserId)
         registerUserDTO.userId = nextUserId
         registerUserDTO.invitationId = invitationId
-        return userService.register(
-            registerUserDTO
-        )
+        return userService.register(registerUserDTO)
     }
 
 }

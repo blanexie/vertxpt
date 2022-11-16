@@ -34,8 +34,8 @@ class UserController(@Resource val userRpc: UserRpc) {
 
     @PostMapping("/register")
     fun register(@RequestBody  registerUserDTO: RegisterUserDTO): SaResult {
-        val userDTO = userRpc.register(registerUserDTO)
-        StpUtil.login(userDTO.id)
+        val userId = userRpc.register(registerUserDTO)
+        StpUtil.login(userId)
         return SaResult.ok()
     }
 }
