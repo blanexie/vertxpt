@@ -5,6 +5,26 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+## nodejs logs ###
+vxpt-web/logs
+*.log
+vxpt-web/npm-debug.log*
+vxpt-web/yarn-debug.log*
+vxpt-web/yarn-error.log*
+vxpt-web/pnpm-debug.log*
+vxpt-web/lerna-debug.log*
+
+vxpt-web/cypress/videos/
+vxpt-web/cypress/screenshots/
+
+### vue ###
+vxpt-web/node_modules
+vxpt-web/.DS_Store
+vxpt-web/dist
+vxpt-web/dist-ssr
+vxpt-web/coverage
+*.local
+
 ### STS ###
 .apt_generated
 .classpath
@@ -34,8 +54,9 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-/vxpt-web/.vscode/
-/vxpt-web/node_modules/
+vxpt-web/.vscode/*
+!vxpt-web/.vscode/extensions.json
+vxpt-web/node_modules/
 
 ### lombok ###
 **/lombok.config

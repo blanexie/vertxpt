@@ -22,39 +22,10 @@ import java.util.Set;
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackageClasses = BbsApplication.class)
-public class BbsApplication implements CommandLineRunner {
+public class BbsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BbsApplication.class);
-    }
-
-    @Resource
-    RequestMappingHandlerMapping requestMappingHandlerMapping;
-
-    /**
-     * 扫描项目获取所有的api
-     *
-     * @return
-     */
-    public void scanSpringRequestApi() {
-        Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
-        for (Map.Entry<RequestMappingInfo, HandlerMethod> item : handlerMethods.entrySet()) {
-            RequestMappingInfo mapping = item.getKey();
-            final HandlerMethod method = item.getValue();
-            //请求的方式,  post 还是get
-            final Set<RequestMethod> methods = mapping.getMethodsCondition().getMethods();
-            for (RequestMethod requestMethod : methods) {
-                final Class<?> beanType = method.getBeanType();
-                String name = beanType.getSimpleName() + "#" + method.getMethod().getName();
-                String s = beanType.getName() + "#" + method.getMethod().getName();
-                log.info("name：{}  setMethod:{}  setDescription:{} ", name, requestMethod.name(), s);
-            }
-        }
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        this.scanSpringRequestApi();
     }
 
 }
