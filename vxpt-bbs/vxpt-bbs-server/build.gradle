@@ -14,7 +14,7 @@ dependencies {
 
     implementation "com.vladmihalcea:hibernate-types-52"
     implementation "com.dampcake:bencode"
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.32.0'
+    implementation 'cn.dev33:sa-token-spring-boot-starter'
 
     developmentOnly "org.postgresql:postgresql"
 
