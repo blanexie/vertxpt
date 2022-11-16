@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PostRepository : JpaRepository<PostDO, Int> {
+interface PostRepository : JpaRepository<PostDO, Int>, CurlRepository<PostDO, Int> {
+
 }
