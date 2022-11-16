@@ -36,3 +36,6 @@ out/
 ### VS Code ###
 /vxpt-web/.vscode/
 /vxpt-web/node_modules/
+
+### lombok ###
+**/lombok.config
