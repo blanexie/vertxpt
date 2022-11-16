@@ -1,49 +1,161 @@
 <template>
   <div class="by">
-    <div class="login-card">
-      <div>登录/注册</div>
-      <br>
-      <n-form ref="formRef" :model="formValue"
-              label-align="right"
-              label-width="auto"
-              label-placement="left">
-        <n-form-item
-            label="姓名"
-            path="user.name"
-        >
-          <n-input v-model:value="formValue.user.name" placeholder="输入姓名"/>
-        </n-form-item>
-        <n-form-item label="年龄" path="user.age">
-          <n-input v-model:value="formValue.user.age" placeholder="输入年龄"/>
-        </n-form-item>
-        <n-form-item label="电话号码" path="user.phone">
-          <n-input v-model:value="formValue.phone" placeholder="电话号码"/>
-        </n-form-item>
-      </n-form>
-    </div>
+    <a-card class="login-card">
+      <a-tabs>
+        <a-tab-pane key="1" tab="登录">
+          <a-form
+              :model="loginFormState"
+              name="normal_login"
+              class="login-form"
+              @finish="onFinish"
+              @finishFailed="onFinishFailed"
+          >
+            <a-form-item
+                label="Username"
+                name="username"
+                :rules="[{ required: true, message: 'Please input your username!' }]"
+            >
+              <a-input v-model:value="loginFormState.username">
+                <template #prefix>
+                  <UserOutlined class="site-form-item-icon"/>
+                </template>
+              </a-input>
+            </a-form-item>
+
+            <a-form-item
+                label="Password"
+                name="password"
+                :rules="[{ required: true, message: 'Please input your password!' }]"
+            >
+              <a-input-password v-model:value="loginFormState.password">
+                <template #prefix>
+                  <LockOutlined class="site-form-item-icon"/>
+                </template>
+              </a-input-password>
+            </a-form-item>
+
+            <a-form-item>
+              <a-form-item name="remember" no-style>
+                <a-checkbox v-model:checked="loginFormState.remember">Remember me</a-checkbox>
+              </a-form-item>
+              <a class="login-form-forgot" href="">Forgot password</a>
+            </a-form-item>
+
+            <a-form-item>
+              <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+                Log in
+              </a-button>
+              Or
+              <a href="">register now!</a>
+            </a-form-item>
+          </a-form>
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="注册" force-render>
+
+          <a-form
+              :model="loginFormState"
+
+              name="normal_login"
+              class="login-form"
+              @finish="onFinish"
+              @finishFailed="onFinishFailed"
+          >
+            <a-form-item
+                label="Username"
+                name="username"
+                :rules="[{ required: true, message: 'Please input your username!' }]"
+            >
+              <a-input v-model:value="loginFormState.username">
+                <template #prefix>
+                  <UserOutlined class="site-form-item-icon"/>
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-form-item
+                label="email"
+                name="email"
+                :rules="[{ required: true, message: 'Please input your username!' }]"
+            >
+              <a-input v-model:value="loginFormState.username">
+                <template #prefix>
+                  <UserOutlined class="site-form-item-icon"/>
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-form-item
+                label="Password"
+                name="password"
+                :rules="[{ required: true, message: 'Please input your password!' }]"
+            >
+              <a-input-password v-model:value="loginFormState.password">
+                <template #prefix>
+                  <LockOutlined class="site-form-item-icon"/>
+                </template>
+              </a-input-password>
+            </a-form-item>
+
+            <a-form-item>
+              <a-form-item name="remember" no-style>
+                <a-checkbox v-model:checked="loginFormState.remember">Remember me</a-checkbox>
+              </a-form-item>
+              <a class="login-form-forgot" href="">Forgot password</a>
+            </a-form-item>
+
+            <a-form-item>
+              <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+                Log in
+              </a-button>
+              Or
+              <a href="">register now!</a>
+            </a-form-item>
+          </a-form>
+        </a-tab-pane>
+
+      </a-tabs>
+
+    </a-card>
   </div>
 </template>
 
 <script lang="ts">
+import {defineComponent, reactive, computed} from 'vue';
+import {UserOutlined, LockOutlined} from '@ant-design/icons-vue';
 
-import {defineComponent, ref} from 'vue'
-import {FormInst, useMessage} from 'naive-ui'
+interface LoginFormState {
+  username: string;
+  password: string;
+  remember: boolean;
+}
 
 export default defineComponent({
+  components: {
+    UserOutlined,
+    LockOutlined,
+  },
   setup() {
-    const formRef = ref(null)
+    const loginFormState = reactive<LoginFormState>({
+      username: '',
+      password: '',
+      remember: true,
+    });
+    const onFinish = (values: any) => {
+      console.log('Success:', values);
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+      console.log('Failed:', errorInfo);
+    };
+    const disabled = computed(() => {
+      return !(loginFormState.username && loginFormState.password);
+    });
     return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-    }
-  }
-})
+      loginFormState,
+      onFinish,
+      onFinishFailed,
+      disabled,
+    };
+  },
+});
 </script>
 
 <style scoped>
@@ -55,9 +167,7 @@ export default defineComponent({
 }
 
 .login-card {
-  border: 1px solid red;
-  height: 300px;
-  width: 550px;
-  padding: 25px;
+  width: 500px;
+  padding: 0 25px;
 }
 </style>

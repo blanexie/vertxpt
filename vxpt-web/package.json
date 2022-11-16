@@ -7,12 +7,12 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "ant-design-vue": "^3.2.15",
     "vue": "^3.2.38",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
-    "naive-ui": "^2.33.5",
     "vite": "^3.0.9"
   }
 }
