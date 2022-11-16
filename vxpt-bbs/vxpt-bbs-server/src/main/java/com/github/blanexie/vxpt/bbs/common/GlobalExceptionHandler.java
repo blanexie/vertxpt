@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.util;
+package com.github.blanexie.vxpt.bbs.common;
 
 import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;

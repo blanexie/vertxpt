@@ -1,11 +1,11 @@
-package com.github.blanexie.vxpt.bbs.service
+package com.github.blanexie.vxpt.bbs.post.service
 
 import cn.hutool.core.bean.BeanUtil
 import cn.hutool.crypto.digest.DigestUtil
 import com.dampcake.bencode.Type
 import com.github.blanexie.vxpt.api.bbs.dto.TorrentDTO
-import com.github.blanexie.vxpt.bbs.entity.TorrentDO
-import com.github.blanexie.vxpt.bbs.repository.TorrentRepository
+import com.github.blanexie.vxpt.bbs.post.entity.TorrentDO
+import com.github.blanexie.vxpt.bbs.post.repository.TorrentRepository
 import com.github.blanexie.vxpt.bbs.util.bencode
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime

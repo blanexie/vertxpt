@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.controller
+package com.github.blanexie.vxpt.bbs.post.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult

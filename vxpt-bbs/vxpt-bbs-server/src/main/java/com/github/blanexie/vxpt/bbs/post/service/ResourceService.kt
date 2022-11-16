@@ -1,10 +1,10 @@
-package com.github.blanexie.vxpt.bbs.service
+package com.github.blanexie.vxpt.bbs.post.service
 
 import cn.hutool.crypto.digest.DigestUtil
-import com.github.blanexie.vxpt.bbs.entity.ResDO
-import com.github.blanexie.vxpt.bbs.entity.ResUserDO
-import com.github.blanexie.vxpt.bbs.repository.ResourceRepository
-import com.github.blanexie.vxpt.bbs.repository.ResourceUserRepository
+import com.github.blanexie.vxpt.bbs.post.entity.ResDO
+import com.github.blanexie.vxpt.bbs.post.entity.ResUserDO
+import com.github.blanexie.vxpt.bbs.post.repository.ResourceRepository
+import com.github.blanexie.vxpt.bbs.post.repository.ResourceUserRepository
 import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -20,9 +20,25 @@ class ResourceService(val resourceRepository: ResourceRepository, val resourceUs
     fun upload(userId: Int, content: ByteArray, fileName: String) {
         var sha1Hex = DigestUtil.sha1Hex(content)
         var suffix = fileName.substringAfterLast(".")
-        val resDO = ResDO(null, sha1Hex, suffix, content, 0, LocalDateTime.now(), LocalDateTime.now())
+        val resDO = ResDO(
+            null,
+            sha1Hex,
+            suffix,
+            content,
+            0,
+            LocalDateTime.now(),
+            LocalDateTime.now()
+        )
         resourceRepository.save(resDO)
-        var resUserDO = ResUserDO(null, userId, sha1Hex, fileName, 0, LocalDateTime.now(), LocalDateTime.now())
+        var resUserDO = ResUserDO(
+            null,
+            userId,
+            sha1Hex,
+            fileName,
+            0,
+            LocalDateTime.now(),
+            LocalDateTime.now()
+        )
         resourceUserRepository.save(resUserDO)
     }
 

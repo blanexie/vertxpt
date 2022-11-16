@@ -1,8 +1,8 @@
-package com.github.blanexie.vxpt.bbs.controller
+package com.github.blanexie.vxpt.bbs.post.controller
 
 import cn.dev33.satoken.util.SaResult
-import com.github.blanexie.vxpt.bbs.service.PostService
-import com.github.blanexie.vxpt.bbs.service.TorrentService
+import com.github.blanexie.vxpt.bbs.post.service.PostService
+import com.github.blanexie.vxpt.bbs.post.service.TorrentService
 import org.springframework.web.bind.annotation.*
 
 @RestController

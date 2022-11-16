@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.controller
+package com.github.blanexie.vxpt.bbs.post.controller
 
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping

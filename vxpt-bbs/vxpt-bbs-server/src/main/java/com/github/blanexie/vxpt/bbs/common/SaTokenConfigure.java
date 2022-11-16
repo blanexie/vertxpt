@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.component;
+package com.github.blanexie.vxpt.bbs.common;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import org.springframework.context.annotation.Configuration;

@@ -1,12 +1,12 @@
-package com.github.blanexie.vxpt.bbs.service
+package com.github.blanexie.vxpt.bbs.post.service
 
 
 import cn.hutool.core.bean.BeanUtil
 import com.github.blanexie.vxpt.api.bbs.dto.PostDTO
-import com.github.blanexie.vxpt.bbs.entity.LabelDO
-import com.github.blanexie.vxpt.bbs.entity.PostDO
-import com.github.blanexie.vxpt.bbs.repository.LabelRepository
-import com.github.blanexie.vxpt.bbs.repository.PostRepository
+import com.github.blanexie.vxpt.bbs.post.entity.LabelDO
+import com.github.blanexie.vxpt.bbs.post.entity.PostDO
+import com.github.blanexie.vxpt.bbs.post.repository.LabelRepository
+import com.github.blanexie.vxpt.bbs.post.repository.PostRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -40,7 +40,14 @@ class PostService(val postRepository: PostRepository, val labelRepository: Label
         labels.forEach {
             var labelDO = labelRepository.findByLabelAndPostId(it, postDO.id)
             if (labelDO == null) {
-                labelDO = LabelDO(null, postDO.id, it, 0, LocalDateTime.now(), LocalDateTime.now())
+                labelDO = LabelDO(
+                    null,
+                    postDO.id,
+                    it,
+                    0,
+                    LocalDateTime.now(),
+                    LocalDateTime.now()
+                )
                 labelRepository.save(labelDO)
             }
         }

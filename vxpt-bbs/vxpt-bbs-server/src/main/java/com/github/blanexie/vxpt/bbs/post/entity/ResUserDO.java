@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.entity;
+package com.github.blanexie.vxpt.bbs.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

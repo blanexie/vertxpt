@@ -1,10 +1,10 @@
-package com.github.blanexie.vxpt.bbs.controller
+package com.github.blanexie.vxpt.bbs.post.controller
 
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
 import cn.hutool.core.net.URLEncodeUtil
-import com.github.blanexie.vxpt.bbs.service.ResourceService
+import com.github.blanexie.vxpt.bbs.post.service.ResourceService
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
