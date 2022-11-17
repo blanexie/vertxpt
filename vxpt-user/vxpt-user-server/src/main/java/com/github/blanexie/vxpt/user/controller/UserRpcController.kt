@@ -32,8 +32,8 @@ class UserRpcController(
         )
     }
 
-    override fun login(email: String, pwdSecret: String): Int? {
-        return userService.login(email, pwdSecret)?.id
+    override fun login(nickName: String, pwdSecret: String): Int? {
+        return userService.login(nickName, pwdSecret)?.id
     }
 
     override fun register(registerUserDTO: RegisterUserDTO): Int {

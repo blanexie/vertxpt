@@ -2,8 +2,10 @@ package com.github.blanexie.vxpt.user.entity;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(schema = "vxpt_user", name = "user")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UserDO {
 
     @Id

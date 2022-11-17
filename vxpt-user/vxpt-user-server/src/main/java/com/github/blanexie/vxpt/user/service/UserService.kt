@@ -20,8 +20,8 @@ class UserService(
     /**
      * 校验登录,
      */
-    fun login(email: String, pwdSecret: String): UserDO? {
-        val userDO = userRepository.findByEmail(email)
+    fun login(nickName: String, pwdSecret: String): UserDO? {
+        val userDO = userRepository.findByNickName(nickName)
         return if (userDO != null && userDO.checkPwd(pwdSecret)) {
             userDO;
         } else {
@@ -76,7 +76,7 @@ class UserService(
             registerUserDTO.userId,
             registerUserDTO.nickName,
             registerUserDTO.email,
-            registerUserDTO.pwd,
+            registerUserDTO.password,
             registerUserDTO.sex,
             listOf("normal"),
             registerUserDTO.invitationId,

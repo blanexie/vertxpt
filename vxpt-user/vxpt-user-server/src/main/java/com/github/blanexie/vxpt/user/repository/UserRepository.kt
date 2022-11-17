@@ -10,6 +10,8 @@ interface UserRepository : CrudRepository<UserDO, Int> {
 
     fun findByEmail(email: String): UserDO?
 
+    fun findByNickName(nickName: String): UserDO?
+
     @Query("select nextval('vxpt_user.user_id_seq')", nativeQuery = true)
     fun nextSeqId(): Int
 

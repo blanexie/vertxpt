@@ -1,112 +1,86 @@
 <template>
   <div class="by">
     <a-card class="login-card">
-      <a-tabs>
+      <a-tabs centered>
         <a-tab-pane key="1" tab="登录">
-          <a-form
-              :model="loginFormState"
-              name="normal_login"
-              class="login-form"
-              @finish="onFinish"
-              @finishFailed="onFinishFailed"
-          >
-            <a-form-item
-                label="Username"
-                name="username"
-                :rules="[{ required: true, message: 'Please input your username!' }]"
-            >
-              <a-input v-model:value="loginFormState.username">
+          <a-form :model="loginFormState" name="normal_login" class="login-form" @finish="loginReq"
+                  @finishFailed="onFinishFailed">
+            <a-form-item label="用户名" name="nickName" :rules="[{ required: true, message: '请输入用户名!' }]">
+              <a-input v-model:value="loginFormState.nickName">
                 <template #prefix>
-                  <UserOutlined class="site-form-item-icon"/>
+                  <UserOutlined/>
                 </template>
               </a-input>
             </a-form-item>
 
-            <a-form-item
-                label="Password"
-                name="password"
-                :rules="[{ required: true, message: 'Please input your password!' }]"
-            >
+            <a-form-item label="密&nbsp;&nbsp;&nbsp;码" name="password" :rules="[{ required: true, message: '请输入密码!' }]">
               <a-input-password v-model:value="loginFormState.password">
                 <template #prefix>
-                  <LockOutlined class="site-form-item-icon"/>
+                  <LockOutlined/>
                 </template>
               </a-input-password>
             </a-form-item>
-
             <a-form-item>
               <a-form-item name="remember" no-style>
-                <a-checkbox v-model:checked="loginFormState.remember">Remember me</a-checkbox>
+                <a-checkbox v-model:checked="loginFormState.remember">记住我</a-checkbox>
               </a-form-item>
-              <a class="login-form-forgot" href="">Forgot password</a>
+              <a class="login-form-forgot" href="">忘记密码</a>
             </a-form-item>
 
             <a-form-item>
-              <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-                Log in
-              </a-button>
-              Or
-              <a href="">register now!</a>
+              <a-button type="primary" html-type="submit" class="login-form-button">登录</a-button>
             </a-form-item>
           </a-form>
         </a-tab-pane>
+
+
         <a-tab-pane key="2" tab="注册" force-render>
 
-          <a-form
-              :model="loginFormState"
-
-              name="normal_login"
-              class="login-form"
-              @finish="onFinish"
-              @finishFailed="onFinishFailed"
-          >
-            <a-form-item
-                label="Username"
-                name="username"
-                :rules="[{ required: true, message: 'Please input your username!' }]"
-            >
-              <a-input v-model:value="loginFormState.username">
+          <a-form :model="registerFormState" name="normal_register" class="register-form" @finish="onFinish"
+                  @finishFailed="onFinishFailed">
+            <a-form-item label="用户名" name="nickName"
+                         :rules="[{ required: true, message: '请输入用户名!' }]">
+              <a-input v-model:value="registerFormState.nickName">
                 <template #prefix>
-                  <UserOutlined class="site-form-item-icon"/>
+                  <UserOutlined/>
                 </template>
               </a-input>
             </a-form-item>
-            <a-form-item
-                label="email"
-                name="email"
-                :rules="[{ required: true, message: 'Please input your username!' }]"
-            >
-              <a-input v-model:value="loginFormState.username">
+            <a-form-item label="邮&nbsp;&nbsp;&nbsp;&nbsp;箱" name="email"
+                         :rules="[{ required: true, message: '请输入注册邮箱!' }]">
+              <a-input v-model:value="registerFormState.email">
                 <template #prefix>
-                  <UserOutlined class="site-form-item-icon"/>
+                  <MailOutlined/>
                 </template>
               </a-input>
             </a-form-item>
-            <a-form-item
-                label="Password"
-                name="password"
-                :rules="[{ required: true, message: 'Please input your password!' }]"
-            >
-              <a-input-password v-model:value="loginFormState.password">
+            <a-form-item label="密&nbsp;&nbsp;&nbsp;&nbsp;码" name="password"
+                         :rules="[{ required: true, message: '请输入密码!' }]">
+              <a-input-password v-model:value="registerFormState.password">
                 <template #prefix>
-                  <LockOutlined class="site-form-item-icon"/>
+                  <LockOutlined/>
+                </template>
+              </a-input-password>
+            </a-form-item>
+            <a-form-item label="邀请码" name="code" :rules="[{ required: true, message: '请输入邀请码!' }]">
+              <a-input-password v-model:value="registerFormState.code">
+                <template #prefix>
+                  <UsergroupAddOutlined/>
                 </template>
               </a-input-password>
             </a-form-item>
 
-            <a-form-item>
-              <a-form-item name="remember" no-style>
-                <a-checkbox v-model:checked="loginFormState.remember">Remember me</a-checkbox>
-              </a-form-item>
-              <a class="login-form-forgot" href="">Forgot password</a>
+            <a-form-item label="性&nbsp;&nbsp;&nbsp;&nbsp;别" name="sex" :rules="[{ required: true, message: '请选择性别!' }]">
+              <a-radio-group v-model:value="registerFormState.sex">
+                <a-radio :value="1">男</a-radio>
+                <a-radio :value="2">女</a-radio>
+              </a-radio-group>
             </a-form-item>
 
             <a-form-item>
-              <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-                Log in
+              <a-button type="primary" html-type="submit" class="login-form-button">
+                注册
               </a-button>
-              Or
-              <a href="">register now!</a>
             </a-form-item>
           </a-form>
         </a-tab-pane>
@@ -119,40 +93,66 @@
 
 <script lang="ts">
 import {defineComponent, reactive, computed} from 'vue';
-import {UserOutlined, LockOutlined} from '@ant-design/icons-vue';
+import {UserOutlined, LockOutlined, MailOutlined, UsergroupAddOutlined} from '@ant-design/icons-vue';
+import post from '../assets/js/axios-config'
 
 interface LoginFormState {
-  username: string;
+  nickName: string;
   password: string;
   remember: boolean;
 }
+
+interface RegisterFormState {
+  nickName: string;
+  email: string;
+  code: string;
+  password: string;
+  sex: number;
+}
+
 
 export default defineComponent({
   components: {
     UserOutlined,
     LockOutlined,
+    MailOutlined,
+    UsergroupAddOutlined,
   },
   setup() {
     const loginFormState = reactive<LoginFormState>({
-      username: '',
+      nickName: '',
       password: '',
       remember: true,
     });
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
+    const registerFormState = reactive<RegisterFormState>({
+      nickName: '',
+      password: '',
+      email: '',
+      code: '',
+      sex: 1,
+    });
+
+    const loginReq = (loginFormState: LoginFormState) => {
+      if (loginFormState.remember) {
+
+      }
+      post('/user/login', loginFormState)
+          .then(res => {
+            console.log(res)
+          })
+      console.log('Success:', loginFormState);
     };
 
     const onFinishFailed = (errorInfo: any) => {
       console.log('Failed:', errorInfo);
     };
-    const disabled = computed(() => {
-      return !(loginFormState.username && loginFormState.password);
-    });
+
+
     return {
       loginFormState,
-      onFinish,
+      registerFormState,
+      loginReq,
       onFinishFailed,
-      disabled,
     };
   },
 });
@@ -167,7 +167,11 @@ export default defineComponent({
 }
 
 .login-card {
-  width: 500px;
-  padding: 0 25px;
+  width: 440px;
+  padding: 0 20px;
+}
+
+.login-form-forgot {
+  float: right;
 }
 </style>
