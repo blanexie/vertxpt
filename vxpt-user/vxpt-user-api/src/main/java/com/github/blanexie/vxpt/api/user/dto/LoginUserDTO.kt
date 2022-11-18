@@ -1,5 +1,4 @@
-package com.github.blanexie.vxpt.bbs.post.dto
-
+package com.github.blanexie.vxpt.api.user.dto
 /**
  *
  * @author ：xiezc

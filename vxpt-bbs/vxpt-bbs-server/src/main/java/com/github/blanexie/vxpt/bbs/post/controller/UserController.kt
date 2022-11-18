@@ -2,9 +2,9 @@ package com.github.blanexie.vxpt.bbs.post.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
+import com.github.blanexie.vxpt.api.user.dto.LoginUserDTO
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
-import com.github.blanexie.vxpt.bbs.post.dto.LoginUserDTO
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
@@ -20,7 +20,7 @@ class UserController(@Resource val userRpc: UserRpc) {
     @PostMapping("/login")
     fun doLogin(@RequestBody loginUserDTO: LoginUserDTO): SaResult {
         log.info("doLogin  {},{},{}", loginUserDTO.nickName, loginUserDTO.password, loginUserDTO.loginTime)
-        val userId = userRpc.login(loginUserDTO.nickName, loginUserDTO.password, loginUserDTO.loginTime)
+        val userId = userRpc.login(loginUserDTO)
         if (userId != null) {
             StpUtil.login(userId)
             return SaResult.ok()

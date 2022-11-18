@@ -1,5 +1,6 @@
 package com.github.blanexie.vxpt.user.controller
 
+import com.github.blanexie.vxpt.api.user.dto.LoginUserDTO
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.api.user.dto.RoleDTO
@@ -29,8 +30,11 @@ class UserRpcController(
         )
     }
 
-    override fun login(nickName: String, pwdSecret: String, loginTime: Long): Int? {
-        return userService.login(nickName, pwdSecret, loginTime)?.id
+    override fun login(loginUserDTO: LoginUserDTO): Int? {
+
+            return userService.login(loginUserDTO.nickName!!,loginUserDTO.password,loginUserDTO.loginTime)?.id
+
+
     }
 
     override fun register(registerUserDTO: RegisterUserDTO): Int {
