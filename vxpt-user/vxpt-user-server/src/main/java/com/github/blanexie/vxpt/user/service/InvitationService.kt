@@ -16,10 +16,8 @@ class InvitationService(
         return invitationRepository.findByCodeAndStatus(code, 0)
     }
 
-    fun use(code: String, receiveUserId: Int): Int {
-        var invitationDO = invitationRepository.findByCodeAndStatus(code, 0)
-        invitationDO!!.use(receiveUserId)
-        invitationRepository.save(invitationDO)
+    fun save(invitationDO: InvitationDO): Int {
+        var invitationDO = invitationRepository.saveAndFlush(invitationDO)
         return invitationDO.id
     }
 

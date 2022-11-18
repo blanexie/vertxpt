@@ -17,20 +17,16 @@ class UserController(@Resource val userRpc: UserRpc) {
 
     val log: Logger = LoggerFactory.getLogger(UserController::class.java)!!
 
-    @PostMapping("/login")
-    fun doLogin(@RequestBody loginUserDTO: LoginUserDTO): SaResult {
-        log.info("doLogin  {},{},{}", loginUserDTO.nickName, loginUserDTO.password, loginUserDTO.loginTime)
-        val userId = userRpc.login(loginUserDTO)
-        if (userId != null) {
-            StpUtil.login(userId)
-            return SaResult.ok()
-        }
-        return SaResult.get(503, "账号或者密码错误", null)
-    }
-
     @GetMapping("/isLogin")
     fun isLogin(): SaResult {
         return SaResult.data(StpUtil.isLogin())
+    }
+
+    @GetMapping("/info")
+    fun getUserInfo(): SaResult {
+        val userId = StpUtil.getLoginIdAsInt()
+        var userInfo = userRpc.userInfo(userId)
+        return SaResult.data(userInfo)
     }
 
     @GetMapping("/logout")
@@ -39,10 +35,5 @@ class UserController(@Resource val userRpc: UserRpc) {
         return SaResult.ok()
     }
 
-    @PostMapping("/register")
-    fun register(@RequestBody registerUserDTO: RegisterUserDTO): SaResult {
-        val userId = userRpc.register(registerUserDTO)
-        StpUtil.login(userId)
-        return SaResult.ok()
-    }
+
 }

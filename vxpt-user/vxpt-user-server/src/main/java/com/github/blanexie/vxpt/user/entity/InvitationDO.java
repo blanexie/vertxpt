@@ -63,27 +63,41 @@ public class InvitationDO {
     @LastModifiedDate
     private LocalDateTime updateTime;
 
+
     /**
-     * @param receiveId
-     * @return 返回的是错误消息
+     * 检查邀请函
+     *
+     * @param email 邀请码对应的注册邮箱
+     * @return
      */
-    public Boolean use(Integer receiveId) {
+    public String check(String email) {
         if (status > 0) {
-            return false;
+            return "邀请码已经不可用";
         }
         //检查有无过期
         if (LocalDateTime.now().isAfter(expireTime)) {
             this.status = 2;
-            return false;
+            return "邀请码已经过期";
         }
         //检查有无已经使用
-        if (receiveId != null) {
+        if (receiveUserId != null) {
             this.status = 1;
-            return false;
+            return "邀请码已经被使用";
         }
+        //检查 注册邮箱和邀请码是否匹配
+        if (receiveEmail.equals(email)) {
+            return "邀请码与注册邮箱不匹配";
+        }
+        return null;
+    }
+
+    /**
+     * @param receiveId
+     * @return 返回的是错误消息
+     */
+    public void use(Integer receiveId) {
         this.receiveUserId = receiveId;
         this.status = 1;
-        return null;
     }
 
 }

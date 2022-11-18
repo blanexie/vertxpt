@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {router} from './router';
 
 const config = {
     baseURL: '//localhost:9092/api',
@@ -6,7 +7,7 @@ const config = {
 };
 
 
-function post(url, params) {
+export function post(url, params) {
     return new Promise((resolve, reject) => {
         axios({
             method: 'post',
@@ -27,7 +28,7 @@ function post(url, params) {
     })
 }
 
-function get(url, params) {
+export function get(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(config.baseURL + url, {
             params
@@ -48,9 +49,9 @@ axios.interceptors.response.use(
         if (response.data.code) {
             switch (response.status) {
                 case 301:
-                    console.log('登录过期');
+                    router.push("/home")
                 default:
-                    console.log(response);
+                    console.log("response", response);
             }
         }
         return response
@@ -60,8 +61,3 @@ axios.interceptors.response.use(
         return Promise.reject(error.response.status) // 返回接口返回的错误信息
     })
 
-
-export default {
-    post,
-    get
-}

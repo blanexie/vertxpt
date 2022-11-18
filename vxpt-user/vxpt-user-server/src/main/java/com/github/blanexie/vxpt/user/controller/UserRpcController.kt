@@ -1,10 +1,7 @@
 package com.github.blanexie.vxpt.user.controller
 
-import com.github.blanexie.vxpt.api.user.dto.LoginUserDTO
+import com.github.blanexie.vxpt.api.user.dto.*
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
-import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
-import com.github.blanexie.vxpt.api.user.dto.RoleDTO
-import com.github.blanexie.vxpt.api.user.dto.UserDTO
 import com.github.blanexie.vxpt.user.entity.UserDO
 import com.github.blanexie.vxpt.user.service.InvitationService
 import com.github.blanexie.vxpt.user.service.RoleService
@@ -31,15 +28,24 @@ class UserRpcController(
     }
 
     override fun login(loginUserDTO: LoginUserDTO): Int? {
-
-            return userService.login(loginUserDTO.nickName!!,loginUserDTO.password,loginUserDTO.loginTime)?.id
-
-
+        return userService.login(loginUserDTO.nickName!!, loginUserDTO.password, loginUserDTO.loginTime)?.id
     }
 
-    override fun register(registerUserDTO: RegisterUserDTO): Int {
+    override fun register(registerUserDTO: RegisterUserDTO): R {
+        //检查昵称是否可用
+        userService.findByNickName(registerUserDTO.nickName) ?: return R(msg = "用户昵称已存在")
+
+        //检查邀请还是否可用
+        val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: return R(msg = "邀请码不存在")
+        val error = invitationDO.check(registerUserDTO.email)
+        if (error != null) {
+            return R(msg = error)
+        }
+        //使用邀请码
         val nextUserId = userService.nextUserId()
-        val invitationId = invitationService.use(registerUserDTO.code, nextUserId)
+        invitationDO.use(nextUserId)
+        val invitationId = invitationService.save(invitationDO)
+        //新增用户
         val userDO = UserDO(
             nextUserId,
             registerUserDTO.nickName,
@@ -53,7 +59,8 @@ class UserRpcController(
             0
         )
 
-        return userService.save(userDO)
+        val save = userService.save(userDO)
+        return R(data = save.id)
     }
 
 }

@@ -37,7 +37,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 .setAuth(obj -> {
                     log.info("---------- 进入Sa-Token全局认证 -----------");
                     // 登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-                    SaRouter.match("/api/**", "/api/user/login", () -> StpUtil.checkLogin());
+                    SaRouter.match("/api/**", "/api/user/lr/*", () -> StpUtil.checkLogin());
                     // 更多拦截处理方式，请参考“路由拦截式鉴权”章节 */
                 })
 

@@ -32,6 +32,10 @@ class UserService(
         return userRepository.findById(userId).orElse(null)
     }
 
+    fun findByNickName(nickName: String): UserDO? {
+        return userRepository.findByNickName(nickName)
+    }
+
     /**
      *  增加角色
      */
