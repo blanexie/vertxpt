@@ -4,7 +4,8 @@ import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
-import lombok.extern.slf4j.Slf4j
+import com.github.blanexie.vxpt.bbs.post.dto.LoginUserDTO
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
@@ -14,12 +15,12 @@ import javax.annotation.Resource
 @RequestMapping("/api/user")
 class UserController(@Resource val userRpc: UserRpc) {
 
-    val log = LoggerFactory.getLogger(UserController::class.java)
+    val log: Logger = LoggerFactory.getLogger(UserController::class.java)!!
 
     @PostMapping("/login")
-    fun doLogin(@RequestBody userDTO: RegisterUserDTO): SaResult {
-        log.info("{},{}", userDTO.nickName, userDTO.password)
-        val userId = userRpc.login(userDTO.nickName, userDTO.password)
+    fun doLogin(@RequestBody loginUserDTO: LoginUserDTO): SaResult {
+        log.info("doLogin  {},{},{}", loginUserDTO.nickName, loginUserDTO.password, loginUserDTO.loginTime)
+        val userId = userRpc.login(loginUserDTO.nickName, loginUserDTO.password, loginUserDTO.loginTime)
         if (userId != null) {
             StpUtil.login(userId)
             return SaResult.ok()

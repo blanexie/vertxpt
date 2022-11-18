@@ -85,8 +85,12 @@ public class UserDO {
     /**
      * 检查密码
      */
-    public Boolean checkPwd(String pwdSha256Hex) {
-        String secret = this.email + this.pwd;
+    public Boolean checkPwd(String pwdSha256Hex, Long loginTime) {
+        if (loginTime < System.currentTimeMillis() - 10 * 60 * 1000 || loginTime > System.currentTimeMillis()) {
+            //10分钟有效期
+            return false;
+        }
+        String secret = this.nickName + this.pwd + loginTime;
         String sha256Hex = DigestUtil.sha256Hex(secret);
         return pwdSha256Hex.equals(sha256Hex);
     }

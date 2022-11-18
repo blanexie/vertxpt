@@ -11,7 +11,7 @@ public interface UserRpc {
     UserDTO userInfo(@RequestParam Integer userId);
 
     @GetMapping("/login")
-    Integer login(@RequestParam String nickName, @RequestParam String pwdSecret);
+    Integer login(@RequestParam String nickName, @RequestParam String pwdSecret, @RequestParam Long loginTime);
 
     @PostMapping("/register")
     Integer register(@RequestBody RegisterUserDTO registerUserDTO);

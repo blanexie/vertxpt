@@ -4,20 +4,17 @@ import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.api.user.dto.RoleDTO
 import com.github.blanexie.vxpt.api.user.dto.UserDTO
+import com.github.blanexie.vxpt.user.entity.UserDO
 import com.github.blanexie.vxpt.user.service.InvitationService
 import com.github.blanexie.vxpt.user.service.RoleService
 import com.github.blanexie.vxpt.user.service.UserService
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
 import javax.annotation.Resource
 
 @RestController
 class UserRpcController(
-    @Resource
-    val userService: UserService,
-    @Resource
-    val roleService: RoleService,
-    @Resource
-    val invitationService: InvitationService
+    val userService: UserService, val roleService: RoleService, val invitationService: InvitationService
 ) : UserRpc {
 
 
@@ -32,16 +29,27 @@ class UserRpcController(
         )
     }
 
-    override fun login(nickName: String, pwdSecret: String): Int? {
-        return userService.login(nickName, pwdSecret)?.id
+    override fun login(nickName: String, pwdSecret: String, loginTime: Long): Int? {
+        return userService.login(nickName, pwdSecret, loginTime)?.id
     }
 
     override fun register(registerUserDTO: RegisterUserDTO): Int {
         val nextUserId = userService.nextUserId()
         val invitationId = invitationService.use(registerUserDTO.code, nextUserId)
-        registerUserDTO.userId = nextUserId
-        registerUserDTO.invitationId = invitationId
-        return userService.register(registerUserDTO)
+        val userDO = UserDO(
+            nextUserId,
+            registerUserDTO.nickName,
+            registerUserDTO.email,
+            registerUserDTO.password,
+            registerUserDTO.sex,
+            listOf("normal"),
+            invitationId,
+            LocalDateTime.now(),
+            LocalDateTime.now(),
+            0
+        )
+
+        return userService.save(userDO)
     }
 
 }
