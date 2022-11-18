@@ -11,3 +11,6 @@ eureka:
       defaultZone: http://localhost:9090/eureka
     register-with-eureka: false  # 不向eureka server 注册自己
     fetch-registry: false  # 不向eureka server 获取服务列表
+  server:
+    enable-self-preservation=false: false   # 关闭保护机制
+    eviction-interval-timer-in-ms: 2000

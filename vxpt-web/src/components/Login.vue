@@ -4,11 +4,11 @@
       <a-tabs centered>
         <a-tab-pane key="1" tab="登录">
           <a-form :model="loginFormState" name="normal_login" class="login-form" @finish="loginReq"
-                  @finishFailed="onFinishFailed">
+            @finishFailed="onFinishFailed">
             <a-form-item label="用户名" name="nickName" :rules="[{ required: true, message: '请输入用户名!' }]">
               <a-input v-model:value="loginFormState.nickName">
                 <template #prefix>
-                  <UserOutlined/>
+                  <UserOutlined />
                 </template>
               </a-input>
             </a-form-item>
@@ -16,7 +16,7 @@
             <a-form-item label="密&nbsp;&nbsp;&nbsp;码" name="password" :rules="[{ required: true, message: '请输入密码!' }]">
               <a-input-password v-model:value="loginFormState.password">
                 <template #prefix>
-                  <LockOutlined/>
+                  <LockOutlined />
                 </template>
               </a-input-password>
             </a-form-item>
@@ -33,39 +33,36 @@
           </a-form>
         </a-tab-pane>
 
-
         <a-tab-pane key="2" tab="注册" force-render>
-
           <a-form :model="registerFormState" name="normal_register" class="register-form" @finish="onFinish"
-                  @finishFailed="onFinishFailed">
-            <a-form-item label="用户名" name="nickName"
-                         :rules="[{ required: true, message: '请输入用户名!' }]">
+            @finishFailed="onFinishFailed">
+            <a-form-item label="用户名" name="nickName" :rules="[{ required: true, message: '请输入用户名!' }]">
               <a-input v-model:value="registerFormState.nickName">
                 <template #prefix>
-                  <UserOutlined/>
+                  <UserOutlined />
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item label="邮&nbsp;&nbsp;&nbsp;&nbsp;箱" name="email"
-                         :rules="[{ required: true, message: '请输入注册邮箱!' }]">
+              :rules="[{ required: true, message: '请输入注册邮箱!' }]">
               <a-input v-model:value="registerFormState.email">
                 <template #prefix>
-                  <MailOutlined/>
+                  <MailOutlined />
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item label="密&nbsp;&nbsp;&nbsp;&nbsp;码" name="password"
-                         :rules="[{ required: true, message: '请输入密码!' }]">
+              :rules="[{ required: true, message: '请输入密码!' }]">
               <a-input-password v-model:value="registerFormState.password">
                 <template #prefix>
-                  <LockOutlined/>
+                  <LockOutlined />
                 </template>
               </a-input-password>
             </a-form-item>
             <a-form-item label="邀请码" name="code" :rules="[{ required: true, message: '请输入邀请码!' }]">
               <a-input-password v-model:value="registerFormState.code">
                 <template #prefix>
-                  <UsergroupAddOutlined/>
+                  <UsergroupAddOutlined />
                 </template>
               </a-input-password>
             </a-form-item>
@@ -84,17 +81,15 @@
             </a-form-item>
           </a-form>
         </a-tab-pane>
-
       </a-tabs>
-
     </a-card>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed} from 'vue';
-import {UserOutlined, LockOutlined, MailOutlined, UsergroupAddOutlined} from '@ant-design/icons-vue';
-import post from '../assets/js/axios-config'
+import { defineComponent, reactive, computed } from "vue";
+import { UserOutlined, LockOutlined, MailOutlined, UsergroupAddOutlined, } from "@ant-design/icons-vue";
+import  axios from "../assets/js/axios-config";
 
 interface LoginFormState {
   nickName: string;
@@ -110,7 +105,6 @@ interface RegisterFormState {
   sex: number;
 }
 
-
 export default defineComponent({
   components: {
     UserOutlined,
@@ -120,32 +114,32 @@ export default defineComponent({
   },
   setup() {
     const loginFormState = reactive<LoginFormState>({
-      nickName: '',
-      password: '',
+      nickName: "",
+      password: "",
       remember: true,
     });
     const registerFormState = reactive<RegisterFormState>({
-      nickName: '',
-      password: '',
-      email: '',
-      code: '',
+      nickName: "",
+      password: "",
+      email: "",
+      code: "",
       sex: 1,
     });
 
     const loginReq = (loginFormState: LoginFormState) => {
       if (loginFormState.remember) {
-
       }
-      post('/user/login', loginFormState)
-          .then(res => {
-            console.log(res)
-          })
-      console.log('Success:', loginFormState);
+      axios.post("/user/login", loginFormState).then((res) => {
+        console.log(res);
+      });
+      console.log("Success:", loginFormState);
     };
+
 
     const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
+      console.log("Failed:", errorInfo);
     };
+
 
 
     return {

@@ -21,23 +21,11 @@ class ResourceService(val resourceRepository: ResourceRepository, val resourceUs
         var sha1Hex = DigestUtil.sha1Hex(content)
         var suffix = fileName.substringAfterLast(".")
         val resDO = ResDO(
-            null,
-            sha1Hex,
-            suffix,
-            content,
-            0,
-            LocalDateTime.now(),
-            LocalDateTime.now()
+                null, sha1Hex, suffix, content, 0, LocalDateTime.now(), LocalDateTime.now()
         )
         resourceRepository.save(resDO)
         var resUserDO = ResUserDO(
-            null,
-            userId,
-            sha1Hex,
-            fileName,
-            0,
-            LocalDateTime.now(),
-            LocalDateTime.now()
+                null, userId, sha1Hex, fileName, 0, LocalDateTime.now(), LocalDateTime.now()
         )
         resourceUserRepository.save(resUserDO)
     }

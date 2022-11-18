@@ -6,7 +6,7 @@ const config = {
 };
 
 
-export default function (url, params) {
+function post(url, params) {
     return new Promise((resolve, reject) => {
         axios({
             method: 'post',
@@ -27,7 +27,7 @@ export default function (url, params) {
     })
 }
 
-const get = function (url, params) {
+function get(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(config.baseURL + url, {
             params
@@ -40,6 +40,8 @@ const get = function (url, params) {
         })
     })
 }
+
+
 axios.interceptors.response.use(
     response => {
         //拦截响应，做统一处理
@@ -57,3 +59,9 @@ axios.interceptors.response.use(
     error => {
         return Promise.reject(error.response.status) // 返回接口返回的错误信息
     })
+
+
+export default {
+    post,
+    get
+}
