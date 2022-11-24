@@ -32,6 +32,10 @@ class UserService(
         return userRepository.findById(userId).orElse(null)
     }
 
+    fun findByEmail(email: String): UserDO? {
+        return userRepository.findByEmail(email)
+    }
+
     fun findByNickName(nickName: String): UserDO? {
         return userRepository.findByNickName(nickName)
     }

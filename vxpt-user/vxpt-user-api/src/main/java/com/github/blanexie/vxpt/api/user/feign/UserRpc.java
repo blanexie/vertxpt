@@ -13,6 +13,16 @@ public interface UserRpc {
     @GetMapping("/userinfo")
     UserDTO userInfo(@RequestParam Integer userId);
 
+    @GetMapping("/userInfoByEmail")
+    UserDTO userInfoByEmail(@RequestParam String email);
+
+    @GetMapping("/create/reset/pwd/token")
+    R createResetPwdToken(@RequestParam String email);
+
+    @GetMapping("/check/reset/pwd/token")
+    R checkTokenAndResetPwd(@RequestParam String email, @RequestParam String token,
+                            @RequestParam Long expireTime, @RequestParam String newPassword);
+
     @PostMapping("/login")
     Integer login(@RequestBody LoginUserDTO loginUserDTO);
 

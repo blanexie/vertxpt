@@ -1,5 +1,7 @@
 package com.github.blanexie.vxpt.user.controller
 
+import cn.hutool.core.date.DateUtil
+import cn.hutool.crypto.digest.DigestUtil
 import com.github.blanexie.vxpt.api.user.dto.*
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import com.github.blanexie.vxpt.user.entity.UserDO
@@ -8,7 +10,7 @@ import com.github.blanexie.vxpt.user.service.RoleService
 import com.github.blanexie.vxpt.user.service.UserService
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
-import javax.annotation.Resource
+import java.util.*
 
 @RestController
 class UserRpcController(
@@ -17,14 +19,56 @@ class UserRpcController(
 
 
     override fun userInfo(userId: Int): UserDTO? {
-        val userDO = userService.findById(userId)
-        val roles = userDO!!.roles.mapNotNull { roleService.findRole(it) }
+        val userDO = userService.findById(userId) ?: return null
+        val roles = userDO.roles.mapNotNull { roleService.findRole(it) }
             .map {
                 RoleDTO(it.id, it.name, it.code, it.permissionCodes)
             }
         return UserDTO(
             userId, userDO.nickName, userDO.email, userDO.sex, roles
         )
+    }
+
+    override fun userInfoByEmail(email: String): UserDTO? {
+        val userDO = userService.findByEmail(email) ?: return null
+        val roles = userDO.roles.mapNotNull { roleService.findRole(it) }
+            .map {
+                RoleDTO(it.id, it.name, it.code, it.permissionCodes)
+            }
+        return UserDTO(
+            userDO.id, userDO.nickName, userDO.email, userDO.sex, roles
+        )
+    }
+
+    override fun createResetPwdToken(email: String): R {
+        val userDO = userService.findByEmail(email) ?: return R(msg = "请传入正确的邮箱")
+        val id = userDO.id
+        val pwd = userDO.pwd
+        val expireTime = DateUtil.offsetHour(Date(), 4).time
+        val token = DigestUtil.sha256Hex("$id$pwd$expireTime")
+        return R(data = mapOf("token" to token, "expireTime" to expireTime))
+    }
+
+    override fun checkTokenAndResetPwd(email: String, token: String, expireTime: Long, newPassword: String): R {
+        val userDO = userService.findByEmail(email) ?: return R(msg = "请传入正确的邮箱")
+        //校验是否过期
+        if (expireTime < System.currentTimeMillis()) {
+            return R(msg = "已经过期，重置失败")
+        }
+        val id = userDO.id
+        val pwd = userDO.pwd
+        val expireTime = DateUtil.offsetHour(Date(), 4).time
+        val sha256Hex = DigestUtil.sha256Hex("$id$pwd$expireTime")
+        if (sha256Hex != token) {
+            return R(msg = "验证错误，重置失败")
+        }
+        return if (pwd == newPassword) {
+            R(msg = "验证错误，重置失败")
+        } else {
+            userDO.pwd = newPassword
+            userService.save(userDO)
+            R(true)
+        }
     }
 
     override fun login(loginUserDTO: LoginUserDTO): Int? {
@@ -59,8 +103,8 @@ class UserRpcController(
             0
         )
 
-        val save = userService.save(userDO)
-        return R(data = save.id)
+        val id = userService.save(userDO)
+        return R(data = id)
     }
 
 }

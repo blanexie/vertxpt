@@ -7,10 +7,7 @@ import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.annotation.Resource
 
 @RestController
@@ -32,11 +29,47 @@ class LoginAndRegisterController(@Resource val userRpc: UserRpc) {
     @PostMapping("/register")
     fun register(@RequestBody registerUserDTO: RegisterUserDTO): SaResult {
         val r = userRpc.register(registerUserDTO)
-        if (r.data != null) {
+        return if (r.data != null) {
             StpUtil.login(r.data)
-            return SaResult.ok()
+            SaResult.ok()
         } else {
-            return SaResult.error(r.msg)
+            SaResult.error(r.msg)
         }
     }
+
+
+    /**
+     * 重置密码
+     */
+    @GetMapping("/reset/password")
+    fun sendResetPwdEmail(
+        @RequestParam email: String,
+        @RequestParam token: String,
+        @RequestParam expireTime: Long,
+        @RequestParam password: String
+    ): SaResult {
+        val r = userRpc.checkTokenAndResetPwd(email, token, expireTime, password)
+        if (r.msg != null) {
+            return SaResult.error(r.msg)
+        }
+        return SaResult.ok()
+    }
+
+    /**
+     * 发送重置密码邮件
+     */
+    @GetMapping("/send/reset/email")
+    fun sendResetPwdEmail(email: String): SaResult {
+        //找到对应的用户
+        val r = userRpc.createResetPwdToken(email)
+        if (r.msg != null) {
+            return SaResult.error(r.msg)
+        }
+        val map = r.data as Map<String, Any>
+
+        // TODO: 2022/11/24 send Email 应该限制用户的频繁调用
+        return SaResult.data("找回密码邮件已经发送到注册邮箱中了，请进入邮箱查看。")
+    }
+
+
 }
