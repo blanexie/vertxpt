@@ -2,12 +2,14 @@ package com.github.blanexie.vxpt.bbs.post.controller
 
 import cn.dev33.satoken.stp.StpUtil
 import cn.dev33.satoken.util.SaResult
+import cn.hutool.core.date.DateUtil
 import com.github.blanexie.vxpt.api.user.dto.LoginUserDTO
 import com.github.blanexie.vxpt.api.user.dto.RegisterUserDTO
 import com.github.blanexie.vxpt.api.user.feign.UserRpc
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.annotation.Resource
 
 @RestController
@@ -61,7 +63,8 @@ class LoginAndRegisterController(@Resource val userRpc: UserRpc) {
     @GetMapping("/send/reset/email")
     fun sendResetPwdEmail(email: String): SaResult {
         //找到对应的用户
-        val r = userRpc.createResetPwdToken(email)
+        val expireTime = DateUtil.offsetHour(Date(), 6).time
+        val r = userRpc.createResetPwdToken(email, expireTime)
         if (r.msg != null) {
             return SaResult.error(r.msg)
         }

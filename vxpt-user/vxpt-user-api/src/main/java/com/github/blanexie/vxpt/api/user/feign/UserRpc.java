@@ -17,7 +17,7 @@ public interface UserRpc {
     UserDTO userInfoByEmail(@RequestParam String email);
 
     @GetMapping("/create/reset/pwd/token")
-    R createResetPwdToken(@RequestParam String email);
+    R createResetPwdToken(@RequestParam String email, @RequestParam Long expireTime);
 
     @GetMapping("/check/reset/pwd/token")
     R checkTokenAndResetPwd(@RequestParam String email, @RequestParam String token,

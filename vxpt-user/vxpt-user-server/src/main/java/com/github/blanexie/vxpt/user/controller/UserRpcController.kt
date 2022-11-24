@@ -40,13 +40,12 @@ class UserRpcController(
         )
     }
 
-    override fun createResetPwdToken(email: String): R {
+    override fun createResetPwdToken(email: String, expireTime: Long): R {
         val userDO = userService.findByEmail(email) ?: return R(msg = "请传入正确的邮箱")
         val id = userDO.id
         val pwd = userDO.pwd
-        val expireTime = DateUtil.offsetHour(Date(), 4).time
         val token = DigestUtil.sha256Hex("$id$pwd$expireTime")
-        return R(data = mapOf("token" to token, "expireTime" to expireTime))
+        return R(data = token)
     }
 
     override fun checkTokenAndResetPwd(email: String, token: String, expireTime: Long, newPassword: String): R {
