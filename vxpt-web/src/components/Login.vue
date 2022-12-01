@@ -4,7 +4,7 @@
       <a-tabs centered>
         <a-tab-pane key="1" tab="登录">
           <a-form :model="loginFormState" name="normal_login" class="login-form" @finish="loginReq"
-                  @finishFailed="onFinishFailed">
+          >
             <a-form-item label="用户名" name="nickName" :rules="[{ required: true, message: '请输入用户名!' }]">
               <a-input v-model:value="loginFormState.nickName">
                 <template #prefix>
@@ -86,15 +86,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed} from "vue";
-import {UserOutlined, LockOutlined, MailOutlined, UsergroupAddOutlined,} from "@ant-design/icons-vue";
+import {defineComponent, reactive} from "vue";
+import {LockOutlined, MailOutlined, UsergroupAddOutlined, UserOutlined,} from "@ant-design/icons-vue";
 import {post} from "../assets/js/axios-config";
 import {Md5} from 'ts-md5'
 import {router} from '../assets/js/router'
 import {message} from 'ant-design-vue';
-
-
-let md5 = new Md5()
 
 interface LoginFormState {
   nickName: string;
@@ -170,8 +167,6 @@ let registerReq = (registerFormState: RegisterFormState) => {
       message.error(res.data.msg)
     }
   })
-
-
 }
 
 /**
@@ -189,6 +184,8 @@ let loginReq = (loginFormState: LoginFormState) => {
   }
 
   let loginTime: number = new Date().getTime();
+  console.log(loginFormState.nickName, loginFormState.password, loginTime)
+  let md5 = new Md5()
   let pwdMd5Hex = md5.appendStr(loginFormState.nickName + loginFormState.password + loginTime).end()
   post("/user/lr/login", {
     nickName: loginFormState.nickName,
@@ -223,10 +220,6 @@ export default defineComponent({
       code: "",
       sex: 1,
     });
-
-    const onFinishFailed = (errorInfo: any) => {
-      console.log("Failed:", errorInfo);
-    };
 
     return {
       loginFormState,

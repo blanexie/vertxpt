@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(schema = "vxpt_user", name = "invitation")
+@EntityListeners(AuditingEntityListener.class)
 public class InvitationDO {
 
     @Id
@@ -85,7 +87,7 @@ public class InvitationDO {
             return "邀请码已经被使用";
         }
         //检查 注册邮箱和邀请码是否匹配
-        if (receiveEmail.equals(email)) {
+        if (!receiveEmail.equals(email)) {
             return "邀请码与注册邮箱不匹配";
         }
         return null;

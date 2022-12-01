@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import java.util.List;
 @Table(schema = "vxpt_bbs")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class PostDO {
 
     @Id
