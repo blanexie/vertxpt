@@ -11,10 +11,10 @@ docker rmi vxpt-user:1.0
 docker build -t vxpt-user:1.0 .
 
 ## 停止容器
-docker stop  user
+docker stop user
 
 ## 删除容器
 docker rm user
 
 ## 启动容器
-docker run --rm -d  --name user -p 9090:9090 vxpt-user:1.0
+docker run --rm -d --name user -p 9090:9090 vxpt-user:1.0

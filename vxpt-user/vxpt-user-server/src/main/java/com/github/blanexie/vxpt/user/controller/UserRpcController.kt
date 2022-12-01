@@ -40,33 +40,33 @@ class UserRpcController(
         )
     }
 
-    override fun createResetPwdToken(email: String, expireTime: Long): R {
-        val userDO = userService.findByEmail(email) ?: return R(msg = "请传入正确的邮箱")
+    override fun createResetPwdToken(email: String, expireTime: Long): Resp {
+        val userDO = userService.findByEmail(email) ?: return Resp(msg = "请传入正确的邮箱")
         val id = userDO.id
         val pwd = userDO.pwd
         val token = DigestUtil.sha256Hex("$id$pwd$expireTime")
-        return R(data = token)
+        return Resp(data = token)
     }
 
-    override fun checkTokenAndResetPwd(email: String, token: String, expireTime: Long, newPassword: String): R {
-        val userDO = userService.findByEmail(email) ?: return R(msg = "请传入正确的邮箱")
+    override fun checkTokenAndResetPwd(email: String, token: String, expireTime: Long, newPassword: String): Resp {
+        val userDO = userService.findByEmail(email) ?: return Resp(msg = "请传入正确的邮箱")
         //校验是否过期
         if (expireTime < System.currentTimeMillis()) {
-            return R(msg = "已经过期，重置失败")
+            return Resp(msg = "已经过期，重置失败")
         }
         val id = userDO.id
         val pwd = userDO.pwd
         val expireTime = DateUtil.offsetHour(Date(), 4).time
         val sha256Hex = DigestUtil.sha256Hex("$id$pwd$expireTime")
         if (sha256Hex != token) {
-            return R(msg = "验证错误，重置失败")
+            return Resp(msg = "验证错误，重置失败")
         }
         return if (pwd == newPassword) {
-            R(msg = "验证错误，重置失败")
+            Resp(msg = "验证错误，重置失败")
         } else {
             userDO.pwd = newPassword
             userService.save(userDO)
-            R(true)
+            Resp(true)
         }
     }
 
@@ -74,15 +74,15 @@ class UserRpcController(
         return userService.login(loginUserDTO.nickName!!, loginUserDTO.password, loginUserDTO.loginTime)?.id
     }
 
-    override fun register(registerUserDTO: RegisterUserDTO): R {
+    override fun register(registerUserDTO: RegisterUserDTO): Resp {
         //检查昵称是否可用
-        userService.findByNickName(registerUserDTO.nickName) ?: return R(msg = "用户昵称已存在")
+        userService.findByNickName(registerUserDTO.nickName) ?: return Resp(msg = "用户昵称已存在")
 
         //检查邀请还是否可用
-        val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: return R(msg = "邀请码不存在")
+        val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: return Resp(msg = "邀请码不存在")
         val error = invitationDO.check(registerUserDTO.email)
         if (error != null) {
-            return R(msg = error)
+            return Resp(msg = error)
         }
         //使用邀请码
         val nextUserId = userService.nextUserId()
@@ -103,7 +103,7 @@ class UserRpcController(
         )
 
         val id = userService.save(userDO)
-        return R(data = id)
+        return Resp(data = id)
     }
 
 }

@@ -11,7 +11,7 @@ docker rmi vxpt-eureka:1.0
 docker build -t vxpt-eureka:1.0 .
 
 ## 停止容器
-docker stop  eureka
+docker stop eureka
 
 ## 删除容器
 docker rm eureka
