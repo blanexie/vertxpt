@@ -77,11 +77,11 @@ class UserRpcController(
     override fun register(registerUserDTO: RegisterUserDTO): Resp {
         //检查昵称是否可用
         if (userService.findByNickName(registerUserDTO.nickName) != null) {
-            return R(msg = "用户昵称已存在")
+            return Resp(msg = "用户昵称已存在")
         }
         //检查邮箱是否已经使用
         if (userService.findByEmail(registerUserDTO.email) != null) {
-            return R(msg = "用户邮箱已经注册了")
+            return Resp(msg = "用户邮箱已经注册了")
         }
         //检查邀请还是否可用
         val invitationDO = invitationService.findByCode(registerUserDTO.code) ?: return Resp(msg = "邀请码不存在")

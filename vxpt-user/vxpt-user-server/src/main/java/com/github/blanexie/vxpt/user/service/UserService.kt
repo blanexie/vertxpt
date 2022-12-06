@@ -40,9 +40,6 @@ class UserService(
         return userRepository.findByNickName(nickName)
     }
 
-    fun findByEmail(email: String): UserDO? {
-        return userRepository.findByEmail(email)
-    }
     /**
      *  增加角色
      */

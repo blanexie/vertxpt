@@ -13,8 +13,6 @@ interface UserRepository : CrudRepository<UserDO, Int>, JpaRepository<UserDO, In
 
     fun findByNickName(nickName: String): UserDO?
 
-    fun findByEmail(email: String): UserDO?
-
     @Query("select nextval('vxpt_user.user_id_seq')", nativeQuery = true)
     fun nextSeqId(): Int
 
