@@ -11,9 +11,9 @@ data class PeerEntity(
     var id: Int?,
     val infoHash: String,
     val peerId: String,
-    var trackerid: String?,
+    var trackerId: String?,
     val authKey: String,
-
+    var userId: Int?,
     var ipAddr: IpAddr,
 
     var downloaded: Size,

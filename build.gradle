@@ -64,10 +64,10 @@ subprojects {
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 
         implementation 'cn.hutool:hutool-all:5.8.8'
+        implementation 'com.alibaba.fastjson2:fastjson2:2.0.20'
 
         implementation 'org.projectlombok:lombok:1.18.24'
         annotationProcessor 'org.projectlombok:lombok:1.18.24'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
     }
     //子模块依赖管理
     dependencyManagement {
