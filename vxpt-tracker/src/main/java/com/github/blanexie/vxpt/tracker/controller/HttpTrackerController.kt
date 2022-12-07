@@ -5,6 +5,7 @@ import cn.hutool.core.net.URLDecoder
 import cn.hutool.core.util.HexUtil
 import com.dampcake.bencode.Bencode
 import com.github.blanexie.vxpt.tracker.common.Bean
+import com.github.blanexie.vxpt.tracker.common.Inject
 import com.github.blanexie.vxpt.tracker.common.Mapping
 import com.github.blanexie.vxpt.tracker.service.PeerService
 import com.github.blanexie.vxpt.tracker.service.dto.IpAddr
@@ -20,7 +21,9 @@ import java.time.LocalDateTime
 class HttpTrackerController {
 
     private val bencode = Bencode(true)
-    private val peerService: PeerService = Singleton.get("peerService")
+
+    @Inject
+    lateinit var peerService: PeerService;
 
     @Mapping("/announce")
     fun anncount(req: HttpRequest): HttpResponse {
@@ -36,7 +39,6 @@ class HttpTrackerController {
         val encode = bencode.encode(resp)
         return buildResp(req, encode)
     }
-
 
 
     private fun getReqParamMap(req: HttpRequest): Map<String, List<String>> {

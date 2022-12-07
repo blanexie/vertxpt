@@ -1,14 +1,11 @@
 package com.github.blanexie.vxpt.tracker.service.impl
 
-import cn.hutool.core.lang.Singleton
 import cn.hutool.core.util.HexUtil
 import com.alibaba.fastjson2.JSON
 import com.github.blanexie.vxpt.tracker.common.Bean
 import com.github.blanexie.vxpt.tracker.common.Inject
 import com.github.blanexie.vxpt.tracker.repository.PeerProvider
-import com.github.blanexie.vxpt.tracker.repository.buildSqlSessionFactory
 import com.github.blanexie.vxpt.tracker.repository.entity.PeerDO
-import com.github.blanexie.vxpt.tracker.repository.mapper.PeerMapper
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
 import com.github.blanexie.vxpt.tracker.user.UserService
 import io.netty.buffer.Unpooled
@@ -26,7 +23,7 @@ class PeerServiceImpl : PeerService {
 
     override fun announce(peerEntity: PeerEntity): Map<String, Any> {
         //1. 校验用户是否正常，
-        val user = userService.findByAuthKeyAndInfoHash(peerEntity.authKey, peerEntity.infoHash)
+        val user = userService.checkAuthAndInfoHash(peerEntity.authKey, peerEntity.infoHash)
         if (user.code != 200) {
             return buildFailResp(user.msg)
         }

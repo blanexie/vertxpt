@@ -26,6 +26,10 @@ plugins {
 
 //全部模块通用配置
 allprojects {
+
+    targetCompatibility = "11"
+
+
     repositories {
         mavenLocal()
         maven { url 'https://maven.aliyun.com/repository/central' }
@@ -55,6 +59,7 @@ subprojects {
 
     group 'com.github.blanexie.vxpt'
     version "${version}"
+
 
     //子模块通用依赖
     dependencies {

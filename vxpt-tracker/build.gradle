@@ -1,4 +1,3 @@
-
 bootJar {
     archiveBaseName = "vxpt-tracker"
     archiveVersion = "0.0.1"

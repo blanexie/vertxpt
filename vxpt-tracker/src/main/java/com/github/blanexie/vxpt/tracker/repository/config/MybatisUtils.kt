@@ -1,6 +1,9 @@
 package com.github.blanexie.vxpt.tracker.repository
 
+import cn.hutool.core.io.resource.ClassPathResource
+import cn.hutool.core.io.resource.ResourceUtil
 import cn.hutool.core.lang.Singleton
+import cn.hutool.core.util.ClassUtil
 import com.alibaba.druid.pool.DruidDataSource
 import org.apache.ibatis.mapping.Environment
 import org.apache.ibatis.session.Configuration
@@ -8,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory
 import org.apache.ibatis.session.SqlSessionFactoryBuilder
 import org.apache.ibatis.transaction.TransactionFactory
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
+import java.nio.charset.Charset
 import java.util.*
 import javax.sql.DataSource
 
@@ -27,16 +31,6 @@ fun buildSqlSessionFactory(): SqlSessionFactory {
 }
 
 
-fun loadProperties(): Properties {
-    return Singleton.get("tracker.properties") {
-        var properties = Properties()
-        val stream = Thread.currentThread().contextClassLoader.getResourceAsStream("tracker.properties")
-        properties.load(stream)
-        System.setProperties(properties)
-        properties
-    }
-
-}
 
 fun buildDataSource(): DataSource {
     return Singleton.get("dataSource") {

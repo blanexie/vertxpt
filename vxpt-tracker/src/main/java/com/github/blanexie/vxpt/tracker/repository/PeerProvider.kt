@@ -7,11 +7,12 @@ import com.github.blanexie.vxpt.tracker.repository.mapper.PeerMapper
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
 import io.netty.util.concurrent.FastThreadLocal
 import org.apache.ibatis.session.SqlSession
+import kotlin.concurrent.getOrSet
 
 @Bean
 class PeerProvider {
 
-    private val fastThreadLocal = FastThreadLocal<SqlSession>()
+    private val fastThreadLocal = ThreadLocal<SqlSession>()
 
     fun findByInfoHash(infoHash: String): List<PeerDO> {
         val peerMapper = getPeerMapper()
@@ -51,7 +52,7 @@ class PeerProvider {
     }
 
     private fun getPeerMapper(): PeerMapper {
-        if (!fastThreadLocal.isSet) {
+        if (fastThreadLocal.get() == null) {
             fastThreadLocal.set(buildSqlSessionFactory().openSession(true))
         }
         val sqlSession = fastThreadLocal.get()
