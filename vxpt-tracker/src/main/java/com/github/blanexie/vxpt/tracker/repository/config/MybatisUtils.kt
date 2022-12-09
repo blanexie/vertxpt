@@ -34,8 +34,8 @@ fun buildSqlSessionFactory(): SqlSessionFactory {
 
 fun buildDataSource(): DataSource {
     return Singleton.get("dataSource") {
-
         val druidDataSource = DruidDataSource()
+
         druidDataSource.init()
         druidDataSource
     }

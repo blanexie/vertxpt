@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.tracker.common
+package com.github.blanexie.vxpt.ioc.annotation
 
 @Target(AnnotationTarget.FIELD)
 @Retention(value = AnnotationRetention.RUNTIME)

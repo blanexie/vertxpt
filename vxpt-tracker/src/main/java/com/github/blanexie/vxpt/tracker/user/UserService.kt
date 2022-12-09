@@ -1,6 +1,6 @@
 package com.github.blanexie.vxpt.tracker.user
 
-import com.github.blanexie.vxpt.tracker.common.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Bean
 
 @Bean
 class UserService {

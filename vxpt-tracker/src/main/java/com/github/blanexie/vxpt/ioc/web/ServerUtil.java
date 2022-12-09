@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.tracker.controller.config;
+package com.github.blanexie.vxpt.ioc.web;
 
 import io.netty.handler.ssl.SslContext;
 

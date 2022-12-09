@@ -1,16 +1,13 @@
-package com.github.blanexie.vxpt.tracker.controller.config;
+package com.github.blanexie.vxpt.ioc.web;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.ssl.SslContext;
 import org.jetbrains.annotations.NotNull;
 
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
-import io.netty.handler.ssl.SslContext;
 
 public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
 

@@ -1,6 +1,5 @@
-package com.github.blanexie.vxpt.tracker.common
+package com.github.blanexie.vxpt.ioc.annotation
 
 @Target(AnnotationTarget.CLASS)
 @Retention(value = AnnotationRetention.RUNTIME)
-annotation class Bean {
-}
+annotation class Component

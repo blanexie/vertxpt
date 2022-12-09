@@ -1,9 +1,11 @@
-package com.github.blanexie.vxpt.tracker.common;
+package com.github.blanexie.vxpt.ioc.web;
+
+import com.github.blanexie.vxpt.ioc.web.annotation.Mapping;
 
 import java.lang.reflect.Method;
 
 
-public class MappingMethodInfo {
+public class MappingInfo {
 
     String url;
 

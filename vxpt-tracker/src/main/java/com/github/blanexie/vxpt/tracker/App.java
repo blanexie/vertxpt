@@ -1,7 +1,7 @@
 package com.github.blanexie.vxpt.tracker;
 
-import com.github.blanexie.vxpt.tracker.common.Ioc;
-import com.github.blanexie.vxpt.tracker.controller.config.HttpServer;
+import com.github.blanexie.vxpt.tracker.ioc.annotation.Ioc;
+import com.github.blanexie.vxpt.ioc.web.HttpServer;
 
 public class App {
 

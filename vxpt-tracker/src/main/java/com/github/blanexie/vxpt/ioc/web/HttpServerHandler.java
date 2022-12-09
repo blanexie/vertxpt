@@ -1,7 +1,6 @@
-package com.github.blanexie.vxpt.tracker.controller.config;
+package com.github.blanexie.vxpt.ioc.web;
 
 import cn.hutool.core.lang.Singleton;
-import com.github.blanexie.vxpt.tracker.common.MappingMethodInfo;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,16 +30,15 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
             String uri = req.uri().split("\\?")[0];
 
-            MappingMethodInfo mappingMethodInfo = Singleton.get(uri, () -> {
+            MappingInfo mappingInfo = Singleton.get(uri, () -> {
                 throw new RuntimeException("未找到 " + uri + "路径的处理方法");
             });
 
-            var obj = Singleton.get(mappingMethodInfo.getClazz());
-            FullHttpResponse response = (FullHttpResponse) mappingMethodInfo.getMethod().invoke(obj, req);
+            Object obj = Singleton.get(mappingInfo.getClazz());
+            FullHttpResponse response = (FullHttpResponse) mappingInfo.getMethod().invoke(obj, req);
 
             boolean keepAlive = HttpUtil.isKeepAlive(req);
-            response.headers()
-                    .set(CONTENT_TYPE, TEXT_PLAIN)
+            response.headers().set(CONTENT_TYPE, TEXT_PLAIN)
                     .setInt(CONTENT_LENGTH, response.content().readableBytes());
 
             if (keepAlive) {

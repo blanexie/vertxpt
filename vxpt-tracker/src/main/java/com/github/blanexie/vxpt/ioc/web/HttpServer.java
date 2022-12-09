@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.tracker.controller.config;
+package com.github.blanexie.vxpt.ioc.web;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HttpServer {
-
 
     public void start() throws Exception {
         boolean SSL = System.getProperty("ssl") != null;

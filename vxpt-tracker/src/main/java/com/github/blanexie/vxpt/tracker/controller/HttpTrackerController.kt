@@ -1,12 +1,11 @@
 package com.github.blanexie.vxpt.tracker.controller
 
-import cn.hutool.core.lang.Singleton
 import cn.hutool.core.net.URLDecoder
 import cn.hutool.core.util.HexUtil
 import com.dampcake.bencode.Bencode
-import com.github.blanexie.vxpt.tracker.common.Bean
-import com.github.blanexie.vxpt.tracker.common.Inject
-import com.github.blanexie.vxpt.tracker.common.Mapping
+import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Inject
+import com.github.blanexie.vxpt.ioc.web.annotation.Mapping
 import com.github.blanexie.vxpt.tracker.service.PeerService
 import com.github.blanexie.vxpt.tracker.service.dto.IpAddr
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity

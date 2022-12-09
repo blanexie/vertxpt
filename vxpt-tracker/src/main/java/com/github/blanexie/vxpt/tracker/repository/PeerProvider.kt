@@ -1,13 +1,11 @@
 package com.github.blanexie.vxpt.tracker.repository
 
 import com.alibaba.fastjson2.JSON
-import com.github.blanexie.vxpt.tracker.common.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Bean
 import com.github.blanexie.vxpt.tracker.repository.entity.PeerDO
 import com.github.blanexie.vxpt.tracker.repository.mapper.PeerMapper
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
-import io.netty.util.concurrent.FastThreadLocal
 import org.apache.ibatis.session.SqlSession
-import kotlin.concurrent.getOrSet
 
 @Bean
 class PeerProvider {

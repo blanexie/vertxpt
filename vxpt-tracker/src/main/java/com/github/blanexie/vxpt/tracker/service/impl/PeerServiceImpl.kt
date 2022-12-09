@@ -2,8 +2,8 @@ package com.github.blanexie.vxpt.tracker.service.impl
 
 import cn.hutool.core.util.HexUtil
 import com.alibaba.fastjson2.JSON
-import com.github.blanexie.vxpt.tracker.common.Bean
-import com.github.blanexie.vxpt.tracker.common.Inject
+import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Inject
 import com.github.blanexie.vxpt.tracker.repository.PeerProvider
 import com.github.blanexie.vxpt.tracker.repository.entity.PeerDO
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
