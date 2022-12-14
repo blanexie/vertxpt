@@ -6,5 +6,6 @@ include ':vxpt-user:vxpt-user-server'
 include ':vxpt-bbs:vxpt-bbs-api'
 include ':vxpt-bbs:vxpt-bbs-server'
 include ':vxpt-ioc'
-include 'vxpt-tracker'
+include ':vxpt-iocweb'
+include ':vxpt-tracker'
 
