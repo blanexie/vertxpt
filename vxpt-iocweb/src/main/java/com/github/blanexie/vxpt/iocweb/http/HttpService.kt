@@ -1,6 +1,7 @@
 package com.github.blanexie.vxpt.iocweb
 
-import com.github.blanexie.vxpt.ioc.AppLineRunner
+import cn.hutool.core.thread.ThreadUtil
+import com.github.blanexie.vxpt.ioc.process.AppCompleteRunner
 import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.ioc.annotation.Inject
 import com.github.blanexie.vxpt.iocweb.http.HttpServiceInitializer
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory
 import java.util.*
 
 @Component
-class HttpService : AppLineRunner {
+class HttpService : AppCompleteRunner {
 
     private val log: Logger = LoggerFactory.getLogger(HttpService::class.java)
 
@@ -28,24 +29,26 @@ class HttpService : AppLineRunner {
     lateinit var httpServiceInitializer: HttpServiceInitializer
 
     override fun process() {
-        val port: String = properties.getProperty("http.server.port", "8016")
-        val bossGroupNum: String = properties.getProperty("http.bossGroup.num", "1")
+        ThreadUtil.execute {
+            val port: String = properties.getProperty("http.server.port", "8016")
+            val bossGroupNum: String = properties.getProperty("http.bossGroup.num", "1")
 
-        val bossGroup: EventLoopGroup = NioEventLoopGroup(bossGroupNum.toInt())
-        val workerGroup: EventLoopGroup = NioEventLoopGroup()
-        try {
-            val b = ServerBootstrap()
-            b.option(ChannelOption.SO_BACKLOG, 1024)
-            b.group(bossGroup, workerGroup)
-                .channel(NioServerSocketChannel::class.java)
-                .handler(LoggingHandler(LogLevel.INFO))
-                .childHandler(httpServiceInitializer)
-            val ch: Channel = b.bind(port.toInt()).sync().channel()
-            log.info("Open your web browser and navigate to http://127.0.0.1:$port/")
-            ch.closeFuture().sync()
-        } finally {
-            bossGroup.shutdownGracefully()
-            workerGroup.shutdownGracefully()
+            val bossGroup: EventLoopGroup = NioEventLoopGroup(bossGroupNum.toInt())
+            val workerGroup: EventLoopGroup = NioEventLoopGroup()
+            try {
+                val b = ServerBootstrap()
+                b.option(ChannelOption.SO_BACKLOG, 1024)
+                b.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel::class.java)
+                    .handler(LoggingHandler(LogLevel.INFO))
+                    .childHandler(httpServiceInitializer)
+                val ch: Channel = b.bind(port.toInt()).sync().channel()
+                log.info("Open your web browser and navigate to http://127.0.0.1:$port/")
+                ch.closeFuture().sync()
+            } finally {
+                bossGroup.shutdownGracefully()
+                workerGroup.shutdownGracefully()
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.ioc
+package com.github.blanexie.vxpt.ioc.process
 
 interface ComponentScan {
 

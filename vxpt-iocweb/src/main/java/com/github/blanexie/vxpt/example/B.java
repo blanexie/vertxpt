@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 public class B {
 
     @Mapping(path = "/url")
-    HttpResponse getUrl(HttpRequest req) {
+    public HttpResponse getUrl(HttpRequest req) {
         FullHttpResponse response = new DefaultFullHttpResponse(req.protocolVersion(), HttpResponseStatus.OK,
                 Unpooled.wrappedBuffer("CONTENT".getBytes(StandardCharsets.UTF_8)));
         return response;

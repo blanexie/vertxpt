@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.ioc;
+package com.github.blanexie.vxpt.ioc.process;
 
 /**
  * 2022/12/9 2:58 下午
@@ -6,7 +6,7 @@ package com.github.blanexie.vxpt.ioc;
  *
  * @author xiezhicheng
  */
-public interface AppLineRunner {
+public interface AppCompleteRunner {
 
     default int order() {
         return 1;

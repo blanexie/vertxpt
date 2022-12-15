@@ -1,7 +1,7 @@
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'ch.qos.logback:logback-classic'
+    api 'ch.qos.logback:logback-classic'
 }
 
 test {

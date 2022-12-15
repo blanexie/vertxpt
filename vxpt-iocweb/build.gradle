@@ -1,6 +1,5 @@
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'ch.qos.logback:logback-classic'
     implementation 'io.netty:netty-all'
     api project(":vxpt-ioc")
 }

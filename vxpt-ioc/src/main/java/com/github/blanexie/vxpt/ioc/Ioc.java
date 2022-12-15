@@ -10,6 +10,8 @@ import com.github.blanexie.vxpt.ioc.annotation.Bean;
 
 import com.github.blanexie.vxpt.ioc.annotation.Component;
 import com.github.blanexie.vxpt.ioc.annotation.Inject;
+import com.github.blanexie.vxpt.ioc.process.AppCompleteRunner;
+import com.github.blanexie.vxpt.ioc.process.ComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,9 +51,9 @@ public class Ioc {
 
     private static void doAppLineRunner() {
         Set<Class<?>> existClass = Singleton.getExistClass();
-        existClass.stream().filter(it -> AppLineRunner.class.isAssignableFrom(it))
-                .map(it -> (AppLineRunner) Singleton.get(it))
-                .sorted(Comparator.comparing(AppLineRunner::order))
+        existClass.stream().filter(it -> AppCompleteRunner.class.isAssignableFrom(it))
+                .map(it -> (AppCompleteRunner) Singleton.get(it))
+                .sorted(Comparator.comparing(AppCompleteRunner::order))
                 .forEach(it -> {
                     log.info("IOC  appLineRunner start,  class:{} ", it.getClass());
                     it.process();
