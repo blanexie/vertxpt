@@ -23,7 +23,7 @@ class MappingHandler {
     private val mappingInfoMap = hashMapOf<String, MappingInfo>()
 
 
-    fun handler(path: String, httpRequest: HttpRequest): FullHttpResponse {
+    fun process(path: String, httpRequest: HttpRequest): FullHttpResponse {
         val mappingInfo = getMappingInfo(path)
             ?: return DefaultFullHttpResponse(
                 httpRequest.protocolVersion(), HttpResponseStatus.NOT_FOUND,

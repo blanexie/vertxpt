@@ -5,12 +5,14 @@ bootJar {
 }
 
 dependencies {
+
+    api project(":vxpt-iocweb")
+
     implementation 'com.alibaba.fastjson2:fastjson2'
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     implementation("org.postgresql:postgresql")
-    implementation 'io.netty:netty-all:4.1.85.Final'
     implementation 'org.mybatis:mybatis:3.5.11'
     implementation 'com.alibaba:druid:1.2.15'
 

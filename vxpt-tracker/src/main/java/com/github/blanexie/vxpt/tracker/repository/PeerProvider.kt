@@ -1,13 +1,13 @@
 package com.github.blanexie.vxpt.tracker.repository
 
 import com.alibaba.fastjson2.JSON
-import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.tracker.repository.entity.PeerDO
 import com.github.blanexie.vxpt.tracker.repository.mapper.PeerMapper
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
 import org.apache.ibatis.session.SqlSession
 
-@Bean
+@Component
 class PeerProvider {
 
     private val fastThreadLocal = ThreadLocal<SqlSession>()
@@ -18,7 +18,6 @@ class PeerProvider {
         return peerDOs
     }
 
-
     fun saveOrUpdate(peerEntity: PeerEntity) {
         val peerDO = PeerDO()
         peerDO.id = peerEntity.id
@@ -27,10 +26,10 @@ class PeerProvider {
         peerDO.peerId = peerEntity.peerId
         peerDO.trackerId = peerEntity.trackerId
         peerDO.userId = peerEntity.userId
-        peerDO.ip = peerEntity.ipAddr.ip
-        peerDO.ipv6 = JSON.toJSONString(peerEntity.ipAddr.ipv6)
-        peerDO.port = peerEntity.ipAddr.port
-        peerDO.compact = peerEntity.ipAddr.compact
+        peerDO.ip = peerEntity.ipAddress.ip
+        peerDO.ipv6 = JSON.toJSONString(peerEntity.ipAddress.ipv6)
+        peerDO.port = peerEntity.ipAddress.port
+        peerDO.compact = peerEntity.ipAddress.compact
         peerDO.downloaded = peerEntity.downloaded.byte()
         peerDO.left = peerEntity.left.bytes
         peerDO.uploaded = peerEntity.uploaded.bytes
@@ -57,7 +56,6 @@ class PeerProvider {
         val peerMapper = sqlSession.getMapper(PeerMapper::class.java)
         return peerMapper
     }
-
 
 }
 

@@ -3,6 +3,8 @@ package com.github.blanexie.vxpt.tracker.service.impl
 import cn.hutool.core.util.HexUtil
 import com.alibaba.fastjson2.JSON
 import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Component
+
 import com.github.blanexie.vxpt.ioc.annotation.Inject
 import com.github.blanexie.vxpt.tracker.repository.PeerProvider
 import com.github.blanexie.vxpt.tracker.repository.entity.PeerDO
@@ -11,15 +13,13 @@ import com.github.blanexie.vxpt.tracker.user.UserService
 import io.netty.buffer.Unpooled
 import com.github.blanexie.vxpt.tracker.service.PeerService as PeerService
 
-@Bean
+@Component
 class PeerServiceImpl : PeerService {
 
     @Inject
-    lateinit var userService: UserService;
-    //private val userService: UserService = Singleton.get(UserService::class.java)
+    lateinit var userService: UserService
     @Inject
-    lateinit var peerProvider: PeerProvider;
-    //= Singleton.get("peerProvider")
+    lateinit var peerProvider: PeerProvider
 
     override fun announce(peerEntity: PeerEntity): Map<String, Any> {
         //1. 校验用户是否正常，
@@ -68,8 +68,7 @@ class PeerServiceImpl : PeerService {
         resp["incomplete"] = peerDOs.size - count
         resp["complete"] = count
         val bytebuf = Unpooled.buffer()
-        peerDOs
-            .filter { it.ip != null }
+        peerDOs.filter { it.ip != null }
             .map { getCompactPeer(it.ip!!, it.port) }
             .forEach { bytes -> bytebuf.writeBytes(bytes) }
         val nioBuffer = bytebuf.nioBuffer()
@@ -77,8 +76,7 @@ class PeerServiceImpl : PeerService {
             resp["peers"] = nioBuffer
         }
         val bytebuf6 = Unpooled.buffer()
-        peerDOs
-            .filter { it.ipv6 != null }.filterNotNull()
+        peerDOs.filter { it.ipv6 != null }
             .map {
                 val list = JSON.parseArray(it.ipv6)
                 list?.map { str -> getCompactPeer6(str as String, it.port) }

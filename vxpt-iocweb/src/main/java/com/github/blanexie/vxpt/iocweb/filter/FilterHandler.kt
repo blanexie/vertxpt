@@ -17,7 +17,7 @@ class FilterHandler {
 
     private val filterCache: LFUCache<String, List<out Filter>> = CacheUtil.newLFUCache(100, 30 * 60 * 1000L)
 
-    fun handlerPre(path: String, httpRequest: HttpRequest): FullHttpResponse? {
+    fun processPre(path: String, httpRequest: HttpRequest): FullHttpResponse? {
         val handler: List<out Filter> = getSupportFilters(path)
         for (filter in handler) {
             var resp = filter.pre(httpRequest)
@@ -29,7 +29,7 @@ class FilterHandler {
         return null
     }
 
-    fun handlerPost(path: String, httpRequest: HttpRequest, response: FullHttpResponse): Boolean {
+    fun processPost(path: String, httpRequest: HttpRequest, response: FullHttpResponse): Boolean {
         val handler: List<out Filter> = getSupportFilters(path)
         for (filter in handler) {
             var result = filter.post(httpRequest, response)
@@ -42,8 +42,8 @@ class FilterHandler {
     }
 
     private fun getSupportFilters(path: String): List<out Filter> {
-        val handler: List<out Filter> = filterCache.get(
-            path, Singleton.getExistClass().map { Singleton.get(it) }
+        val handler: List<out Filter> = filterCache.get(path, Singleton.getExistClass()
+            .map { Singleton.get(it) }
             .map {
                 if (it is Filter) {
                     it
