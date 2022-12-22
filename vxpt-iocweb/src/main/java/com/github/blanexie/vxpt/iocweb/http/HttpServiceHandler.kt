@@ -30,18 +30,17 @@ class HttpServiceHandler : SimpleChannelInboundHandler<HttpObject?>() {
     }
 
     @Throws(InvocationTargetException::class, IllegalAccessException::class)
-    public override fun channelRead0(ctx: ChannelHandlerContext, msg: HttpObject?) {
-        if (msg is HttpRequest) {
-            val req = msg
-            val path = req.uri().split("""?""").toTypedArray()[0]
+    public override fun channelRead0(ctx: ChannelHandlerContext, req: HttpObject?) {
+        if (req is HttpRequest) {
+            val path = req.uri().split("""?""")[0]
             //执行拦截器的 前置拦截
-            var response = filterHandler.handlerPre(path, req)
+            var response = filterHandler.processPre(path, req)
             if (response == null) {
                 //拦截器执行完成
-                response = mappingHandler.handler(path, req)
+                response = mappingHandler.process(path, req)
             }
             //执行拦截器的 后置拦截
-            val result = filterHandler.handlerPost(path, req, response)
+            val result = filterHandler.processPost(path, req, response)
             if (!result) {
                 log.info("后置拦截器 提前返回，未全部执行完成")
             }

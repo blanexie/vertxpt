@@ -1,8 +1,8 @@
 package com.github.blanexie.vxpt.tracker.user
 
-import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Component
 
-@Bean
+@Component
 class UserService {
 
     /**
@@ -11,6 +11,5 @@ class UserService {
     fun checkAuthAndInfoHash(authKey: String, infoHash: String): User {
         TODO("Not yet implemented")
     }
-
 
 }

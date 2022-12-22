@@ -3,11 +3,11 @@ package com.github.blanexie.vxpt.tracker.controller
 import cn.hutool.core.net.URLDecoder
 import cn.hutool.core.util.HexUtil
 import com.dampcake.bencode.Bencode
-import com.github.blanexie.vxpt.ioc.annotation.Bean
+import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.ioc.annotation.Inject
-import com.github.blanexie.vxpt.ioc.web.annotation.Mapping
+import com.github.blanexie.vxpt.iocweb.annotation.Mapping
 import com.github.blanexie.vxpt.tracker.service.PeerService
-import com.github.blanexie.vxpt.tracker.service.dto.IpAddr
+import com.github.blanexie.vxpt.tracker.service.dto.IpAddress
 import com.github.blanexie.vxpt.tracker.service.dto.PeerEntity
 import com.github.blanexie.vxpt.tracker.service.dto.Size
 import io.netty.buffer.Unpooled
@@ -16,13 +16,13 @@ import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.time.LocalDateTime
 
-@Bean
+@Component
 class HttpTrackerController {
 
     private val bencode = Bencode(true)
 
     @Inject
-    lateinit var peerService: PeerService;
+    lateinit var peerService: PeerService
 
     @Mapping("/announce")
     fun anncount(req: HttpRequest): HttpResponse {
@@ -64,7 +64,6 @@ class HttpTrackerController {
             infoHash!!.first().toByteArray(charset("utf8"))
         )
         paramMap["infoHash"] = arrayListOf(HexUtil.encodeHexStr(decode))
-
         return paramMap
     }
 }
@@ -100,7 +99,7 @@ fun buildPeerEntity(reqMap: Map<String, List<String>>): PeerEntity {
     val createTime = LocalDateTime.now()
     val updateTime = LocalDateTime.now()
 
-    val ipAddr = IpAddr(ip!!, ipv6, port, compact)
+    val ipAddr = IpAddress(ip!!, ipv6, port, compact)
 
     return PeerEntity(
         null, infoHash, peerId, trackerid, authKey, null, ipAddr, Size(downloaded), Size(left),
@@ -108,75 +107,11 @@ fun buildPeerEntity(reqMap: Map<String, List<String>>): PeerEntity {
     )
 }
 
-
 fun buildResp(req: HttpRequest, content: ByteArray): HttpResponse {
-    val response: FullHttpResponse = DefaultFullHttpResponse(
+    return DefaultFullHttpResponse(
         req.protocolVersion(), HttpResponseStatus.OK,
         Unpooled.wrappedBuffer(content)
     )
-    return response
 }
 
 
-val LOCALHOST = "127.0.0.1"
-val LOCALHOSTIPV6 = "0:0:0:0:0:0:0:1"
-val LOCALHOSTStr = "localhost"
-val DOCKERLOCLHOST = "host.docker.internal"
-
-/**
- * 注意对ipv6地址的兼容和处理
- */
-fun getIpAddress(request: HttpRequest): String? {
-
-    val UNKNOWN = "unknown";
-    var ipAddress = request.headers().get("x-forwarded-for")
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        ipAddress = request.headers().get("Proxy-Client-IP")
-    }
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        ipAddress = request.headers().get("WL-Proxy-Client-IP")
-    }
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        ipAddress = request.headers().get("HTTP_CLIENT_IP");
-    }
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        ipAddress = request.headers().get("HTTP_X_FORWARDED_FOR");
-    }
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        ipAddress = request.headers().get("X-Real-IP");
-    }
-    if (ipAddress == null || ipAddress.isEmpty() || UNKNOWN != ipAddress) {
-        val remoteAddress = request.headers().get("remoteAddress")
-        val inetSocketAddress = remoteAddress.first() as InetSocketAddress
-        ipAddress = inetSocketAddress.address.hostAddress
-        if (LOCALHOST == ipAddress
-            || LOCALHOSTStr == ipAddress
-            || LOCALHOSTIPV6 == ipAddress
-            || DOCKERLOCLHOST == ipAddress
-        ) {
-            var inet: InetAddress? = InetAddress.getLocalHost()
-            ipAddress = inet!!.hostAddress
-        }
-    }
-
-    // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-    // "***.***.***.***".length()
-    if (ipAddress != null && ipAddress.length > 15) {
-        if (ipAddress.indexOf(",") > 0) {
-            ipAddress = ipAddress.substring(0, ipAddress.indexOf(","))
-        }
-    }
-    return ipAddress
-}
-
-fun blockBrowser(request: HttpRequest): String? {
-    val userAgent = request.headers().get("user-agent")
-    if (userAgent != null) {
-        val acceptUserAgent = userAgent.contains("/^Mozilla/") || userAgent.contains("/^Opera/")
-                || userAgent.contains("/^Links/") || userAgent.contains("/^Lynx/")
-        if (acceptUserAgent) {
-            return "Browser access blocked!"
-        }
-    }
-    return null
-}

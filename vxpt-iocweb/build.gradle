@@ -1,6 +1,6 @@
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'io.netty:netty-all'
+    api "org.jetbrains.kotlin:kotlin-stdlib"
+    api 'io.netty:netty-all'
     api project(":vxpt-ioc")
 }
 
