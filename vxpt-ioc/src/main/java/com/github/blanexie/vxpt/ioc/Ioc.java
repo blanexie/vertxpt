@@ -154,7 +154,8 @@ public class Ioc {
             properties.load(reader);
             Singleton.put(properties);
         } catch (IOException e) {
-            throw new RemoteException("加载配置文件 app.properties失败 ", e);
+            log.error("未找到配置文件  app.properties");
+            // throw new RemoteException("加载配置文件 app.properties失败 ", e);
         }
         log.info("IOC loadProperties end.");
         return properties;

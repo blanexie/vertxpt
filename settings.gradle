@@ -7,5 +7,7 @@ include ':vxpt-bbs:vxpt-bbs-api'
 include ':vxpt-bbs:vxpt-bbs-server'
 include ':vxpt-ioc'
 include ':vxpt-iocweb'
+include ':vxpt-iocorm'
 include ':vxpt-tracker'
+include 'vxpt-iocorm'
 

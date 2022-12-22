@@ -9,7 +9,7 @@ package com.github.blanexie.vxpt.ioc.process;
 public interface AppCompleteRunner {
 
     default int order() {
-        return 1;
+        return 100;
     }
 
     void process();
