@@ -1,9 +1,9 @@
 package com.github.blanexie.vxpt.iocweb
 
 import cn.hutool.core.thread.ThreadUtil
-import com.github.blanexie.vxpt.ioc.process.AppCompleteRunner
 import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.ioc.annotation.Inject
+import com.github.blanexie.vxpt.ioc.process.AppCompleteExecute
 import com.github.blanexie.vxpt.iocweb.http.HttpServiceInitializer
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory
 import java.util.*
 
 @Component
-class HttpService : AppCompleteRunner {
+class HttpService : AppCompleteExecute {
 
     private val log: Logger = LoggerFactory.getLogger(HttpService::class.java)
 
@@ -28,7 +28,7 @@ class HttpService : AppCompleteRunner {
     @Inject
     lateinit var httpServiceInitializer: HttpServiceInitializer
 
-    override fun process() {
+    override fun execute() {
         ThreadUtil.execute {
             val port: String = properties.getProperty("http.server.port", "8016")
             val bossGroupNum: String = properties.getProperty("http.bossGroup.num", "1")

@@ -9,5 +9,5 @@ include ':vxpt-ioc'
 include ':vxpt-iocweb'
 include ':vxpt-iocorm'
 include ':vxpt-tracker'
-include 'vxpt-iocorm'
+include ':vxpt-iocorm'
 

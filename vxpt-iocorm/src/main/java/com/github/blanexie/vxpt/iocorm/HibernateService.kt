@@ -1,9 +1,10 @@
 package com.github.blanexie.vxpt.iocorm
 
+import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.lang.Singleton
 import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.ioc.annotation.Inject
-import com.github.blanexie.vxpt.ioc.process.AppCompleteRunner
+import com.github.blanexie.vxpt.ioc.process.AppCompleteExecute
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.boot.MetadataSources
@@ -12,7 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder
 import java.util.*
 
 @Component
-class HibernateService : AppCompleteRunner {
+class HibernateService : AppCompleteExecute {
 
 
     override fun order(): Int {
@@ -23,9 +24,8 @@ class HibernateService : AppCompleteRunner {
     lateinit var properties: Properties
 
 
-    override fun process() {
-        val registry: StandardServiceRegistry = StandardServiceRegistryBuilder()
-            .configure()
+    override fun execute() {
+        val registry: StandardServiceRegistry = StandardServiceRegistryBuilder().configure()
             .applySettings(properties)
             .build()
         try {
@@ -34,11 +34,8 @@ class HibernateService : AppCompleteRunner {
                 metadataSources.addPackage(it)
             }
 
+            BeanUtil.
             var buildMetadata = metadataSources.buildMetadata()
-
-            buildMetadata.database
-
-
             val sessionFactory = buildMetadata.buildSessionFactory()
             Singleton.put(sessionFactory)
         } catch (e: Exception) {

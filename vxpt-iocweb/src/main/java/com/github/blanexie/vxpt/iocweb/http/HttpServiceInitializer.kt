@@ -4,8 +4,10 @@ import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.ioc.annotation.Inject
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.SocketChannel
+import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.codec.http.HttpServerExpectContinueHandler
+import io.netty.handler.stream.ChunkedWriteHandler
 
 @Component
 class HttpServiceInitializer : ChannelInitializer<SocketChannel>() {
@@ -15,9 +17,12 @@ class HttpServiceInitializer : ChannelInitializer<SocketChannel>() {
 
     @Throws(Exception::class)
     override fun initChannel(ch: SocketChannel) {
-        val p = ch.pipeline()
-        p.addLast(HttpServerCodec())
-        p.addLast(HttpServerExpectContinueHandler())
-        p.addLast(httpServiceHandler)
+        val pipeline = ch.pipeline()
+        pipeline.addLast(HttpServerCodec())
+        pipeline.addLast(HttpObjectAggregator(1024 * 1024))
+        pipeline.addLast(HttpServerExpectContinueHandler())
+        pipeline .addLast(ChunkedWriteHandler())
+        pipeline.addLast(httpServiceHandler)
     }
+
 }

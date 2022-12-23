@@ -2,6 +2,7 @@ package com.github.blanexie.vxpt.iocweb.entity
 
 
 import cn.hutool.core.lang.Singleton
+import cn.hutool.core.util.ReferenceUtil
 import com.github.blanexie.vxpt.ioc.annotation.Component
 import com.github.blanexie.vxpt.iocweb.annotation.Mapping
 import io.netty.buffer.Unpooled
@@ -9,9 +10,11 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse
 import io.netty.handler.codec.http.FullHttpResponse
 import io.netty.handler.codec.http.HttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus
+import io.netty.util.internal.ReflectionUtil
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.nio.charset.StandardCharsets
+import kotlin.jvm.internal.Reflection
 import kotlin.reflect.jvm.kotlinFunction
 
 
@@ -40,7 +43,7 @@ class MappingHandler {
                 .map {
                     it.declaredMethods.filter { m -> m.getAnnotation(Mapping::class.java) != null }
                         .map { m ->
-                            m.trySetAccessible()
+                            ReflectionUtil.trySetAccessible(m, false)
                             MappingInfo(m.getAnnotation(Mapping::class.java), m.kotlinFunction!!, it.kotlin)
                         }.toList()
                 }.flatMap { it.asIterable() }

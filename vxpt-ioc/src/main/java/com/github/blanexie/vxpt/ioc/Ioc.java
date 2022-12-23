@@ -10,7 +10,7 @@ import com.github.blanexie.vxpt.ioc.annotation.Bean;
 
 import com.github.blanexie.vxpt.ioc.annotation.Component;
 import com.github.blanexie.vxpt.ioc.annotation.Inject;
-import com.github.blanexie.vxpt.ioc.process.AppCompleteRunner;
+import com.github.blanexie.vxpt.ioc.process.AppCompleteExecute;
 import com.github.blanexie.vxpt.ioc.process.ComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,12 +50,12 @@ public class Ioc {
 
     private static void doAppLineRunner() {
         Set<Class<?>> existClass = Singleton.getExistClass();
-        existClass.stream().filter(it -> AppCompleteRunner.class.isAssignableFrom(it))
-                .map(it -> (AppCompleteRunner) Singleton.get(it))
-                .sorted(Comparator.comparing(AppCompleteRunner::order))
+        existClass.stream().filter(it -> AppCompleteExecute.class.isAssignableFrom(it))
+                .map(it -> (AppCompleteExecute) Singleton.get(it))
+                .sorted(Comparator.comparing(AppCompleteExecute::order))
                 .forEach(it -> {
                     log.info("IOC  appLineRunner start,  class:{} ", it.getClass());
-                    it.process();
+                    it.execute();
                     log.info("IOC  appLineRunner end,  class:{} ", it.getClass());
                 });
     }

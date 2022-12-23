@@ -25,12 +25,7 @@ class HttpTrackerController {
     lateinit var peerService: PeerService
 
     @Mapping("/announce")
-    fun anncount(req: HttpRequest): HttpResponse {
-        //检查客户端是否符合要求
-        val blockBrowser = blockBrowser(req)
-        if (blockBrowser != null) {
-            return buildResp(req, blockBrowser.encodeToByteArray())
-        }
+    fun announce(req: HttpRequest): HttpResponse {
         //获取参数
         val reqMap = getReqParamMap(req)
         val peerEntity = buildPeerEntity(reqMap)
@@ -38,7 +33,6 @@ class HttpTrackerController {
         val encode = bencode.encode(resp)
         return buildResp(req, encode)
     }
-
 
     private fun getReqParamMap(req: HttpRequest): Map<String, List<String>> {
         val uri = req.uri()
