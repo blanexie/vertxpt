@@ -1,9 +1,0 @@
-dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib"
-    api 'io.netty:netty-all'
-    api project(":vxpt-ioc")
-}
-
-test {
-    useJUnitPlatform()
-}

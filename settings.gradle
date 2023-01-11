@@ -1,13 +1,6 @@
 rootProject.name = 'vxpt'
 
-include ':vxpt-eureka'
-include ':vxpt-user:vxpt-user-api'
-include ':vxpt-user:vxpt-user-server'
-include ':vxpt-bbs:vxpt-bbs-api'
-include ':vxpt-bbs:vxpt-bbs-server'
-include ':vxpt-ioc'
-include ':vxpt-iocweb'
-include ':vxpt-iocorm'
+include ':vxpt-bbs'
 include ':vxpt-tracker'
-include ':vxpt-iocorm'
+
 
