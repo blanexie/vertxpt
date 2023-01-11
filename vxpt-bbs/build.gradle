@@ -1,8 +1,5 @@
 
-bootJar {
-    archiveBaseName = "vxpt-bbs"
-    archiveVersion = "0.0.1"
-}
+
 
 dependencies {
 

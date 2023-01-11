@@ -1,9 +1,7 @@
 buildscript {
     ext {
-        springCloudVersion = "2021.0.2"
         version = '1.0-SNAPSHOT'
         group = 'com.github.blanexie.vxpt'
-        springBootVersion = '2.6.7'
         kotlinVersion = '1.7.20'
     }
     repositories {
@@ -11,21 +9,19 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-
     }
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
-    id 'org.jetbrains.kotlin.plugin.lombok' version '1.7.20'
+    id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
+    id 'org.jetbrains.kotlin.plugin.lombok' version "${kotlinVersion}"
     id 'io.freefair.lombok' version '5.3.0'
-
+    id "io.spring.dependency-management" version "1.1.0"
 }
 
 
 //全部模块通用配置
 allprojects {
-
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 
@@ -33,23 +29,16 @@ allprojects {
         mavenLocal()
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
-        maven { url 'https://maven.aliyun.com/repository/grails-core' }
-        maven { url 'https://maven.aliyun.com/repository/apache-snapshots' }
         mavenCentral()
     }
 }
 
 //子模块配置
 subprojects {
-    apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'kotlin'
-
+    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.jetbrains.kotlin.plugin.lombok'
     apply plugin: 'io.freefair.lombok'
 
@@ -60,24 +49,26 @@ subprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation "org.jetbrains.kotlin:kotlin-stdlib"
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-
-        implementation 'cn.hutool:hutool-all:5.8.8'
+        implementation 'cn.hutool:hutool-all'
     }
+
     //子模块依赖管理
     dependencyManagement {
         dependencies {
+            dependency "org.postgresql:postgresql:42.5.1"
             dependency "com.dampcake:bencode:1.3.2"
-
             dependency 'com.alibaba.fastjson2:fastjson2:2.0.20'
-            dependency 'org.projectlombok:lombok:1.18.24'
+            dependency 'com.alibaba:druid:1.2.15'
 
-            dependency 'ch.qos.logback:logback-classic:1.2.11'
+            dependency 'cn.hutool:hutool-all:5.8.11'
             dependency 'io.netty:netty-all:4.1.85.Final'
-        }
-        imports {
+            dependency 'com.hellokaton:blade-core:2.1.2.RELEASE'
 
+            dependency 'org.projectlombok:lombok:1.18.24'
+            dependency 'ch.qos.logback:logback-classic:1.2.11'
+        }
+
+        imports {
         }
     }
 
