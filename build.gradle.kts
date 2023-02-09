@@ -7,6 +7,9 @@ plugins {
 
 repositories {
     mavenLocal()
+    maven {
+        setUrl("https://maven.aliyun.com/nexus/content/groups/public/")
+    }
     mavenCentral()
 }
 
@@ -17,12 +20,19 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
+    apply(plugin = "kotlin-spring")
 
     repositories {
         mavenLocal()
+        maven {
+            setUrl("https://maven.aliyun.com/nexus/content/groups/public/")
+        }
         mavenCentral()
     }
-
+    allOpen {
+        annotation("com.my.Annotation")
+        // annotations("com.another.Annotation", "com.third.Annotation")
+    }
     java.sourceCompatibility = JavaVersion.VERSION_11
 
     configurations {
@@ -42,6 +52,7 @@ subprojects {
         annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
+
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
