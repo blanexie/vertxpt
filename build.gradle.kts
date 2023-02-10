@@ -1,10 +1,9 @@
 plugins {
-    java
     id("org.springframework.boot") version "2.5.0"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.5.10"
     kotlin("plugin.spring") version "1.5.10"
-
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.4.20"
 }
 
 repositories {
@@ -24,8 +23,7 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
-
+    apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
 
     repositories {
         mavenLocal()
@@ -34,6 +32,8 @@ subprojects {
         }
         mavenCentral()
     }
+
+
 
     java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -48,10 +48,10 @@ subprojects {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
-        compileOnly("org.projectlombok:lombok")
+
+
         developmentOnly("org.springframework.boot:spring-boot-devtools")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-        annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
