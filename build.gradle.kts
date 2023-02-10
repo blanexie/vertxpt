@@ -1,8 +1,10 @@
 plugins {
+    java
     id("org.springframework.boot") version "2.5.0"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.5.10"
     kotlin("plugin.spring") version "1.5.10"
+
 }
 
 repositories {
@@ -15,12 +17,15 @@ repositories {
 
 //注意以下内容
 subprojects {
+    apply(plugin = "java")
+    apply(plugin = "kotlin")
+    apply(plugin = "idea")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
-    apply(plugin = "kotlin-spring")
+
 
     repositories {
         mavenLocal()
@@ -29,10 +34,7 @@ subprojects {
         }
         mavenCentral()
     }
-    allOpen {
-        annotation("com.my.Annotation")
-        // annotations("com.another.Annotation", "com.third.Annotation")
-    }
+
     java.sourceCompatibility = JavaVersion.VERSION_11
 
     configurations {

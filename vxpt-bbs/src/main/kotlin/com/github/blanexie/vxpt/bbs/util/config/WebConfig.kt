@@ -1,25 +1,20 @@
-package com.github.blanexie.vxpt.bbs.util.configurer
+package com.github.blanexie.vxpt.bbs.util.config
 
 import com.alibaba.fastjson.serializer.SerializeConfig
 import com.alibaba.fastjson.serializer.SerializerFeature
 import com.alibaba.fastjson.serializer.ToStringSerializer
 import com.alibaba.fastjson.support.config.FastJsonConfig
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter
-import com.alibaba.fastjson2.JSON
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters
-import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.http.MediaType
-import org.springframework.web.servlet.config.annotation.CorsRegistry
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.math.BigInteger
 import java.nio.charset.Charset
-import javax.sql.DataSource
 
 @Configuration
 @ConditionalOnClass(WebMvcConfigurer::class)
@@ -73,22 +68,6 @@ open class WebConfig : WebMvcConfigurer {
         fastJsonConverter.setFastJsonConfig(fastJsonConfig)
         //将fastjson添加到视图消息转换器列表内
         return HttpMessageConverters(fastJsonConverter)
-    }
-
-
-
-
-    /**
-     * 配置sqlite数据源
-     * @return
-     */
-    @Bean
-    fun sqliteDataSource(): DataSource {
-        //尝试创建sqlite文件-不存在时创建
-       return DataSourceBuilder.create().url("jdbc:sqlite::resource:sqlite/bbs.db")
-            .driverClassName("org.sqlite.JDBC")
-            .build()
-
     }
 
 
