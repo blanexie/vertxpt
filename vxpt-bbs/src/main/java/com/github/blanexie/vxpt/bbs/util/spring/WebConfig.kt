@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.util.config
+package com.github.blanexie.vxpt.bbs.util.spring
 
 import com.alibaba.fastjson.serializer.SerializeConfig
 import com.alibaba.fastjson.serializer.SerializerFeature

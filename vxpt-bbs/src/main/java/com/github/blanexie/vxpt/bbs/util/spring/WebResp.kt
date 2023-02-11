@@ -1,4 +1,4 @@
-package com.github.blanexie.vxpt.bbs.util
+package com.github.blanexie.vxpt.bbs.util.spring
 
 
 class WebResp(val code: Int, val message: String, val data: Any?) {
