@@ -4,6 +4,8 @@ server:
 
 #spring
 spring:
+  profiles:
+    active: dev
   datasource:
     #引用项目中的数据库文件
     driver-class-name: org.sqlite.JDBC
